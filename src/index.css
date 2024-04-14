@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: white;
+  background-color: #242424;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  height: max(1000px, 100vh);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.weather-stat {
+  /* text-shadow: 0.02rem 0.02rem 0.05rem rgba(0, 0, 0, 0.5); */
+}
+
+.bg-clear {
+  background-image: url("images/clear.jpg");
+}
+.bg-clouds {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(36, 36, 36, 0),
+      rgba(36, 36, 36, 0.8)
+    ),
+    url("images/clouds.jpg");
+}
+.bg-mist {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(36, 36, 36, 0),
+      rgba(36, 36, 36, 0.8)
+    ),
+    url("images/mist.jpg");
+}
+.bg-haze {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(36, 36, 36, 0),
+      rgba(36, 36, 36, 0.3)
+    ),
+    url("images/haze.jpg");
+}
+.bg-rain {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(36, 36, 36, 0),
+      rgba(36, 36, 36, 0.8)
+    ),
+    url("images/rain.jpg");
+}
+.bg-sand {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(36, 36, 36, 0),
+      rgba(36, 36, 36, 0.3)
+    ),
+    url("images/sand.jpg");
+}
+.bg-smoke {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(36, 36, 36, 0.3),
+      rgba(36, 36, 36, 0.5)
+    ),
+    url("images/smoke.jpg");
+}
+.bg-snow {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(36, 36, 36, 0.3),
+      rgba(36, 36, 36, 0.9)
+    ),
+    url("images/snow.jpg");
+}
+.bg-thunderstorm {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(36, 36, 36, 0),
+      rgba(36, 36, 36, 0.7)
+    ),
+    url("images/thunderstorm.jpg");
+}
+.bg-tornado {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(36, 36, 36, 0.3),
+      rgba(36, 36, 36, 0.8)
+    ),
+    url("images/tornado.jpg");
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid white;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+
+/* *********************************************************  MAPBOX */
+
+.sidebar {
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px;
+}
