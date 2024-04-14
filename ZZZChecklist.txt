@@ -1,0 +1,31 @@
+Move data array in LocationSearch to different file
+
+Add to portfolio page as "beta version"
+
+Set up API with RTK Query for coords and weatherData?
+
+Set up state management and APIs with Zustand?
+
+Decide whether to use Async Thunks, RTK Query, or Zustand
+
+Option to maximize map to fullscreen size?
+
+Add a 5-day forecast feature that opens up into a modal display
+
+Store Mapbox access token in some kind of environment variable?
+
+Customize map marker?
+
+Implement search suggestions
+
+Implement skeleton to show while data loading?
+
+Style app to be more responsive to screen size
+
+Optional: Add map layers with cloud cover, temperature, wind, etc.
+
+Remove overly-long explanatory comments + write succinct comments/labels
+
+Remove console.log's unnecesasry in production
+
+Deploy and add to portfolio page
