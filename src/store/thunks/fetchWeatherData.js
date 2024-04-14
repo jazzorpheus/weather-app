@@ -6,13 +6,26 @@ const fetchWeatherData = createAsyncThunk(
   async (coords) => {
     console.log("IN FETCH WEATHER DATA");
 
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${coords[1]}&lon=${coords[0]}&appid=ff325cbc53fd8a64b302d2866b804fc8`
-    );
+    // *******************************************************
+    // ******************* IN DEVELOPMENT ********************
+    // *******************************************************
+    if (process.env.NODE_ENV !== "production") {
+      const WEATHER_KEY = import.meta.env.VITE_WEATHER_KEY;
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${coords[1]}&lon=${coords[0]}&appid=${WEATHER_KEY}`
+      );
+      console.log("fetchWeatherData response data:", response.data);
 
-    console.log("fetchWeatherData response data:", response.data);
-
-    return response.data;
+      return response.data;
+      // *******************************************************
+      // ******************* IN PRODUCTION ********************
+      // *******************************************************
+    } else {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${coords[1]}&lon=${coords[0]}&appid=${process.env.WEATHER_KEY}`
+      );
+      return response.data;
+    }
   }
 );
 
