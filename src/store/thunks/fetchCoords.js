@@ -1,19 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
 // GEOCODER: IMPORT & SET UP GEOCODING FROM MAPBOX-SDK
 import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
+const geocoder = mbxGeocoding({
+  accessToken:
+    "pk.eyJ1IjoiamF6em9ycGhldXMiLCJhIjoiY2xid25sbDhnMHlzZTN1bXNiejBvOXl0eiJ9.yv9LtnmzsC6A7a74Fwod7Q",
+});
 
 const fetchCoords = createAsyncThunk("/fetchCoords", async (searchTerm) => {
   console.log("IN FETCH COORDS");
 
-  const geocoder = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
   const response = await geocoder
     .forwardGeocode({
       query: searchTerm,
       limit: 1,
     })
     .send();
+
   if (
     response &&
     response.body &&
