@@ -6,11 +6,9 @@ const fetchWeatherData = createAsyncThunk(
   async (coords) => {
     console.log("IN FETCH WEATHER DATA");
 
-    const WEATHER_KEY = process.env.WEATHER_KEY;
-
-    const Url = `https://api.openweathermap.org/data/2.5/weather?lat=${coords[1]}&lon=${coords[0]}&appid=${WEATHER_KEY}`;
-
-    const response = await axios.get(Url);
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${coords[1]}&lon=${coords[0]}&appid=ff325cbc53fd8a64b302d2866b804fc8`
+    );
 
     console.log("fetchWeatherData response data:", response.data);
 
