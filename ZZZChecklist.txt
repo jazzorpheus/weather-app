@@ -1,3 +1,7 @@
+Get Vercel environment variables working
+
+Fix view height issue!
+
 Move data array in LocationSearch to different file
 
 Add to portfolio page as "beta version"
