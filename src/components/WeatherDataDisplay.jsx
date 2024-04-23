@@ -21,10 +21,10 @@ function WeatherDataDisplay({ data }) {
   ));
 
   return (
-    <>
+    <div className="flex flex-col items-center mb-5">
       {header}
       {weatherStats}
-    </>
+    </div>
   );
 }
 

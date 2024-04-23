@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Panel from "./Panel";
 
 // Icons
-import { GoChevronDown } from "react-icons/go";
+import { GoChevronUp } from "react-icons/go";
 
 export default function Dropdown({ options, value, onChange }) {
   // Used to toggle dropdown menu on or off
@@ -73,14 +73,14 @@ export default function Dropdown({ options, value, onChange }) {
   });
 
   return (
-    <div ref={divEl} className="w-48 relative mt-3">
+    <div ref={divEl} className="w-28 flex  mt-3">
       <Panel
         className="flex justify-between items-center cursor-pointer"
         onClick={handleToggle}
       >
-        {value?.label || "Map Style"} <GoChevronDown className="text-lg" />
+        {value?.label || "Map Style"} <GoChevronUp className="text-lg" />
       </Panel>
-      {isExpanded && <Panel className="absolute top-full">{dropMenu}</Panel>}
+      {isExpanded && <Panel className="absolute bottom-full">{dropMenu}</Panel>}
     </div>
   );
 }

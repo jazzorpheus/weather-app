@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 // React-Redux Hooks
 import { useDispatch, useSelector } from "react-redux";
 
+// Custom Hooks
+import useGetBackground from "../hooks/use-get-background";
+
 // Async Thunks
 import { fetchCoords } from "../store/thunks/fetchCoords";
 import { fetchWeatherData } from "../store/thunks/fetchWeatherData";
@@ -16,9 +19,13 @@ import mapboxgl from "mapbox-gl";
 
 // My Components
 import WeatherDataDisplay from "./WeatherDataDisplay";
+import convertWeatherData from "../utils/convertWeatherData";
 
 function LocationSearch() {
   console.log("RENDERING LOCATION SEARCH COMPONENT");
+
+  // Dynamic background
+  const styles = useGetBackground();
 
   // Local state for form
   const [searchTerm, setSearchTerm] = useState("");
@@ -45,8 +52,12 @@ function LocationSearch() {
     if (coords.coords[0]) {
       dispatch(fetchWeatherData(coords.coords));
       if (formSubmitted) {
-        mapObj.setCenter(coords.coords);
-        mapObj.setZoom(9);
+        // mapObj.setCenter(coords.coords);
+        // mapObj.setZoom(9);
+        mapObj.flyTo({
+          center: coords.coords,
+          essential: true,
+        });
         setFormSubmitted(false);
       }
       if (marker) {
@@ -83,41 +94,16 @@ function LocationSearch() {
   } else if (weatherData.error) {
     weatherDataDisplay = <p>ERROR: {weatherData.error.message}</p>;
   } else {
-    const data = [
-      { name: "Location", value: weatherData.data.name, units: "" },
-      { name: "Main", value: weatherData.data.weather[0].main, units: "" },
-      {
-        name: "Description",
-        value: weatherData.data.weather[0].description,
-        units: "",
-      },
-      {
-        name: "Temperature",
-        value: (weatherData.data.main.temp - 273.15).toFixed(1),
-        units: "°C",
-      },
-      {
-        name: "Feels like",
-        value: (weatherData.data.main.feels_like - 273.15).toFixed(1),
-        units: "°C",
-      },
-      { name: "Humidity", value: weatherData.data.main.humidity, units: "%" },
-      { name: "Wind speed", value: weatherData.data.wind.speed, units: "m/s" },
-      {
-        name: "Wind direction",
-        value: weatherData.data.wind.deg,
-        units: "deg",
-      },
-    ];
+    const data = convertWeatherData(weatherData);
     weatherDataDisplay = <WeatherDataDisplay data={data} />;
   }
 
   return (
-    <>
+    <div className={styles}>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-center mt-3">
           <input
-            className="text-black rounded pt-1 ps-1"
+            className="text-black border-2 border-gray-700 rounded pt-1 ps-1"
             type="text"
             placeholder="Enter location name"
             value={searchTerm}
@@ -129,7 +115,7 @@ function LocationSearch() {
         </div>
       </form>
       {weatherDataDisplay}
-    </>
+    </div>
   );
 }
 

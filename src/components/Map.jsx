@@ -20,10 +20,10 @@ function Map() {
   // Initialize map
   const mapContainerRef = useInitMap();
 
-  // // Get coords from store
-  // const coords = useSelector((state) => state.coords.coords);
+  // Get coords from store
+  const coords = useSelector((state) => state.coords.coords);
 
-  // **********************************************************  DROPDOWN CONFIG
+  // **********************************************************  STYLE DROPDOWN CONFIG
   const [selectedStyle, setSelectedStyle] = useState(null);
   // Change map style selection in dropdown, update map style
   const handleSelect = (option) => {
@@ -62,22 +62,28 @@ function Map() {
     { label: "Streets", value: "streets" },
   ];
 
+  // **********************************************************************  LAYER DROPDOWN
+
+  // **********************************************************************  LAYER DROPDOWN
+
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="w-dvw">
-        {/* <div className="sidebar text-white bg-gray-700 ">
+        <div className="sidebar text-white bg-gray-700 ">
           Longitude: {coords[0]} | Latitude: {coords[1]}
-        </div> */}
+        </div>
         <div
           ref={mapContainerRef}
-          className="w-100 h-80 border-4 border-gray-900"
+          className="map-container w-100 border-4 border-gray-900"
         />
+        <div className="absolute -translate-y-16 translate-x-28">
+          <Dropdown
+            options={options}
+            value={selectedStyle}
+            onChange={handleSelect}
+          />
+        </div>
       </div>
-      <Dropdown
-        options={options}
-        value={selectedStyle}
-        onChange={handleSelect}
-      />
     </div>
   );
 }

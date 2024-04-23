@@ -11,7 +11,8 @@
 }
 
 .app {
-  height: max(1000px, 100vh);
+  /* height: max(1000px, 100vh); */
+  height: auto;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -139,4 +140,9 @@ button:focus-visible {
   left: 0;
   margin: 12px;
   border-radius: 4px;
+}
+
+.map-container {
+  height: 80vh;
+  /* height: 20rem; */
 }

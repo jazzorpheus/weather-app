@@ -1,10 +1,39 @@
-Get Vercel environment variables working
+In convertWeatherData in utils folder, write a function to convert wind direction degs -> compass
+[see chatGPT recent chat]
 
-Fix view height issue!
+Implement search suggestions
+
+Display weather data on map:
+    - Figure out how to change layer data using state WITHOUT using up Tomorrow.io free API calls!!!
+    - Implement dropdown for data layer selection for current weather (everything current for now)
+
+Move map style and data layer dropdowns to appear on top of map
+
+Move search form into its own component and render at top of screen so it is showing
+on all pages, a bit like a navbar
+
+Learn how to use React Router or set up a routing system in order to create a CurrentPage, 
+a MapPage and a Forecast Page, or use SPA techniques and render content dynamically according
+to user selection [see next]
+
+Create a navbar at bottom of screen that contains link to "Current", "Map", and "Forecast"
+(to be displayed on all pages).
+
+Get Vercel environment variables working!!!
+
+Is there a height issue on certain devices? If so, fix! However, could just be an issue with
+Chrome DevTools.
+
+Switch over to Tomorrow.io for weather data instead of OpenWeatherMap? But don't waste
+Tomorrow.io's free API calls
 
 Move data array in LocationSearch to different file
 
+Convert wind direction to compass
+
 Add to portfolio page as "beta version"
+
+********************************************************************** BETA VERSION
 
 Set up API with RTK Query for coords and weatherData?
 
@@ -20,7 +49,7 @@ Store Mapbox access token in some kind of environment variable?
 
 Customize map marker?
 
-Implement search suggestions
+Add a units selection option: imperial or metric
 
 Implement skeleton to show while data loading?
 
