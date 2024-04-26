@@ -1,5 +1,4 @@
-In convertWeatherData in utils folder, write a function to convert wind direction degs -> compass
-[see chatGPT recent chat]
+Figure out how to remove focus on form text input after submission on mobile
 
 Implement search suggestions
 
@@ -7,29 +6,27 @@ Display weather data on map:
     - Figure out how to change layer data using state WITHOUT using up Tomorrow.io free API calls!!!
     - Implement dropdown for data layer selection for current weather (everything current for now)
 
-Move map style and data layer dropdowns to appear on top of map
+Make sure map style and data layer dropdowns appear on top of map; consider using MUI's
+select component
 
 Move search form into its own component and render at top of screen so it is showing
 on all pages, a bit like a navbar
 
 Learn how to use React Router or set up a routing system in order to create a CurrentPage, 
-a MapPage and a Forecast Page, or use SPA techniques and render content dynamically according
+a MapPage and a ForecastPage, or use SPA techniques and render content conditionally according
 to user selection [see next]
 
-Create a navbar at bottom of screen that contains link to "Current", "Map", and "Forecast"
-(to be displayed on all pages).
+Create bottom navigation that contains link to "Current", "Map", and "Forecast"; check out MUI's
+bottom nav component. (To be displayed on all pages.)
 
-Get Vercel environment variables working!!!
+Have a panel display barebones weather data for current location next to map marker on map view?
+Barebones = temp, description, an icon
 
-Is there a height issue on certain devices? If so, fix! However, could just be an issue with
-Chrome DevTools.
+Make UI more attractive on CurrentWeather view/page, add more stats/icons?
 
-Switch over to Tomorrow.io for weather data instead of OpenWeatherMap? But don't waste
-Tomorrow.io's free API calls
+Get Vercel environment variables working
 
-Move data array in LocationSearch to different file
-
-Convert wind direction to compass
+Display arrow icons corresponding to wind direction
 
 Add to portfolio page as "beta version"
 
@@ -40,8 +37,6 @@ Set up API with RTK Query for coords and weatherData?
 Set up state management and APIs with Zustand?
 
 Decide whether to use Async Thunks, RTK Query, or Zustand
-
-Option to maximize map to fullscreen size?
 
 Add a 5-day forecast feature that opens up into a modal display
 

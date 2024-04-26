@@ -22,9 +22,8 @@ function useCreateMap(mapContainerRef, center, dispatch) {
     style: "mapbox://styles/mapbox/outdoors-v12",
     // style: "mapbox://styles/mapbox/light-v11",
     center: center,
-    // Zoom goes from 0->22
-    // zoom: 9,
-    zoom: 7,
+    // Zoom goes from 0 -> 22
+    zoom: 9,
   });
   // Add navigation control (the +/- zoom buttons)
   map.addControl(

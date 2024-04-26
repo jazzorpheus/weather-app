@@ -25,7 +25,8 @@ function LocationSearch() {
   console.log("RENDERING LOCATION SEARCH COMPONENT");
 
   // Dynamic background
-  const styles = useGetBackground();
+  let styles = "location-search flex flex-col items-center";
+  styles += useGetBackground();
 
   // Local state for form
   const [searchTerm, setSearchTerm] = useState("");
@@ -86,6 +87,8 @@ function LocationSearch() {
     dispatch(fetchCoords(searchTerm));
     setSearchTerm("");
     setFormSubmitted(true);
+    // Remove focus from text input (& remove keyboard display on mobile)
+    event.target.elements.inputName.blur();
   };
 
   let weatherDataDisplay;
@@ -100,19 +103,17 @@ function LocationSearch() {
 
   return (
     <div className={styles}>
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center mt-3">
-          <input
-            className="text-black border-2 border-gray-700 rounded pt-1 ps-1"
-            type="text"
-            placeholder="Enter location name"
-            value={searchTerm}
-            onChange={handleInputChange}
-          />
-          <button className="bg-gray-900 mt-3 mb-3" type="submit">
-            Get Weather
-          </button>
-        </div>
+      <form className="flex flex-col items-center mt-3" onSubmit={handleSubmit}>
+        <input
+          className="text-black border-2 border-gray-700 rounded pt-1 ps-1"
+          type="text"
+          placeholder="Enter location name"
+          value={searchTerm}
+          onChange={handleInputChange}
+        />
+        <button className="bg-gray-900 mt-3 mb-3" type="submit">
+          Get Weather
+        </button>
       </form>
       {weatherDataDisplay}
     </div>

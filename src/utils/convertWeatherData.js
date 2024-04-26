@@ -1,7 +1,6 @@
 function convertWeatherData(weatherData) {
   const windDeg = weatherData.data.wind.deg;
   let windCompass;
-  console.log(windDeg);
 
   if (windDeg >= 348.75 || windDeg < 11.25) {
     windCompass = "North";

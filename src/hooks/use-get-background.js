@@ -3,61 +3,56 @@ import { useSelector } from "react-redux";
 
 function useGetBackground() {
   const weatherData = useSelector((state) => state.weatherData);
-  let main;
-  let styles = "app flex flex-col items-center";
   if (weatherData.data) {
-    main = weatherData.data.weather[0].main;
+    const { main } = weatherData.data.weather[0];
+    const { description } = weatherData.data.weather[0];
     switch (main) {
       case "Ash":
-        styles += " bg-mist";
-        break;
+        return " bg-mist";
       case "Clear":
-        styles += " bg-clear";
-        break;
+        return " bg-clear";
       case "Clouds":
-        styles += " bg-clouds";
-        break;
+        switch (description) {
+          case "few clouds":
+            return " bg-clouds-few";
+          case "scattered clouds":
+            return " bg-clouds-scattered";
+          case "broken clouds":
+            return " bg-clouds-overcast";
+          case "overcast clouds":
+            return " bg-clouds-overcast";
+          default:
+            return " bg-gray-700";
+        }
       case "Drizzle":
-        styles += " bg-rain";
-        break;
+        return " bg-rain";
       case "Dust":
-        styles += " bg-mist";
-        break;
+        return " bg-mist";
       case "Fog":
-        styles += " bg-mist";
-        break;
+        return " bg-mist";
       case "Haze":
-        styles += " bg-haze";
-        break;
+        return " bg-haze";
       case "Mist":
-        styles += " bg-mist";
-        break;
+        return " bg-mist";
       case "Rain":
-        styles += " bg-rain";
-        break;
+        return " bg-rain";
       case "Sand":
-        styles += " bg-sand";
-        break;
+        return " bg-sand";
       case "Smoke":
-        styles += " bg-smoke";
-        break;
+        return " bg-smoke";
       case "Snow":
-        styles += " bg-snow";
-        break;
+        return " bg-snow";
       case "Squall":
-        styles += " bg-rain";
-        break;
+        return " bg-rain";
       case "Thunderstorm":
-        styles += " bg-thunderstorm";
-        break;
+        return " bg-thunderstorm";
       case "Tornado":
-        styles += " bg-tornado";
-        break;
+        return " bg-tornado";
       default:
-        styles += " bg-gray-700";
+        return " bg-gray-700";
     }
   } else {
-    styles += " bg-gray-700";
+    return " bg-gray-700";
   }
 
   return styles;
