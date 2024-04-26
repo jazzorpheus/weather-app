@@ -91,16 +91,16 @@ function LocationSearch() {
     document.querySelector('input[name="searchTerm"]').blur();
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      // Prevent default behavior of submitting the form
-      event.preventDefault();
-      console.log("PRESSED ENTERRRRRRRRRR");
-      // Manually trigger form submission
-      // event.target.form.dispatchEvent(new Event("submit"));
-      handleSubmit(new Event("submit"));
-    }
-  };
+  // const handleKeyDown = (event) => {
+  //   if (event.key === "Enter") {
+  //     // Prevent default behavior of submitting the form
+  //     event.preventDefault();
+  //     console.log("PRESSED ENTERRRRRRRRRR");
+  //     // Manually trigger form submission
+  //     // event.target.form.dispatchEvent(new Event("submit"));
+  //     handleSubmit(new Event("submit"));
+  //   }
+  // };
 
   let weatherDataDisplay;
   if (weatherData.isLoading) {
@@ -122,7 +122,7 @@ function LocationSearch() {
           placeholder="Enter location name"
           value={searchTerm}
           onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
+          // onKeyDown={handleKeyDown}
         />
         <button className="bg-gray-900 mt-3 mb-3" type="submit">
           Get Weather
