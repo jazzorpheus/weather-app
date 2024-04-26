@@ -87,8 +87,19 @@ function LocationSearch() {
     dispatch(fetchCoords(searchTerm));
     setSearchTerm("");
     setFormSubmitted(true);
-    // Remove focus from text input (& remove keyboard display on mobile)
-    event.target.elements.inputName.blur();
+    // Remove focus from input element
+    document.querySelector('input[name="searchTerm"]').blur();
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      // Prevent default behavior of submitting the form
+      event.preventDefault();
+      console.log("PRESSED ENTERRRRRRRRRR");
+      // Manually trigger form submission
+      // event.target.form.dispatchEvent(new Event("submit"));
+      handleSubmit(new Event("submit"));
+    }
   };
 
   let weatherDataDisplay;
@@ -103,13 +114,16 @@ function LocationSearch() {
 
   return (
     <div className={styles}>
-      <form className="flex flex-col items-center mt-3" onSubmit={handleSubmit}>
+      <form className="flex flex-col items-center mt-3">
         <input
           className="text-black border-2 border-gray-700 rounded pt-1 ps-1"
+          name="searchTerm"
           type="text"
           placeholder="Enter location name"
           value={searchTerm}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          onSubmit={handleSubmit}
         />
         <button className="bg-gray-900 mt-3 mb-3" type="submit">
           Get Weather
