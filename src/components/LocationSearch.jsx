@@ -114,7 +114,7 @@ function LocationSearch() {
 
   return (
     <div className={styles}>
-      <form className="flex flex-col items-center mt-3">
+      <form className="flex flex-col items-center mt-3" onSubmit={handleSubmit}>
         <input
           className="text-black border-2 border-gray-700 rounded pt-1 ps-1"
           name="searchTerm"
@@ -123,7 +123,6 @@ function LocationSearch() {
           value={searchTerm}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          onSubmit={handleSubmit}
         />
         <button className="bg-gray-900 mt-3 mb-3" type="submit">
           Get Weather
