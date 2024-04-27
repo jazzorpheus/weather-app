@@ -1,5 +1,7 @@
 Implement search suggestions
 
+Sort out max-width issue on larger screens
+
 Display weather data on map:
     - Figure out how to change layer data using state WITHOUT using up Tomorrow.io free API calls!!!
     - Implement dropdown for data layer selection for current weather (everything current for now)

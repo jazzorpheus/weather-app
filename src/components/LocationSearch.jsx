@@ -1,22 +1,16 @@
 // React Hooks
-import { useEffect, useState } from "react";
-
+import { useState, useEffect, useRef } from "react";
 // React-Redux Hooks
 import { useDispatch, useSelector } from "react-redux";
-
 // Custom Hooks
 import useGetBackground from "../hooks/use-get-background";
-
 // Async Thunks
 import { fetchCoords } from "../store/thunks/fetchCoords";
 import { fetchWeatherData } from "../store/thunks/fetchWeatherData";
-
 // Action Creator Functions
 import { updateMarker } from "../store";
-
 // Mapbox GL
 import mapboxgl from "mapbox-gl";
-
 // My Components
 import WeatherDataDisplay from "./WeatherDataDisplay";
 import convertWeatherData from "../utils/convertWeatherData";
@@ -53,10 +47,9 @@ function LocationSearch() {
     if (coords.coords[0]) {
       dispatch(fetchWeatherData(coords.coords));
       if (formSubmitted) {
-        // mapObj.setCenter(coords.coords);
-        // mapObj.setZoom(9);
         mapObj.flyTo({
           center: coords.coords,
+          zoom: 9,
           essential: true,
         });
         setFormSubmitted(false);
@@ -74,14 +67,46 @@ function LocationSearch() {
     }
   }, [coords.coords]);
 
-  // Hijack control of form input value
-  const handleInputChange = (event) => {
+  // Hijack control of form input value and render search suggestions
+  const [suggestions, setSuggestions] = useState([]);
+  const handleInputChange = async (event) => {
     setSearchTerm(event.target.value);
+    if (searchTerm.length > 1) {
+      const response = await getSearchSuggestions(searchTerm);
+      console.log(response, typeof response);
+      setSuggestions(response);
+    }
   };
 
-  // Handle form submission
-  // Fetch coords using search term (triggers fetchWeatherData once coords change)
-  // Reset text input
+  const formRef = useRef(null);
+  let suggestionsContent;
+  if (suggestions[0]) {
+    suggestionsContent = (
+      <div className="bg-gray-900 opacity-95">
+        {suggestions.map((sugg) => {
+          return (
+            <li className="list-none" key={sugg.id}>
+              {sugg.place_name}
+
+              <button
+                onClick={() => {
+                  setSearchTerm(sugg.place_name);
+                }}
+              >
+                Go
+              </button>
+            </li>
+          );
+        })}
+        ;
+      </div>
+    );
+  } else {
+    suggestionsContent = "";
+  }
+
+  // Handle form submission: Fetch coords using search term
+  // (Triggers fetchWeatherData once coords change)
   const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch(fetchCoords(searchTerm));
@@ -103,7 +128,11 @@ function LocationSearch() {
 
   return (
     <div className={styles}>
-      <form className="flex flex-col items-center mt-3" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col items-center mt-3"
+        onSubmit={handleSubmit}
+        ref={formRef}
+      >
         <input
           className="text-black border-2 border-gray-700 rounded pt-1 ps-1"
           name="searchTerm"
@@ -115,6 +144,7 @@ function LocationSearch() {
         <button className="bg-gray-900 mt-3 mb-3" type="submit">
           Get Weather
         </button>
+        {suggestionsContent}
       </form>
       {weatherDataDisplay}
     </div>
@@ -122,3 +152,33 @@ function LocationSearch() {
 }
 
 export default LocationSearch;
+
+// GEOCODER: IMPORT & SET UP GEOCODING FROM MAPBOX-SDK
+import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
+const geocoder = mbxGeocoding({
+  accessToken:
+    "pk.eyJ1IjoiamF6em9ycGhldXMiLCJhIjoiY2xid25sbDhnMHlzZTN1bXNiejBvOXl0eiJ9.yv9LtnmzsC6A7a74Fwod7Q",
+});
+
+const getSearchSuggestions = async (searchTerm) => {
+  console.log("IN GET SEARCH SUGGESTIONS");
+
+  const response = await geocoder
+    .forwardGeocode({
+      query: searchTerm,
+      limit: 5,
+    })
+    .send();
+
+  if (
+    response &&
+    response.body &&
+    response.body.features &&
+    response.body.features.length > 0
+  ) {
+    console.log("getSearchSuggestions response data:", response.body.features);
+    return response.body.features;
+  } else {
+    console.error("Couldn't get search suggestions.");
+  }
+};
