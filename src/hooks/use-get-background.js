@@ -18,7 +18,7 @@ function useGetBackground() {
           case "scattered clouds":
             return " bg-clouds-scattered";
           case "broken clouds":
-            return " bg-clouds-overcast";
+            return " bg-clouds-broken";
           case "overcast clouds":
             return " bg-clouds-overcast";
           default:
