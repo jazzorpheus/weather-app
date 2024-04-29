@@ -89,14 +89,14 @@ function SearchModal({ toggle, showForm }) {
   };
 
   return createPortal(
-    <div className="fixed inset-0 top-1/3 bg-gray-300 opacity-80">
+    <div className="fixed inset-0 bg-gray-300 opacity-80">
       <form
         className="flex flex-col items-center mt-3"
         onSubmit={handleSubmit}
         ref={formRef}
       >
         <input
-          className="text-black border-2 border-gray-700 rounded pt-1 ps-1"
+          className="text-black border-2 border-gray-700 rounded opacity-100 pt-1 ps-1"
           name="searchTerm"
           type="text"
           placeholder="Enter location name"
