@@ -1,4 +1,7 @@
-Implement search suggestions
+Set up Mapbox token + geocoder config to be in a single file
+
+Implement search suggestions with Modal
+    - Make sure that when user clicks off modal, form closes etc.
 
 Sort out max-width issue on larger screens
 

@@ -8,6 +8,11 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Container to 'portal' Modal component into so that it can take up whole screen
+    using "absolute" or "fixed" position property. 
+    REMEMBER: "absolute" / "fixed" elements take up full width and height of their nearest "positioned" 
+    ancestor (i.e. an element whose position value is other than the default (static)). -->
+    <div class="modal-container"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

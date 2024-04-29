@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 // Custom Hooks
 import useGetBackground from "../hooks/use-get-background";
 // Async Thunks
-import { fetchCoords } from "../store/thunks/fetchCoords";
 import { fetchWeatherData } from "../store/thunks/fetchWeatherData";
 // Action Creator Functions
 import { updateMarker } from "../store";
@@ -14,6 +13,7 @@ import mapboxgl from "mapbox-gl";
 // My Components
 import WeatherDataDisplay from "./WeatherDataDisplay";
 import convertWeatherData from "../utils/convertWeatherData";
+import SearchModal from "./SearchModal";
 
 function LocationSearch() {
   console.log("RENDERING LOCATION SEARCH COMPONENT");
@@ -22,8 +22,7 @@ function LocationSearch() {
   let styles = "location-search flex flex-col items-center";
   styles += useGetBackground();
 
-  // Local state for form
-  const [searchTerm, setSearchTerm] = useState("");
+  const [showForm, setshowForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   // State from store
@@ -39,11 +38,14 @@ function LocationSearch() {
   // Dispatch function
   const dispatch = useDispatch();
 
-  // When coords change:
-  //  - get new weather data
-  //  - re-center map if change comes from form search
-  //  - move map marker to new coords
-  useEffect(() => {
+  const toggleFormSubmitted = () => {
+    setFormSubmitted(!formSubmitted);
+  };
+
+  //  - Get new weather data
+  //  - Re-center map if change comes from form search
+  //  - Move map marker to new coords
+  const getNewLocationData = () => {
     if (coords.coords[0]) {
       dispatch(fetchWeatherData(coords.coords));
       if (formSubmitted) {
@@ -52,7 +54,8 @@ function LocationSearch() {
           zoom: 9,
           essential: true,
         });
-        setFormSubmitted(false);
+        toggleFormSubmitted();
+        setshowForm(false);
       }
       if (marker) {
         marker.remove();
@@ -65,56 +68,12 @@ function LocationSearch() {
         );
       }
     }
+  };
+
+  // When coords change
+  useEffect(() => {
+    getNewLocationData();
   }, [coords.coords]);
-
-  // Hijack control of form input value and render search suggestions
-  const [suggestions, setSuggestions] = useState([]);
-  const handleInputChange = async (event) => {
-    setSearchTerm(event.target.value);
-    if (searchTerm.length > 1) {
-      const response = await getSearchSuggestions(searchTerm);
-      console.log(response, typeof response);
-      setSuggestions(response);
-    }
-  };
-
-  const formRef = useRef(null);
-  let suggestionsContent;
-  if (suggestions[0]) {
-    suggestionsContent = (
-      <div className="bg-gray-900 opacity-95">
-        {suggestions.map((sugg) => {
-          return (
-            <li className="list-none" key={sugg.id}>
-              {sugg.place_name}
-
-              <button
-                onClick={() => {
-                  setSearchTerm(sugg.place_name);
-                }}
-              >
-                Go
-              </button>
-            </li>
-          );
-        })}
-        ;
-      </div>
-    );
-  } else {
-    suggestionsContent = "";
-  }
-
-  // Handle form submission: Fetch coords using search term
-  // (Triggers fetchWeatherData once coords change)
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    dispatch(fetchCoords(searchTerm));
-    setSearchTerm("");
-    setFormSubmitted(true);
-    // Remove focus from input element
-    document.querySelector('input[name="searchTerm"]').blur();
-  };
 
   let weatherDataDisplay;
   if (weatherData.isLoading) {
@@ -128,23 +87,16 @@ function LocationSearch() {
 
   return (
     <div className={styles}>
-      <form
-        className="flex flex-col items-center mt-3"
-        onSubmit={handleSubmit}
-        ref={formRef}
-      >
+      {showForm && (
+        <SearchModal toggle={toggleFormSubmitted} showForm={showForm} />
+      )}
+      <form className="flex flex-col items-center my-3">
         <input
           className="text-black border-2 border-gray-700 rounded pt-1 ps-1"
-          name="searchTerm"
           type="text"
           placeholder="Enter location name"
-          value={searchTerm}
-          onChange={handleInputChange}
+          onClick={() => setshowForm(true)}
         />
-        <button className="bg-gray-900 mt-3 mb-3" type="submit">
-          Get Weather
-        </button>
-        {suggestionsContent}
       </form>
       {weatherDataDisplay}
     </div>
@@ -152,33 +104,3 @@ function LocationSearch() {
 }
 
 export default LocationSearch;
-
-// GEOCODER: IMPORT & SET UP GEOCODING FROM MAPBOX-SDK
-import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
-const geocoder = mbxGeocoding({
-  accessToken:
-    "pk.eyJ1IjoiamF6em9ycGhldXMiLCJhIjoiY2xid25sbDhnMHlzZTN1bXNiejBvOXl0eiJ9.yv9LtnmzsC6A7a74Fwod7Q",
-});
-
-const getSearchSuggestions = async (searchTerm) => {
-  console.log("IN GET SEARCH SUGGESTIONS");
-
-  const response = await geocoder
-    .forwardGeocode({
-      query: searchTerm,
-      limit: 5,
-    })
-    .send();
-
-  if (
-    response &&
-    response.body &&
-    response.body.features &&
-    response.body.features.length > 0
-  ) {
-    console.log("getSearchSuggestions response data:", response.body.features);
-    return response.body.features;
-  } else {
-    console.error("Couldn't get search suggestions.");
-  }
-};

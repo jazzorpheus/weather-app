@@ -69,9 +69,9 @@ function Map() {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="w-dvw">
-        <div className="sidebar text-white bg-gray-700 ">
+        {/* <div className="sidebar text-white bg-gray-700 ">
           Longitude: {coords[0]} | Latitude: {coords[1]}
-        </div>
+        </div> */}
         <div
           ref={mapContainerRef}
           className="map-container w-100 border-4 border-gray-900"
