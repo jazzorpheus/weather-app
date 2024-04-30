@@ -13,7 +13,7 @@ const fetchCoords = createAsyncThunk("/fetchCoords", async (searchTerm) => {
   const response = await geocoder
     .forwardGeocode({
       query: searchTerm,
-      limit: 5,
+      limit: 1,
     })
     .send();
 

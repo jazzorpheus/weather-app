@@ -1,5 +1,5 @@
 // React
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 
 // ReactDOM
 import { createPortal } from "react-dom";
@@ -17,6 +17,15 @@ function SearchModal({ toggle, showForm }) {
   // Dispatch function
   const dispatch = useDispatch();
 
+  // Focus on the input field when the form is rendered
+  const formRef = useRef(null);
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (showForm && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [showForm]);
+
   // Make sure user can't scroll while modal is shown on-screen
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
@@ -27,36 +36,33 @@ function SearchModal({ toggle, showForm }) {
     };
   }, []);
 
-  // Hijack control of form input value and render search suggestions
   const [suggestions, setSuggestions] = useState([]);
-  const handleInputChange = async (event) => {
+  // Hijack control of form input value
+  const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
-    if (searchTerm.length > 1) {
-      const response = await getSearchSuggestions(searchTerm);
-      console.log(response, typeof response);
-      setSuggestions(response);
-    }
   };
-
-  const formRef = useRef(null);
-  const inputRef = useRef(null);
+  // Get suggestions when search term required length
   useEffect(() => {
-    // Focus on the input field when the form is rendered
-    if (showForm && inputRef.current) {
-      inputRef.current.focus();
+    const runGetSuggestions = async () => {
+      const response = await getSearchSuggestions(searchTerm);
+      setSuggestions(response);
+    };
+    if (searchTerm.length > 1) {
+      runGetSuggestions();
+    } else {
+      setSuggestions([]);
     }
-  }, [showForm]);
+  }, [searchTerm]);
+
+  // If there are suggestions generate content
   let suggestionsContent;
-  if (suggestions[0]) {
+  if (suggestions && suggestions[0]) {
     suggestionsContent = (
       <div className="bg-gray-900 rounded-md p-3">
         {suggestions.map((sugg) => {
           return (
-            <>
-              <li
-                className="flex justify-between items-center list-none m-2"
-                key={sugg.id}
-              >
+            <Fragment key={sugg.id}>
+              <li className="flex justify-between items-center list-none m-2">
                 <p className="mr-5">{sugg.place_name}</p>
 
                 <button
@@ -68,13 +74,13 @@ function SearchModal({ toggle, showForm }) {
                 </button>
               </li>
               <hr />
-            </>
+            </Fragment>
           );
         })}
       </div>
     );
   } else {
-    suggestionsContent = "";
+    suggestionsContent = null;
   }
 
   // Handle form submission: Fetch coords using search term
@@ -125,13 +131,15 @@ const geocoder = mbxGeocoding({
 
 const getSearchSuggestions = async (searchTerm) => {
   console.log("IN GET SEARCH SUGGESTIONS");
+  console.log(searchTerm);
 
   const response = await geocoder
     .forwardGeocode({
       query: searchTerm,
       limit: 5,
     })
-    .send();
+    .send()
+    .catch((err) => console.error(err));
 
   if (
     response &&
