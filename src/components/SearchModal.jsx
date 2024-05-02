@@ -1,5 +1,5 @@
 // React
-import { useState, useRef, useEffect, Fragment } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // ReactDOM
 import { createPortal } from "react-dom";
@@ -10,15 +10,21 @@ import { useDispatch } from "react-redux";
 // Async Thunks
 import { fetchCoords } from "../store/thunks/fetchCoords";
 
-function SearchModal({ toggle, showForm }) {
+// Custom Hooks
+import { useGetSuggestions } from "../hooks/use-get-suggestions";
+
+// My Components
+import SuggestionItem from "./SuggestionItem";
+
+function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
   // Local state for form
   const [searchTerm, setSearchTerm] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
 
   // Dispatch function
   const dispatch = useDispatch();
 
   // Focus on the input field when the form is rendered
-  const formRef = useRef(null);
   const inputRef = useRef(null);
   useEffect(() => {
     if (showForm && inputRef.current) {
@@ -36,15 +42,14 @@ function SearchModal({ toggle, showForm }) {
     };
   }, []);
 
-  const [suggestions, setSuggestions] = useState([]);
   // Hijack control of form input value
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  // Get suggestions when search term required length
+  // Get suggestions once search term required length
   useEffect(() => {
     const runGetSuggestions = async () => {
-      const response = await getSearchSuggestions(searchTerm);
+      const response = await useGetSuggestions(searchTerm);
       setSuggestions(response);
     };
     if (searchTerm.length > 1) {
@@ -61,20 +66,12 @@ function SearchModal({ toggle, showForm }) {
       <div className="bg-gray-900 rounded-md p-3">
         {suggestions.map((sugg) => {
           return (
-            <Fragment key={sugg.id}>
-              <li className="flex justify-between items-center list-none m-2">
-                <p className="mr-5">{sugg.place_name}</p>
-
-                <button
-                  onClick={() => {
-                    setSearchTerm(sugg.place_name);
-                  }}
-                >
-                  Go
-                </button>
-              </li>
-              <hr />
-            </Fragment>
+            <SuggestionItem
+              key={sugg.id}
+              onClick={() => setSearchTerm(sugg.place_name)}
+            >
+              {sugg.place_name}
+            </SuggestionItem>
           );
         })}
       </div>
@@ -84,72 +81,48 @@ function SearchModal({ toggle, showForm }) {
   }
 
   // Handle form submission: Fetch coords using search term
-  // (Triggers fetchWeatherData once coords change)
+  // (Then a coords change triggers fetchWeatherData in LocationSearch.jsx)
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (searchTerm.length < 1) {
+      return;
+    }
     dispatch(fetchCoords(searchTerm));
     setSearchTerm("");
-    toggle();
+    toggleSubmitted();
     // Remove focus from input element
     document.querySelector('input[name="searchTerm"]').blur();
   };
 
+  const handleCancel = () => {
+    toggleShow();
+  };
+
   return createPortal(
-    <div className="fixed inset-0 bg-gray-300 opacity-80">
-      <form
-        className="flex flex-col items-center mt-3"
-        onSubmit={handleSubmit}
-        ref={formRef}
-      >
-        <input
-          className="text-black border-2 border-gray-700 rounded opacity-100 pt-1 ps-1"
-          name="searchTerm"
-          type="text"
-          placeholder="Enter location name"
-          value={searchTerm}
-          onChange={handleInputChange}
-          ref={inputRef}
-        />
-        <button className="bg-gray-900 mt-3 mb-3" type="submit">
-          Get Weather
+    <div className="fixed inset-0 flex justify-center items-start bg-gray-300 opacity-80">
+      <div className="flex justify-center w-5/6 mt-5">
+        <button
+          className="self-start text-white border-2 border-gray-700 bg-gray-900 rounded opacity-100 p-1 px-2 me-2"
+          onClick={handleCancel}
+        >
+          Cancel
         </button>
-        {suggestionsContent}
-      </form>
+        <form className="flex flex-col w-5/6" onSubmit={handleSubmit}>
+          <input
+            className="text-black border-2 border-gray-700 rounded opacity-100 p-1"
+            name="searchTerm"
+            type="text"
+            placeholder="Search For Location"
+            value={searchTerm}
+            onChange={handleInputChange}
+            ref={inputRef}
+          />
+          {suggestionsContent}
+        </form>
+      </div>
     </div>,
     document.querySelector(".modal-container")
   );
 }
 
 export default SearchModal;
-
-// GEOCODER: IMPORT & SET UP GEOCODING FROM MAPBOX-SDK
-import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
-const geocoder = mbxGeocoding({
-  accessToken:
-    "pk.eyJ1IjoiamF6em9ycGhldXMiLCJhIjoiY2xid25sbDhnMHlzZTN1bXNiejBvOXl0eiJ9.yv9LtnmzsC6A7a74Fwod7Q",
-});
-
-const getSearchSuggestions = async (searchTerm) => {
-  console.log("IN GET SEARCH SUGGESTIONS");
-  console.log(searchTerm);
-
-  const response = await geocoder
-    .forwardGeocode({
-      query: searchTerm,
-      limit: 5,
-    })
-    .send()
-    .catch((err) => console.error(err));
-
-  if (
-    response &&
-    response.body &&
-    response.body.features &&
-    response.body.features.length > 0
-  ) {
-    console.log("getSearchSuggestions response data:", response.body.features);
-    return response.body.features;
-  } else {
-    console.error("Couldn't get search suggestions.");
-  }
-};

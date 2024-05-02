@@ -28,7 +28,6 @@ const coordsSlice = createSlice({
     });
     builder.addCase(fetchCoords.fulfilled, (state, action) => {
       state.coords = action.payload;
-      console.log("FETCH COORDS FULFILLED", action.payload);
       state.isLoading = false;
       state.error = null;
     });

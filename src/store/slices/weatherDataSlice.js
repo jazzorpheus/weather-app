@@ -22,7 +22,6 @@ const weatherDataSlice = createSlice({
     });
     builder.addCase(fetchWeatherData.fulfilled, (state, action) => {
       state.data = action.payload;
-      console.log("WEATHER DATA FULFILLED:", action.payload);
       state.isLoading = false;
       state.error = null;
     });

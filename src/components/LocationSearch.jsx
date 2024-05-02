@@ -1,5 +1,5 @@
 // React Hooks
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 // React-Redux Hooks
 import { useDispatch, useSelector } from "react-redux";
 // Custom Hooks
@@ -16,8 +16,6 @@ import convertWeatherData from "../utils/convertWeatherData";
 import SearchModal from "./SearchModal";
 
 function LocationSearch() {
-  console.log("RENDERING LOCATION SEARCH COMPONENT");
-
   // Dynamic background
   let styles = "location-search flex flex-col items-center";
   styles += useGetBackground();
@@ -37,6 +35,10 @@ function LocationSearch() {
 
   // Dispatch function
   const dispatch = useDispatch();
+
+  const toggleShowForm = () => {
+    setshowForm(!showForm);
+  };
 
   const toggleFormSubmitted = () => {
     setFormSubmitted(!formSubmitted);
@@ -88,13 +90,19 @@ function LocationSearch() {
   return (
     <div className={styles}>
       {showForm && (
-        <SearchModal toggle={toggleFormSubmitted} showForm={showForm} />
+        <SearchModal
+          showForm={showForm}
+          toggleShow={toggleShowForm}
+          toggleSubmitted={toggleFormSubmitted}
+        />
       )}
       <form className="flex flex-col items-center my-3">
         <input
           className="text-black border-2 border-gray-700 rounded pt-1 ps-1"
           type="text"
-          placeholder="Enter location name"
+          placeholder="Search For Location"
+          value={""}
+          onChange={(e) => e.target.value}
           onClick={() => setshowForm(true)}
         />
       </form>
