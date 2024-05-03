@@ -1,6 +1,8 @@
 BIG REFACTOR: Create bottom navigation that contains link to "Current", "Map", and "Forecast"; 
 check out MUI's bottom nav component. (To be displayed on all pages.)
 
+Fix Mapbox overlay, controls, etc. showing on top of search modal
+
 Display weather data on map:
     - Figure out how to change layer data using state WITHOUT using up Tomorrow.io free API calls!!!
     - Implement dropdown for data layer selection for current weather (everything current for now)
