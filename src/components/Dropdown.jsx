@@ -7,7 +7,7 @@ import Panel from "./Panel";
 // Icons
 import { GoChevronUp } from "react-icons/go";
 
-export default function Dropdown({ options, value, onChange }) {
+export default function Dropdown({ label, options, value, onChange }) {
   // Used to toggle dropdown menu on or off
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -64,7 +64,7 @@ export default function Dropdown({ options, value, onChange }) {
     return (
       <li
         key={idx}
-        className="hover:bg-gray-700 rounded cursor-pointer list-none p-1"
+        className="hover:bg-gray-700 rounded cursor-pointer list-none text-sm p-1"
         onClick={() => handleOnChange(option)}
       >
         {option.label}
@@ -73,12 +73,12 @@ export default function Dropdown({ options, value, onChange }) {
   });
 
   return (
-    <div ref={divEl} className="w-28 flex  mt-3">
+    <div ref={divEl} className="w-28 flex">
       <Panel
-        className="flex justify-between items-center cursor-pointer"
+        className="flex justify-around items-center cursor-pointer text-sm"
         onClick={handleToggle}
       >
-        {value?.label || "Map Style"} <GoChevronUp className="text-lg" />
+        {value?.label || label} <GoChevronUp className="text-lg" />
       </Panel>
       {isExpanded && <Panel className="absolute bottom-full">{dropMenu}</Panel>}
     </div>

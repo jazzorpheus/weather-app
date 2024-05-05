@@ -1,3 +1,6 @@
+// React-Redux
+import { useSelector } from "react-redux";
+
 // Action Creator Functions
 import { updateMapObj, updateCoords, updateMarker } from "../store";
 
@@ -7,13 +10,6 @@ const mbxToken =
   "pk.eyJ1IjoiamF6em9ycGhldXMiLCJhIjoiY2xyejhvZDgxMWo2ZTJscHF0Y2kxZnlpaiJ9.CnwtM75CEUYnlYQf6CxQcg";
 // Mapbox access token
 mapboxgl.accessToken = mbxToken;
-// // GEOCODER: IMPORT & SET UP GEOCODING FROM MAPBOX-SDK
-// import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
-// const geocoder = mbxGeocoding({
-//   accessToken: mbxToken,
-// });
-
-const TMW_KEY = "uHRwNBfZ4wdj8PmZ8ueU25NHB1eggBo9";
 
 function useCreateMap(mapContainerRef, center, dispatch) {
   // Create map
@@ -83,10 +79,36 @@ function useCreateMap(mapContainerRef, center, dispatch) {
 
   // *****************************************************************  LAYERS EXPERIMENT
 
-  // In case needed later
-  map.on("style.load", () => {
-    // TBD
-  });
+  // // In case needed later
+  // map.on("style.load", () => {
+  //   // TODO
+  //   if (layer) {
+  //     // if (state.mapObj.getLayer("radar-tiles")) {
+  //     //   state.mapObj.removeLayer("radar-tiles");
+  //     //   state.mapObj.removeSource("tomorrow-io-api");
+  //     // }
+  //     // TODO
+  //     state.mapObj.addSource(`${layer}-source`, {
+  //       type: "raster",
+  //       tiles: [
+  //         `https://api.tomorrow.io/v4/map/tile/{z}/{x}/{y}/${layer}/${TIMESTAMP}.png?apikey=${TMW_KEY}`,
+  //       ],
+  //       tileSize: 256,
+  //       attribution:
+  //         '&copy; <a href="https://www.tomorrow.io/weather-api">Powered by Tomorrow.io</a>',
+  //     });
+  //     state.mapObj.addLayer({
+  //       id: `${layer}-layer`,
+  //       type: "raster",
+  //       source: `${layer}-source`,
+  //       minzoom: 1,
+  //       maxzoom: 12,
+  //       paint: {
+  //         "raster-opacity": 0.65,
+  //       },
+  //     });
+  //   }
+  // });
 
   // Create map object in store/state
   dispatch(updateMapObj(map));

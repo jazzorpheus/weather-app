@@ -7,6 +7,7 @@ import {
   updateMapObj,
   updateMapStyle,
   updateMarker,
+  updateLayerName,
 } from "./slices/mapSlice";
 
 // Import combined reducer and action creator functions from coordsSlice
@@ -30,7 +31,14 @@ const store = configureStore({
 });
 
 // Export store and action creators
-export { store, updateMapObj, updateMapStyle, updateMarker, updateCoords };
+export {
+  store,
+  updateMapObj,
+  updateMapStyle,
+  updateMarker,
+  updateLayerName,
+  updateCoords,
+};
 
 // Re-Export async thunks
 export * from "./thunks/fetchCoords";

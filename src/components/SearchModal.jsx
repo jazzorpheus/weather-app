@@ -107,7 +107,10 @@ function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
         >
           Cancel
         </button>
-        <form className="flex flex-col w-5/6" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col w-3/5 max-w-[400px]"
+          onSubmit={handleSubmit}
+        >
           <input
             className="text-black border-2 border-gray-700 rounded opacity-100 p-1"
             name="searchTerm"
