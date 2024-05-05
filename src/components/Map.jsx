@@ -17,6 +17,10 @@ import Dropdown from "./Dropdown";
 // Give access to variable that counts number of renders
 import { useRenderCount } from "@uidotdev/usehooks";
 
+// Tomorrow API
+const TMW_KEY = "uHRwNBfZ4wdj8PmZ8ueU25NHB1eggBo9";
+const TIMESTAMP = new Date().toISOString();
+
 // *************************************************************************************  COMPONENT
 function Map() {
   const renderCount = useRenderCount();
@@ -26,15 +30,13 @@ function Map() {
   const mapObj = useSelector((state) => state.map.mapObj);
   // Initialize map
   const mapContainerRef = useInitMap();
-  // Style loaded flag
-  const [styleLoaded, setStyleLoaded] = useState(false);
-  console.log("STYLE LOADED:", styleLoaded);
 
   // DROPDOWN LAYER
   const [selectedLayer, setSelectedLayer] = useState(null);
   console.log("NEW RENDER - Selected layer:", selectedLayer);
   // CURRENT LAYER
-  const [layer, setLayer] = useState("red");
+  // const [layer, setLayer] = useState("red");
+  const [layer, setLayer] = useState("precipitationIntensity");
   console.log("NEW RENDER - Current layer:", layer);
   // PREV LAYER
   const [prevLayer, setPrevLayer] = useState(null);
@@ -52,78 +54,31 @@ function Map() {
 
   // Change map style selection in dropdown, update map style
   const handleStyleSelect = (option) => {
-    mapObj.on("style.load", () => {
-      console.log("STYLE LOADED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      // ****************************************************************  Log all custom layers currently added to map
-      try {
-        // Get all sources
-        const sources = Object.values(mapObj.getStyle().sources);
-        console.log("ALL SOURCES:", sources);
-        // Get all layers
-        const layers = mapObj.getStyle().layers;
-        // Filter out custom layers
-        const customLayers = layers.filter(function (layer) {
-          // Check if the layer's ID starts with a specific prefix
-          return layer.id.startsWith("custom-layer");
-        });
-        console.log("CUSTOM LAYERS:", customLayers);
-      } catch (err) {
-        console.log(err);
-      }
-      // ****************************************************************
-
-      // Remove layers & sources
-      const layers = mapObj.getStyle().layers;
-      layers.forEach(function (layer) {
-        if (layer.id.startsWith("custom-layer")) {
-          mapObj.removeLayer(layer.id);
-        }
-      });
-      const sourceIds = Object.keys(mapObj.getStyle().sources);
-      sourceIds.forEach((sourceId) => {
-        if (sourceId.startsWith("custom-source")) {
-          mapObj.removeSource(sourceId);
-        }
-      });
-
-      // Re-Add sources and layers
-      console.log(`ADDING NEW ${layer} SOURCE`);
-      mapObj.addSource(`custom-source-${layer}`, {
-        type: "geojson",
-        data: {
-          type: "Feature",
-          geometry: {
-            type: "Polygon",
-            coordinates: [
-              [
-                [-180, 90],
-                [-180, -90],
-                [180, -90],
-                [180, 90],
-                [-180, 90],
-              ],
-            ],
-          },
-        },
-      });
-
-      console.log(`ADDING NEW ${layer} LAYER`);
-      mapObj.addLayer({
-        id: `custom-layer-${layer}`, // Layer ID
-        type: "fill",
-        source: `custom-source-${layer}`,
-        layout: {},
-        paint: {
-          "fill-color": `${layer}`, // Layer color
-          "fill-opacity": 0.5,
-        },
-      });
-
-      setStyleLoaded(true);
-    });
-
     setSelectedStyle(option);
     dispatch(updateMapStyle(option.value));
+
+    mapObj.on("style.load", () => {
+      console.log("SUBSEQUENT STYLE LOADED!!");
+      addCustomLayer(layer);
+    });
+
+    // ****************************************************************  Log all custom SOURCES & LAYERS START
+    try {
+      // Get all sources
+      const sources = Object.values(mapObj.getStyle().sources);
+      console.log("ALL SOURCES:", sources);
+      // Get all layers
+      const layers = mapObj.getStyle().layers;
+      // Filter out custom layers
+      const customLayers = layers.filter(function (layer) {
+        // Check if the layer's ID starts with a specific prefix
+        return layer.id.startsWith("custom-layer");
+      });
+      console.log("CUSTOM LAYERS:", customLayers);
+    } catch (err) {
+      console.log(err);
+    }
+    // **************************************************************** Log all custom SOURCES & LAYERS END
   };
   // List of styleOptions
   const styleOptions = [
@@ -147,10 +102,16 @@ function Map() {
   };
   // List of layerOptions
   const layerOptions = [
-    { label: "Red", value: "red" },
-    { label: "Green", value: "green" },
-    { label: "Blue", value: "blue" },
+    { label: "Precipitation", value: "precipitationIntensity" },
+    { label: "Temperature", value: "temperature" },
+    { label: "Wind Speed", value: "windSpeed" },
   ];
+  // // List of layerOptions
+  // const layerOptions = [
+  //   { label: "Red", value: "red" },
+  //   { label: "Green", value: "green" },
+  //   { label: "Blue", value: "blue" },
+  // ];
 
   useEffect(() => {
     console.log("USE EFFECT - Selected layer:", selectedLayer);
@@ -159,110 +120,142 @@ function Map() {
 
     if (mapObj) {
       if (prevLayer) {
-        // Remove layers & sources
-        // Remove layers & sources
-        const layers = mapObj.getStyle().layers;
-        layers.forEach(function (layer) {
-          if (layer.id.startsWith("custom-layer")) {
-            mapObj.removeLayer(layer.id);
-          }
-        });
-        const sourceIds = Object.keys(mapObj.getStyle().sources);
-        sourceIds.forEach((sourceId) => {
-          if (sourceId.startsWith("custom-source")) {
-            mapObj.removeSource(sourceId);
-          }
-        });
-        // // OLD METHOD
-        // if (mapObj.getLayer(`custom-layer-${prevLayer}`)) {
-        //   console.log(`REMOVING PREV ${prevLayer} LAYER`);
-        //   mapObj.removeLayer(`custom-layer-${prevLayer}`);
-        // }
-        // if (mapObj.getSource(`custom-source-${prevLayer}`)) {
-        //   console.log(`REMOVING PREV ${prevLayer} SOURCE`);
-        //   // Below did not work for some reason :S
-        //   // // mapObj.removeSource(`custom-source-${prevLayer}`); // *** ******************************************
-        //   // Instead, remove all sources except default
-        //   const sourceIds = Object.keys(mapObj.getStyle().sources);
-        //   sourceIds.forEach((sourceId) => {
-        //     if (sourceId.startsWith("custom")) mapObj.removeSource(sourceId);
-        //   });
-        // }
-
-        // Add sources & layers
-        if (!mapObj.getSource(`custom-source-${layer}`)) {
-          console.log(`ADDING NEW ${layer} SOURCE`);
-          mapObj.addSource(`custom-source-${layer}`, {
-            type: "geojson",
-            data: {
-              type: "Feature",
-              geometry: {
-                type: "Polygon",
-                coordinates: [
-                  [
-                    [-180, 90],
-                    [-180, -90],
-                    [180, -90],
-                    [180, 90],
-                    [-180, 90],
-                  ],
-                ],
-              },
-            },
-          });
-        }
-        if (!mapObj.getLayer(`custom-layer-${layer}`)) {
-          console.log(`ADDING NEW ${layer} LAYER`);
-          mapObj.addLayer({
-            id: `custom-layer-${layer}`, // Layer ID
-            type: "fill",
-            source: `custom-source-${layer}`,
-            layout: {},
-            paint: {
-              "fill-color": `${layer}`, // Layer color
-              "fill-opacity": 0.5,
-            },
-          });
-        }
+        addCustomLayer(layer);
       }
       // ********************************************************************** FIRST STYLE LOAD LISTENER
       if (layer && renderCount === 2) {
-        console.log("SETTING STYLE LOAD LISTENER!!!");
+        console.log("SETTING FIRST STYLE LOAD LISTENER!");
         mapObj.once("style.load", () => {
           console.log(`ADDING NEW ${layer} SOURCE`);
-          mapObj.addSource(`custom-source-${layer}`, {
-            type: "geojson",
-            data: {
-              type: "Feature",
-              geometry: {
-                type: "Polygon",
-                coordinates: [
-                  [
-                    [-180, 90],
-                    [-180, -90],
-                    [180, -90],
-                    [180, 90],
-                    [-180, 90],
-                  ],
-                ],
-              },
-            },
-          });
-          console.log(`ADDING NEW ${layer} LAYER`);
-          mapObj.addLayer({
-            id: `custom-layer-${layer}`, // Layer ID
-            type: "fill",
-            source: `custom-source-${layer}`,
-            layout: {},
-            paint: {
-              "fill-color": `${layer}`, // Layer color
-              "fill-opacity": 0.5,
-            },
-          });
+          addCustomLayer(layer);
+          // mapObj.addSource(`custom-source-${layer}`, {
+          //   type: "geojson",
+          //   data: {
+          //     type: "Feature",
+          //     geometry: {
+          //       type: "Polygon",
+          //       coordinates: [
+          //         [
+          //           [-180, 90],
+          //           [-180, -90],
+          //           [180, -90],
+          //           [180, 90],
+          //           [-180, 90],
+          //         ],
+          //       ],
+          //     },
+          //   },
+          // });
+          // console.log(`ADDING NEW ${layer} LAYER`);
+          // mapObj.addLayer({
+          //   id: `custom-layer-${layer}`, // Layer ID
+          //   type: "fill",
+          //   source: `custom-source-${layer}`,
+          //   layout: {},
+          //   paint: {
+          //     "fill-color": `${layer}`, // Layer color
+          //     "fill-opacity": 0.5,
+          //   },
+          // });
         });
       }
     }
   }, [layer, mapObj]);
+
+  const addCustomLayer = (layer) => {
+    // Remove layers & sources
+    const layers = mapObj.getStyle().layers;
+    layers.forEach((layer) => {
+      if (layer.id.startsWith("custom-layer")) {
+        mapObj.removeLayer(layer.id);
+      }
+    });
+    const sourceIds = Object.keys(mapObj.getStyle().sources);
+    sourceIds.forEach((sourceId) => {
+      if (sourceId && sourceId.startsWith("custom-source")) {
+        mapObj.removeSource(sourceId);
+      }
+    });
+
+    // Add sources & layers
+    if (!mapObj.getSource(`custom-source-${layer}`)) {
+      console.log(`ADDING NEW ${layer} SOURCE`);
+      mapObj.addSource(`custom-source-${layer}`, {
+        type: "raster",
+        tiles: [
+          `https://api.tomorrow.io/v4/map/tile/{z}/{x}/{y}/${layer}/${TIMESTAMP}.png?apikey=${TMW_KEY}`,
+        ],
+        tileSize: 256,
+        attribution:
+          '&copy; <a href="https://www.tomorrow.io/weather-api">Powered by Tomorrow.io</a>',
+      });
+    }
+    if (!mapObj.getLayer(`custom-layer-${layer}`)) {
+      console.log(`ADDING NEW ${layer} LAYER`);
+      mapObj.addLayer({
+        id: `custom-layer-${layer}`,
+        type: "raster",
+        source: `custom-source-${layer}`,
+        minzoom: 1,
+        maxzoom: 12,
+        paint: {
+          "raster-opacity": 0.65,
+        },
+      });
+    }
+  };
+
+  // const addCustomLayer = (layer) => {
+  //   // Remove layers & sources
+  //   const layers = mapObj.getStyle().layers;
+  //   layers.forEach((layer) => {
+  //     if (layer.id.startsWith("custom-layer")) {
+  //       mapObj.removeLayer(layer.id);
+  //     }
+  //   });
+  //   const sourceIds = Object.keys(mapObj.getStyle().sources);
+  //   sourceIds.forEach((sourceId) => {
+  //     if (sourceId.startsWith("custom-source")) {
+  //       mapObj.removeSource(sourceId);
+  //     }
+  //   });
+
+  //   // Add sources & layers
+  //   if (!mapObj.getSource(`custom-source-${layer}`)) {
+  //     console.log(`ADDING NEW ${layer} SOURCE`);
+  //     mapObj.addSource(`custom-source-${layer}`, {
+  //       type: "geojson",
+  //       data: {
+  //         type: "Feature",
+  //         geometry: {
+  //           type: "Polygon",
+  //           coordinates: [
+  //             [
+  //               [-180, 90],
+  //               [-180, -90],
+  //               [180, -90],
+  //               [180, 90],
+  //               [-180, 90],
+  //             ],
+  //           ],
+  //         },
+  //       },
+  //     });
+  //   }
+  //   if (!mapObj.getLayer(`custom-layer-${layer}`)) {
+  //     console.log(`ADDING NEW ${layer} LAYER`);
+  //     mapObj.addLayer({
+  //       id: `custom-layer-${layer}`, // Layer ID
+  //       type: "fill",
+  //       source: `custom-source-${layer}`,
+  //       layout: {},
+  //       paint: {
+  //         "fill-color": `${layer}`, // Layer color
+  //         "fill-opacity": 0.5,
+  //       },
+  //     });
+  //   }
+  // };
 
   // **********************************************************************  LAYER EXPERIMENT END
 
@@ -298,62 +291,6 @@ function Map() {
 }
 
 export default Map;
-
-// // Create on style load function to re-add current layer
-// mapObj.on("style.load", () => {
-//   try {
-//     // Get all layers
-//     var layers = mapObj.getStyle().layers;
-
-//     // Filter out layers added manually by checking for specific IDs
-//     var manuallyAddedLayers = layers.filter(function (layer) {
-//       // Check if the layer's ID starts with a specific prefix that you assigned
-//       // For example, if all your manually added layers have IDs starting with 'custom-', you can use this condition
-//       return layer.id.startsWith("custom-");
-//     });
-//     console.log(manuallyAddedLayers);
-//   } catch (err) {
-//     console.error(err);
-//   }
-
-//   if (mapObj && mapObj.getLayer(`custom-${option.value}-layer`)) {
-//     console.log(`IN STYLE LOAD - REMOVING PREV ${option.value} LAYER`);
-//     mapObj.removeLayer(`custom-${option.value}-layer`);
-//     // mapObj.removeSource(`${prevLayer}-source`);
-//   }
-
-//   if (mapObj) {
-//     console.log(`IN STYLE LOAD - ADDING NEW ${option.value} LAYER`);
-//     mapObj.addLayer({
-//       id: `custom-${option.value}-layer`,
-//       type: "fill",
-//       source: {
-//         type: "geojson",
-//         data: {
-//           type: "Feature",
-//           geometry: {
-//             type: "Polygon",
-//             coordinates: [
-//               [
-//                 [-180, 90],
-//                 [-180, -90],
-//                 [180, -90],
-//                 [180, 90],
-//                 [-180, 90],
-//               ],
-//             ],
-//           },
-//         },
-//       },
-//       layout: {},
-//       paint: {
-//         "fill-color": `${layer}`, // Red color
-//         "fill-opacity": 0.5, // Adjust opacity as needed
-//       },
-//     });
-//   }
-// });
-// console.log(`STYLE LOAD EVENT LISTENER CREATED FOR ${option.value} LAYER!`);
 
 // // Change map layer selection in dropdown, update map layer
 // const handleLayerSelect = (option) => {
@@ -404,7 +341,3 @@ export default Map;
 //     });
 //   }
 // }, [layer]);
-
-// // Tomorrow API
-// const TMW_KEY = "uHRwNBfZ4wdj8PmZ8ueU25NHB1eggBo9";
-// const TIMESTAMP = new Date().toISOString();
