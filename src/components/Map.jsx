@@ -57,10 +57,9 @@ function Map() {
     setSelectedStyle(option);
     dispatch(updateMapStyle(option.value));
 
-    mapObj.on("style.load", () => {
-      console.log("SUBSEQUENT STYLE LOADED!!");
-      addCustomLayer(layer);
-    });
+    if (mapObj) {
+      mapObj.once("style.load", addCustomLayer);
+    }
 
     // ****************************************************************  Log all custom SOURCES & LAYERS START
     // try {
@@ -120,44 +119,14 @@ function Map() {
 
     if (mapObj) {
       if (prevLayer) {
-        addCustomLayer(layer);
+        removeCustomLayers();
+        // TODO: *** REMOVE PREVIOUSLY ADDED EVENT STYLE.LOAD EVENT LISTENERS ***
+        addCustomLayer();
       }
       // ********************************************************************** FIRST STYLE LOAD LISTENER
       if (layer && renderCount === 2) {
         console.log("SETTING FIRST STYLE LOAD LISTENER!");
-        mapObj.once("style.load", () => {
-          console.log(`ADDING NEW ${layer} SOURCE`);
-          addCustomLayer(layer);
-          // mapObj.addSource(`custom-source-${layer}`, {
-          //   type: "geojson",
-          //   data: {
-          //     type: "Feature",
-          //     geometry: {
-          //       type: "Polygon",
-          //       coordinates: [
-          //         [
-          //           [-180, 90],
-          //           [-180, -90],
-          //           [180, -90],
-          //           [180, 90],
-          //           [-180, 90],
-          //         ],
-          //       ],
-          //     },
-          //   },
-          // });
-          // console.log(`ADDING NEW ${layer} LAYER`);
-          // mapObj.addLayer({
-          //   id: `custom-layer-${layer}`, // Layer ID
-          //   type: "fill",
-          //   source: `custom-source-${layer}`,
-          //   layout: {},
-          //   paint: {
-          //     "fill-color": `${layer}`, // Layer color
-          //     "fill-opacity": 0.5,
-          //   },
-          // });
-        });
+        mapObj.once("style.load", addCustomLayer);
       }
     }
   }, [layer, mapObj]);
@@ -207,25 +176,30 @@ function Map() {
   // };
 
   // ******************************************************** ADD LAYER BASIC
-  const addCustomLayer = (layer) => {
-    // Remove layers & sources
-    const layers = mapObj.getStyle().layers;
-    layers.forEach((layer) => {
+
+  const removeCustomLayers = () => {
+    // Remove layers
+    const allLayers = mapObj.getStyle().layers;
+    allLayers.forEach((layer) => {
       if (layer.id.startsWith("custom-layer")) {
+        console.log(`REMOVING ${layer.id} LAYER`);
         mapObj.removeLayer(layer.id);
       }
     });
-    const sourceIds = Object.keys(mapObj.getStyle().sources);
-    sourceIds.forEach((sourceId) => {
+    // Remove sources
+    const allSources = Object.keys(mapObj.getStyle().sources);
+    allSources.forEach((sourceId) => {
       if (sourceId.startsWith("custom-source")) {
+        console.log(`REMOVING ${sourceId} SOURCE`);
         mapObj.removeSource(sourceId);
       }
       return;
     });
+  };
 
-    // Add sources & layers
-
-    console.log(`ADDING NEW ${layer} SOURCE`);
+  const addCustomLayer = () => {
+    // Add source
+    console.log(`ADDING NEW custom-source-${layer} SOURCE`);
     mapObj.addSource(`custom-source-${layer}`, {
       type: "geojson",
       data: {
@@ -244,8 +218,8 @@ function Map() {
         },
       },
     });
-
-    console.log(`ADDING NEW ${layer} LAYER`);
+    // Add layer
+    console.log(`ADDING NEW custom-layer-${layer} LAYER`);
     mapObj.addLayer({
       id: `custom-layer-${layer}`, // Layer ID
       type: "fill",
