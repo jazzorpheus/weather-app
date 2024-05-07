@@ -23,42 +23,44 @@ const TIMESTAMP = new Date().toISOString();
 
 // *************************************************************************************  COMPONENT
 function Map() {
+  // Keep track of total number of renders
   const renderCount = useRenderCount();
   console.log("RENDER COUNT:", renderCount);
 
-  // MAP
-  const mapObj = useSelector((state) => state.map.mapObj);
-  // Initialize map
+  // Map object & reference
   const mapContainerRef = useInitMap();
+  const mapObj = useSelector((state) => state.map.mapObj);
 
-  // DROPDOWN LAYER
+  // Selected layer in dropdown
   const [selectedLayer, setSelectedLayer] = useState(null);
   console.log("NEW RENDER - Selected layer:", selectedLayer);
-  // CURRENT LAYER
+  // Current layer
   const [layer, setLayer] = useState("red");
-  // const [layer, setLayer] = useState("precipitationIntensity");
   console.log("NEW RENDER - Current layer:", layer);
-  // PREV LAYER
+  // Previous layer
   const [prevLayer, setPrevLayer] = useState(null);
   console.log("NEW RENDER - Previous layer:", prevLayer);
 
-  // Dispatch function
+  // Action dispatch function
   const dispatch = useDispatch();
 
-  // // Get coords from store
+  // // Coords from store
   // const coords = useSelector((state) => state.coords.coords);
 
   // **********************************************************  STYLE DROPDOWN CONFIG
 
   const [selectedStyle, setSelectedStyle] = useState(null);
 
-  // Change map style selection in dropdown, update map style
+  // Handle style selection
   const handleStyleSelect = (option) => {
+    // Set dropdown style to selected option
     setSelectedStyle(option);
+    // Update map style in store
     dispatch(updateMapStyle(option.value));
 
-    if (mapObj) {
-      mapObj.once("style.load", addCustomLayer);
+    // Re-add current layer (if there was one) once new style has loaded
+    if (mapObj && layer) {
+      mapObj.once("style.load", addCurrentLayer);
     }
 
     // ****************************************************************  Log all custom SOURCES & LAYERS START
@@ -79,6 +81,16 @@ function Map() {
     // }
     // **************************************************************** Log all custom SOURCES & LAYERS END
   };
+
+  // When style changes remove previous one-time event listener callback
+  // I.e. mapObj.once("styleload", <callback>)
+  // Not sure if this is working as expected :S
+  useEffect(() => {
+    if (mapObj) {
+      mapObj.off("style.load", addCurrentLayer);
+    }
+  }, [selectedStyle]);
+
   // List of styleOptions
   const styleOptions = [
     { label: "Dark", value: "dark-v11" },
@@ -99,12 +111,14 @@ function Map() {
     setPrevLayer(layer);
     setLayer(option.value);
   };
+
   // // List of layerOptions
   // const layerOptions = [
   //   { label: "Precipitation", value: "precipitationIntensity" },
   //   { label: "Temperature", value: "temperature" },
   //   { label: "Wind Speed", value: "windSpeed" },
   // ];
+
   // List of layerOptions
   const layerOptions = [
     { label: "Red", value: "red" },
@@ -120,19 +134,20 @@ function Map() {
     if (mapObj) {
       if (prevLayer) {
         removeCustomLayers();
-        // TODO: *** REMOVE PREVIOUSLY ADDED EVENT STYLE.LOAD EVENT LISTENERS ***
-        addCustomLayer();
+        addCurrentLayer();
+        mapObj.off("style.load", addCurrentLayer);
       }
       // ********************************************************************** FIRST STYLE LOAD LISTENER
       if (layer && renderCount === 2) {
+        // if (layer) {
         console.log("SETTING FIRST STYLE LOAD LISTENER!");
-        mapObj.once("style.load", addCustomLayer);
+        mapObj.once("style.load", addCurrentLayer);
       }
     }
   }, [layer, mapObj]);
 
   // // ******************************************************** ADD LAYER TOMORROW
-  // const addCustomLayer = (layer) => {
+  // const addCurrentLayer = (layer) => {
   //   // Remove layers & sources
   //   const layers = mapObj.getStyle().layers;
   //   layers.forEach((layer) => {
@@ -197,7 +212,7 @@ function Map() {
     });
   };
 
-  const addCustomLayer = () => {
+  const addCurrentLayer = () => {
     // Add source
     console.log(`ADDING NEW custom-source-${layer} SOURCE`);
     mapObj.addSource(`custom-source-${layer}`, {

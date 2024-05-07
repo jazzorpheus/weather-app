@@ -1,7 +1,3 @@
-Figure a way to clean up style.load event listeners:
-    - Perhaps, each time an event listeners is created, push it onto an array of event listeners stored
-    in a state variable.
-
 BIG REFACTOR: Create bottom navigation that contains link to "Current", "Map", and "Forecast"; 
 check out MUI's bottom nav component. (To be displayed on all pages.)
 
@@ -13,8 +9,6 @@ on all pages, a bit like a navbar
 Learn how to use React Router or set up a routing system in order to create a CurrentPage, 
 a MapPage and a ForecastPage, or use SPA techniques and render content conditionally according
 to user selection [see next]
-
-
 
 Have a panel display barebones weather data for current location next to map marker on map view?
 Barebones = temp, description, an icon
