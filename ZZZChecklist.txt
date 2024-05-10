@@ -1,3 +1,5 @@
+Experiment with bottom navbar, decide whether to use MUI or not. Probably not. 😆
+
 BIG REFACTOR: Create bottom navigation that contains link to "Current", "Map", and "Forecast"; 
 check out MUI's bottom nav component. (To be displayed on all pages.)
 
@@ -18,6 +20,10 @@ Make UI more attractive on CurrentWeather view/page, add more stats/icons?
 Get Vercel environment variables working
 
 Display arrow icons corresponding to wind direction
+
+Decide whether to have a default custom layer displayed on app start or not.
+This will affect whether we need an if (prevLayer) or an if (layer) conditional in main useEffect
+hook (one with layer and mapObj dependencies).
 
 Add to portfolio page as "beta version"
 
@@ -48,3 +54,7 @@ Remove overly-long explanatory comments + write succinct comments/labels
 Remove console.log's unnecesasry in production
 
 Deploy and add to portfolio page
+
+********************************************************************** FUTURE IMPROVEMENTS
+
+Make sure style.load event listener cleanup is working

@@ -35,7 +35,7 @@ function Map() {
   const [selectedLayer, setSelectedLayer] = useState(null);
   console.log("NEW RENDER - Selected layer:", selectedLayer);
   // Current layer
-  const [layer, setLayer] = useState("red");
+  const [layer, setLayer] = useState("blue");
   console.log("NEW RENDER - Current layer:", layer);
   // Previous layer
   const [prevLayer, setPrevLayer] = useState(null);
@@ -84,7 +84,6 @@ function Map() {
 
   // When style changes remove previous one-time event listener callback
   // I.e. mapObj.once("styleload", <callback>)
-  // Not sure if this is working as expected :S
   useEffect(() => {
     if (mapObj) {
       mapObj.off("style.load", addCurrentLayer);
@@ -135,7 +134,6 @@ function Map() {
       if (prevLayer) {
         removeCustomLayers();
         addCurrentLayer();
-        mapObj.off("style.load", addCurrentLayer);
       }
       // ********************************************************************** FIRST STYLE LOAD LISTENER
       if (layer && renderCount === 2) {

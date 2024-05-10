@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 // Redux Store
 import { store } from "./store/index.js";
 
-// App Component
+// App
 import App from "./App.jsx";
 
 // Styles
