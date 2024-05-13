@@ -35,7 +35,7 @@ function Map() {
   const [selectedLayer, setSelectedLayer] = useState(null);
   console.log("NEW RENDER - Selected layer:", selectedLayer);
   // Current layer
-  const [layer, setLayer] = useState("blue");
+  const [layer, setLayer] = useState("none");
   console.log("NEW RENDER - Current layer:", layer);
   // Previous layer
   const [prevLayer, setPrevLayer] = useState(null);
@@ -116,6 +116,7 @@ function Map() {
   //   { label: "Precipitation", value: "precipitationIntensity" },
   //   { label: "Temperature", value: "temperature" },
   //   { label: "Wind Speed", value: "windSpeed" },
+  //   { label: "No Layer", value: "none" },
   // ];
 
   // List of layerOptions
@@ -123,6 +124,7 @@ function Map() {
     { label: "Red", value: "red" },
     { label: "Green", value: "green" },
     { label: "Blue", value: "blue" },
+    { label: "No Layer", value: "none" },
   ];
 
   useEffect(() => {
@@ -132,14 +134,19 @@ function Map() {
 
     if (mapObj) {
       if (prevLayer) {
-        removeCustomLayers();
-        addCurrentLayer();
+        if (layer !== "none") {
+          removeCustomLayers();
+          addCurrentLayer();
+        } else {
+          removeCustomLayers();
+        }
       }
       // ********************************************************************** FIRST STYLE LOAD LISTENER
       if (layer && renderCount === 2) {
-        // if (layer) {
+        if (layer !== "none") {
         console.log("SETTING FIRST STYLE LOAD LISTENER!");
         mapObj.once("style.load", addCurrentLayer);
+        }
       }
     }
   }, [layer, mapObj]);

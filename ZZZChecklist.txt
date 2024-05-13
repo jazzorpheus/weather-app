@@ -1,4 +1,4 @@
-Experiment with bottom navbar, decide whether to use MUI or not. Probably not. 😆
+Figure out how to get map to take up remaining space above navbar!
 
 BIG REFACTOR: Create bottom navigation that contains link to "Current", "Map", and "Forecast"; 
 check out MUI's bottom nav component. (To be displayed on all pages.)

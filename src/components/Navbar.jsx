@@ -1,44 +1,17 @@
-import { useState, useRef } from "react";
-
-import * as React from "react";
-import Box from "@mui/material/Box";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import Paper from "@mui/material/Paper";
+// Icons
+import { TiWeatherPartlySunny } from "react-icons/ti";
+import { CiMap } from "react-icons/ci";
+import { MdOutlineSatelliteAlt } from "react-icons/md";
 
 export default function Navbar() {
 
   return (
-    <footer className="fixed bottom-0 w-screen p-5 bg-gradient-to-t from-blue-950 to-blue-500">
-      <nav className="flex justify-around items-center">
-          <div>Current</div>
-          <div>Map</div>
-          <div>Forecast</div>
+    <footer className="fixed bottom-0 w-screen bg-gradient-to-t from-blue-950 to-blue-500">
+      <nav className="grid grid-cols-3">
+          <button className="flex flex-col justify-between items-center text-xs m-2"><TiWeatherPartlySunny className="text-2xl" /> Current</button>
+          <button className="flex flex-col justify-between items-center text-xs m-2"><CiMap className="text-2xl" />Map</button>
+          <button className="flex flex-col justify-between items-center text-xs m-2" ><MdOutlineSatelliteAlt className="text-2xl" /> Forecast</button>
       </nav>
     </footer>
   )
-
-  // return (
-  //   <Box sx={{ pb: 7 }} ref={ref}>
-  //     <Paper
-  //       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-  //       elevation={3}
-  //     >
-  //       <BottomNavigation
-  //         showLabels
-  //         value={value}
-  //         onChange={(event, newValue) => {
-  //           setValue(newValue);
-  //         }}
-  //       >
-  //         <BottomNavigationAction label="Current" icon={<RestoreIcon />} />
-  //         <BottomNavigationAction label="Map" icon={<FavoriteIcon />} />
-  //         <BottomNavigationAction label="Forecast" icon={<ArchiveIcon />} />
-  //       </BottomNavigation>
-  //     </Paper>
-  //   </Box>
-  // );
 }
