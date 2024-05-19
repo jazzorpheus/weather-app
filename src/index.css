@@ -15,8 +15,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.location-search-container {
+  background-color: white !important;
+  height: calc(100vh - 56px);
+}
+
 .location-search {
-  height: min(750px, 100vh);
+  /* height: min(750px, 100vh); */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -142,9 +147,7 @@ body {
 /* *********************************************************  MAPBOX */
 
 .map-container {
-  height: 50vh;
-  /* height: 33.33vh; */
-  /* height: 20rem; */
+  height: calc(100vh - 56px);
 }
 
 .sidebar {

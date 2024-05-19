@@ -17,7 +17,8 @@ import SearchModal from "./SearchModal";
 
 function LocationSearch() {
   // Dynamic background
-  let styles = "location-search flex flex-col items-center";
+  let styles =
+    "location-search flex flex-col justify-center items-center h-full";
   styles += useGetBackground();
 
   const [showForm, setshowForm] = useState(false);

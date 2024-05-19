@@ -27,8 +27,8 @@ function Map() {
   // Map object & reference
   const mapContainerRef = useInitMap();
   const mapObj = useSelector((state) => state.map.mapObj);
-  // // Coords from store for displaying on map for debugging purposes
-  // const coords = useSelector((state) => state.coords.coords);
+  //! Coords from store for displaying on map: DEV ONLY
+  const coords = useSelector((state) => state.coords.coords);
 
   // Keep track of total number of renders
   const renderCount = useRenderCount();
@@ -253,11 +253,11 @@ function Map() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="map-container flex flex-col justify-center items-center">
       <div className="w-dvw">
-        {/* <div className="sidebar text-white bg-gray-700 ">
+        <div className="sidebar text-white bg-gray-700 ">
           Longitude: {coords[0]} | Latitude: {coords[1]}
-        </div> */}
+        </div>
         <div
           ref={mapContainerRef}
           className="map-container w-100 border-4 border-gray-900"

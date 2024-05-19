@@ -1,3 +1,14 @@
+Change useInitMap hook to be useClientLocation to be called at top of Root Element
+
+Take out useCreateMap hook and run that inside Map or MapPage
+
+Make use of React Router loader function to go to current location when rendering
+MapPage?
+
+Add location search inputs to Root Element
+
+Create a landing page
+
 Figure out how to get map to take up remaining space above navbar!
 
 BIG REFACTOR: Create bottom navigation that contains link to "Current", "Map", and "Forecast"; 

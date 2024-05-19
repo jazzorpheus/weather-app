@@ -1,6 +1,3 @@
-// React-Redux
-import { useSelector } from "react-redux";
-
 // Action Creator Functions
 import { updateMapObj, updateCoords, updateMarker } from "../store";
 
@@ -42,72 +39,6 @@ function useCreateMap(mapContainerRef, center, dispatch) {
   map.on("click", (event) => {
     dispatch(updateCoords([event.lngLat.lng, event.lngLat.lat]));
   });
-
-  // **********************************************************************************************************
-  // *****************************************************************  LAYERS EXPERIMENT
-
-  // // pick the field (like temperature, precipitationIntensity or cloudCover)
-  // const DATA_FIELD = "precipitationIntensity";
-  // // const DATA_FIELD = "temperature";
-
-  // // set the ISO timestamp (now for all fields, up to 6 hour out for precipitationIntensity)
-  // const TIMESTAMP = new Date().toISOString();
-
-  // // inject the tile layer
-  // map.on("load", function () {
-  //   map.addSource("tomorrow-io-api", {
-  //     type: "raster",
-  //     tiles: [
-  //       `https://api.tomorrow.io/v4/map/tile/{z}/{x}/{y}/${DATA_FIELD}/${TIMESTAMP}.png?apikey=${TMW_KEY}`,
-  //     ],
-  //     tileSize: 256,
-  //     attribution:
-  //       '&copy; <a href="https://www.tomorrow.io/weather-api">Powered by Tomorrow.io</a>',
-  //   });
-  //   map.addLayer({
-  //     id: "radar-tiles",
-  //     type: "raster",
-  //     source: "tomorrow-io-api",
-  //     minzoom: 1,
-  //     maxzoom: 12,
-  //     paint: {
-  //       "raster-opacity": 0.65,
-  //     },
-  //   });
-  // });
-
-  // *****************************************************************  LAYERS EXPERIMENT
-
-  // // In case needed later
-  // map.on("style.load", () => {
-  //   // TODO
-  //   if (layer) {
-  //     // if (state.mapObj.getLayer("radar-tiles")) {
-  //     //   state.mapObj.removeLayer("radar-tiles");
-  //     //   state.mapObj.removeSource("tomorrow-io-api");
-  //     // }
-  //     // TODO
-  //     state.mapObj.addSource(`${layer}-source`, {
-  //       type: "raster",
-  //       tiles: [
-  //         `https://api.tomorrow.io/v4/map/tile/{z}/{x}/{y}/${layer}/${TIMESTAMP}.png?apikey=${TMW_KEY}`,
-  //       ],
-  //       tileSize: 256,
-  //       attribution:
-  //         '&copy; <a href="https://www.tomorrow.io/weather-api">Powered by Tomorrow.io</a>',
-  //     });
-  //     state.mapObj.addLayer({
-  //       id: `${layer}-layer`,
-  //       type: "raster",
-  //       source: `${layer}-source`,
-  //       minzoom: 1,
-  //       maxzoom: 12,
-  //       paint: {
-  //         "raster-opacity": 0.65,
-  //       },
-  //     });
-  //   }
-  // });
 
   // Create map object in store/state
   dispatch(updateMapObj(map));
