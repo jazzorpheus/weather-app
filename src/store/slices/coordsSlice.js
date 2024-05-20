@@ -7,7 +7,7 @@ import { fetchCoords } from "../thunks/fetchCoords";
 const coordsSlice = createSlice({
   name: "coords",
   initialState: {
-    coords: [],
+    coords: [-2.245115, 53.479489],
     isLoading: true,
     error: null,
   },

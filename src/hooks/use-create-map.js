@@ -1,4 +1,5 @@
 // Action Creator Functions
+import { useEffect } from "react";
 import { updateMapObj, updateCoords, updateMarker } from "../store";
 
 // Mapbox GL
@@ -9,41 +10,43 @@ const mbxToken =
 mapboxgl.accessToken = mbxToken;
 
 function useCreateMap(mapContainerRef, center, dispatch) {
-  // Create map
-  const map = new mapboxgl.Map({
-    container: mapContainerRef.current,
-    style: "mapbox://styles/mapbox/outdoors-v12",
-    center: center,
-    // Zoom goes from 0 -> 22
-    zoom: 4,
-  });
-  // Add navigation control (the +/- zoom buttons)
-  map.addControl(
-    new mapboxgl.NavigationControl({
-      visualizePitch: true,
-    }),
-    "top-right"
-  );
-  // Render map marker at center
-  dispatch(
-    updateMarker(
-      new mapboxgl.Marker({
-        draggable: false,
-        scale: 1,
-      })
-        .setLngLat(center)
-        .addTo(map)
-    )
-  );
-  // Event Listener: Change coords in store/state on user click
-  map.on("click", (event) => {
-    dispatch(updateCoords([event.lngLat.lng, event.lngLat.lat]));
-  });
+  useEffect(() => {
+    // Create map
+    const map = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: "mapbox://styles/mapbox/outdoors-v12",
+      center: center,
+      // Zoom goes from 0 -> 22
+      zoom: 4,
+    });
+    // Add navigation control (the +/- zoom buttons)
+    map.addControl(
+      new mapboxgl.NavigationControl({
+        visualizePitch: true,
+      }),
+      "top-right"
+    );
+    // Render map marker at center
+    dispatch(
+      updateMarker(
+        new mapboxgl.Marker({
+          draggable: false,
+          scale: 1,
+        })
+          .setLngLat(center)
+          .addTo(map)
+      )
+    );
+    // Event Listener: Change coords in store/state on user click
+    map.on("click", (event) => {
+      dispatch(updateCoords([event.lngLat.lng, event.lngLat.lat]));
+    });
 
-  // Create map object in store/state
-  dispatch(updateMapObj(map));
+    // Create map object in store/state
+    dispatch(updateMapObj(map));
+  }, []);
 
-  return map;
+  return;
 }
 
 export default useCreateMap;

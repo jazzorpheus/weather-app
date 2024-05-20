@@ -7,7 +7,6 @@ const mapSlice = createSlice({
   initialState: {
     mapObj: null,
     marker: null,
-    // layerName: null,
   },
   reducers: {
     updateMapObj(state, action) {

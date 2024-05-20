@@ -21,62 +21,8 @@ function LocationSearch() {
     "location-search flex flex-col justify-center items-center h-full";
   styles += useGetBackground();
 
-  const [showForm, setshowForm] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  // State from store
-  //
-  // From mapSlice
-  const mapObj = useSelector((state) => state.map.mapObj);
-  const marker = useSelector((state) => state.map.marker);
-  // From coordsSlice
-  const coords = useSelector((state) => state.coords);
   // From weatherDataSlice
   const weatherData = useSelector((state) => state.weatherData);
-
-  // Dispatch function
-  const dispatch = useDispatch();
-
-  const toggleShowForm = () => {
-    setshowForm(!showForm);
-  };
-
-  const toggleFormSubmitted = () => {
-    setFormSubmitted(!formSubmitted);
-  };
-
-  //  - Get new weather data
-  //  - Re-center map if change comes from form search
-  //  - Move map marker to new coords
-  const getNewLocationData = () => {
-    if (coords.coords[0]) {
-      dispatch(fetchWeatherData(coords.coords));
-      if (formSubmitted) {
-        mapObj.flyTo({
-          center: coords.coords,
-          zoom: 9,
-          essential: true,
-        });
-        toggleFormSubmitted();
-        setshowForm(false);
-      }
-      if (marker) {
-        marker.remove();
-        dispatch(
-          updateMarker(
-            new mapboxgl.Marker({ draggable: false, scale: 1 })
-              .setLngLat(coords.coords)
-              .addTo(mapObj)
-          )
-        );
-      }
-    }
-  };
-
-  // When coords change
-  useEffect(() => {
-    getNewLocationData();
-  }, [coords.coords]);
 
   let weatherDataDisplay;
   if (weatherData.isLoading) {
