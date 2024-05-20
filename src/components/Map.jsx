@@ -262,10 +262,7 @@ function Map() {
         {/* <div className="sidebar text-white bg-gray-700 ">
           Longitude: {coords[0]} | Latitude: {coords[1]}
         </div> */}
-        <div
-          ref={mapContainerRef}
-          className="map-container w-100 border-4 border-gray-900"
-        />
+        <div ref={mapContainerRef} className="map-container w-100" />
         <div className="absolute -translate-y-12 translate-x-4">
           <Dropdown
             label="Map Style"
