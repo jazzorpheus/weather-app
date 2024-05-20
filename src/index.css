@@ -16,7 +16,6 @@ body {
 }
 
 .current-weather {
-  /* background-color: white !important; */
   height: calc(100vh - 56px);
   background-position: center;
   background-size: cover;
@@ -144,6 +143,8 @@ body {
 
 .map-container {
   height: calc(100vh - 56px);
+  /* height: calc(100vh - 25px); */
+  height: 93vh;
 }
 
 .sidebar {
@@ -168,4 +169,8 @@ body {
   position: absolute;
   left: 10px;
   top: 5px;
+}
+
+.navbar {
+  height: 7vh;
 }

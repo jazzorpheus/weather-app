@@ -90,7 +90,7 @@ export default function Root() {
   }, [coords.coords]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center h-screen">
       <header className="absolute z-10">
         {showForm ? (
           <SearchModal

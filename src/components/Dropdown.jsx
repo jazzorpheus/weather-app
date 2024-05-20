@@ -73,7 +73,7 @@ export default function Dropdown({ label, options, value, onChange }) {
   });
 
   return (
-    <div ref={divEl} className="w-28 flex">
+    <div ref={divEl} className="dropdown-container w-28 flex">
       <Panel
         className="flex justify-around items-center cursor-pointer text-sm"
         onClick={handleToggle}

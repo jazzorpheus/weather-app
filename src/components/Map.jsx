@@ -257,7 +257,7 @@ function Map() {
   }
 
   return (
-    <div className="map-container flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <div className="w-dvw">
         {/* <div className="sidebar text-white bg-gray-700 ">
           Longitude: {coords[0]} | Latitude: {coords[1]}
