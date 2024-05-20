@@ -143,8 +143,6 @@ body {
 
 .map-container {
   height: calc(100vh - 56px);
-  /* height: calc(100vh - 25px); */
-  height: 93svh;
 }
 
 .sidebar {
@@ -172,5 +170,5 @@ body {
 }
 
 .navbar {
-  height: 7svh;
+  /* height: 7svh; */
 }

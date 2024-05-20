@@ -1,3 +1,5 @@
+Fix navbar and map height issue
+
 Sort out searchModal and "placeholder" input Element
 
 Go over everything and tidy up!
