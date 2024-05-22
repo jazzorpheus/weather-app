@@ -29,7 +29,6 @@ function Map() {
   const dispatch = useDispatch();
   // Current coordinates from store
   const { coords } = useSelector((state) => state.coords);
-  console.log("COORDS:", coords);
   // Reference to map HTML element
   const mapContainerRef = useRef();
   // Map object from store
@@ -39,14 +38,18 @@ function Map() {
 
   // Keep track of total number of renders
   const renderCount = useRenderCount();
+  //! DEV ONLY
   console.log("RENDER COUNT:", renderCount);
 
-  // Selected layer in dropdown
-  const [selectedLayer, setSelectedLayer] = useState(null);
+  // Selected layer in dropdown, to display label
+  const [selectedLayer, setSelectedLayer] = useState({
+    label: "Precipitation",
+    value: "precipitationIntensity",
+  });
   // console.log("NEW RENDER - Selected layer:", selectedLayer);
   // Current layer
   //! PRODUCTION ONLY
-  const [layer, setLayer] = useState("none");
+  const [layer, setLayer] = useState("precipitationIntensity");
   //! DEV ONLY
   // const [layer, setLayer] = useState("blue");
   // console.log("NEW RENDER - Current layer:", layer);
@@ -55,7 +58,10 @@ function Map() {
   // console.log("NEW RENDER - Previous layer:", prevLayer);
 
   // Map style
-  const [selectedStyle, setSelectedStyle] = useState(null);
+  const [selectedStyle, setSelectedStyle] = useState({
+    label: "Dark",
+    value: "dark-v11",
+  });
 
   // **********************************************************************  LAYER FUNCTIONS
 
@@ -265,6 +271,7 @@ function Map() {
         <div ref={mapContainerRef} className="map-container w-100" />
         <div className="absolute -translate-y-12 translate-x-4">
           <Dropdown
+            className="w-[130px]"
             label="Map Style"
             options={styleOptions}
             value={selectedStyle}
@@ -273,6 +280,7 @@ function Map() {
         </div>
         <div className="absolute -translate-y-12 translate-x-40">
           <Dropdown
+            className="w-[130px]"
             label="Add Layer"
             options={layerOptions}
             value={selectedLayer}

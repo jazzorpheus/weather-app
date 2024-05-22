@@ -1,3 +1,5 @@
+Sort out Map/Dropdowns to use selectedLayer.value in instead of layer
+
 Figure out a way to keep map settings / map object between switching pages
 
 Go over everything and tidy up!

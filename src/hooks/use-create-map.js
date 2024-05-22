@@ -14,7 +14,7 @@ function useCreateMap(mapContainerRef, center, dispatch) {
     // Create map
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/outdoors-v12",
+      style: "mapbox://styles/mapbox/dark-v11",
       center: center,
       // Zoom goes from 0 -> 22
       zoom: 4,

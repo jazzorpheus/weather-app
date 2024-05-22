@@ -6,8 +6,20 @@ import Panel from "./Panel";
 
 // Icons
 import { GoChevronUp } from "react-icons/go";
+import { TiTick } from "react-icons/ti";
 
-export default function Dropdown({ label, options, value, onChange }) {
+import classNames from "classnames";
+
+export default function Dropdown({
+  label,
+  options,
+  value,
+  onChange,
+  className,
+}) {
+  // Add classnames passed as props
+  const finalClassNames = classNames(className);
+
   // Used to toggle dropdown menu on or off
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -59,28 +71,33 @@ export default function Dropdown({ label, options, value, onChange }) {
     handleToggle();
   };
 
+  console.log(value);
+
   // Generate HTML for displaying options and pass each element handleSelect
   const dropMenu = options.map((option, idx) => {
     return (
       <li
         key={idx}
-        className="hover:bg-gray-700 rounded cursor-pointer list-none text-sm p-1"
+        className="flex justify-start hover:bg-gray-700 rounded cursor-pointer list-none text-sm p-1"
         onClick={() => handleOnChange(option)}
       >
+        {value?.value === option.value && <TiTick className="mr-1" />}
         {option.label}
       </li>
     );
   });
 
   return (
-    <div ref={divEl} className="dropdown-container w-28 flex">
+    <div ref={divEl} className={finalClassNames}>
       <Panel
         className="flex justify-around items-center cursor-pointer text-sm"
         onClick={handleToggle}
       >
         {value?.label || label} <GoChevronUp className="text-lg" />
       </Panel>
-      {isExpanded && <Panel className="absolute bottom-full">{dropMenu}</Panel>}
+      {isExpanded && (
+        <Panel className="absolute bottom-full w-[130px]">{dropMenu}</Panel>
+      )}
     </div>
   );
 }
