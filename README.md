@@ -1,8 +1,5 @@
-# React + Vite
+# Live Weather Map
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A front-end weather app created in React that utilizes the OpenWeatherMap, Tomorrow.io, and Mapbox APIs to render live weather data together with an integrated map for displaying current weather patterns such as precipitation intensity and wind speed. The top searchbar generates location suggestions on the fly using Mapbox SDK's forward geocoder. Additionally, the user can tap anywhere on the map which will match the geocoordinates of the tap to the nearest location for which Open Weather Map has data.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The plan is to continue improving the UI, especially the current weather dashboard, and eventually add full forecasting information in the form of dashboards plus a time slider on the map.
