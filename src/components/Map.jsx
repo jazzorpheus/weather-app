@@ -223,7 +223,11 @@ function Map() {
 
   //! List of layer options for Tomorrow API's core layers: PRODUCTION ONLY
   const layerOptions = [
+    { label: "Air Quality", value: "mepIndex" },
+    { label: "Humidity", value: "humidity" },
     { label: "Precipitation", value: "precipitationIntensity" },
+    { label: "Pressure (sea)", value: "pressureSeaLevel" },
+    { label: "Pressure (surface)", value: "pressureSurfaceLevel" },
     { label: "Temperature", value: "temperature" },
     { label: "Wind Speed", value: "windSpeed" },
     { label: "No Layer", value: "none" },
@@ -280,7 +284,7 @@ function Map() {
         </div>
         <div className="absolute -translate-y-12 translate-x-40">
           <Dropdown
-            className="w-[130px]"
+            className="w-[150px]"
             label="Add Layer"
             options={layerOptions}
             value={selectedLayer}
