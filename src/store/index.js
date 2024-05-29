@@ -7,7 +7,8 @@ import {
   updateMapObj,
   updateMapStyle,
   updateMarker,
-  updateLayerName,
+  updateLayer,
+  updatePrevLayer,
 } from "./slices/mapSlice";
 
 // Import combined reducer and action creator functions from coordsSlice
@@ -36,7 +37,8 @@ export {
   updateMapObj,
   updateMapStyle,
   updateMarker,
-  updateLayerName,
+  updateLayer,
+  updatePrevLayer,
   updateCoords,
 };
 

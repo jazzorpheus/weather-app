@@ -1,5 +1,8 @@
-// Action Creator Functions
+// React
 import { useEffect } from "react";
+
+// React-Redux
+// Action Creator Functions
 import { updateMapObj, updateCoords, updateMarker } from "../store";
 
 // Mapbox GL
@@ -9,12 +12,12 @@ const mbxToken =
 // Mapbox access token
 mapboxgl.accessToken = mbxToken;
 
-function useCreateMap(mapContainerRef, center, dispatch) {
+function useCreateMap(mapContainerRef, mapStyle, center, dispatch) {
   useEffect(() => {
     // Create map
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/dark-v11",
+      style: `mapbox://styles/mapbox/${mapStyle}`,
       center: center,
       // Zoom goes from 0 -> 22
       zoom: 4,

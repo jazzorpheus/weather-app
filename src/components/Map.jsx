@@ -3,9 +3,8 @@ import { useState, useEffect, useRef } from "react";
 
 // React-Redux
 import { useDispatch, useSelector } from "react-redux";
-
 // Action Creator Functions
-import { updateMapStyle } from "../store";
+import { updateMapStyle, updateLayer, updatePrevLayer } from "../store";
 
 // Custom Hooks
 import useCreateMap from "../hooks/use-create-map";
@@ -13,174 +12,74 @@ import useCreateMap from "../hooks/use-create-map";
 // My Components
 import Dropdown from "./Dropdown";
 
+// Utilities
+import addCurrentLayer from "../utils/addCurrentLayer";
+import removeCustomLayers from "../utils/removeCustomLayers";
+
 // @uidotdev/usehooks
 // Gives access to variable that counts number of renders
 import { useRenderCount } from "@uidotdev/usehooks";
 
-// Tomorrow API
-const TMW_KEY = "uHRwNBfZ4wdj8PmZ8ueU25NHB1eggBo9";
-const TIMESTAMP = new Date().toISOString();
+// List of styleOptions
+const styleOptions = [
+  { label: "Dark", value: "dark-v11" },
+  { label: "Light", value: "light-v11" },
+  { label: "Outdoors", value: "outdoors-v12" },
+  { label: "Satellite", value: "satellite-streets-v12" },
+  { label: "Streets", value: "streets-v12" },
+];
+
+const layerOptions = [
+  { label: "Air Quality", value: "mepIndex" },
+  { label: "Humidity", value: "humidity" },
+  { label: "Precipitation", value: "precipitationIntensity" },
+  { label: "Pressure (sea)", value: "pressureSeaLevel" },
+  { label: "Pressure (surface)", value: "pressureSurfaceLevel" },
+  { label: "Temperature", value: "temperature" },
+  { label: "Wind Speed", value: "windSpeed" },
+  { label: "No Layer", value: "none" },
+];
 
 // *************************************************************************************  COMPONENT
 function Map() {
   // ******************************************************** DECLARE STATE, INIT MAP
 
-  // Action dispatch function for updating map style,
+  // Action dispatch function for updating map style, layer, etc.
   const dispatch = useDispatch();
+
   // Current coordinates from store
   const { coords } = useSelector((state) => state.coords);
   // Reference to map HTML element
   const mapContainerRef = useRef();
-  // Map object from store
+  // Map object & style from store
   const mapObj = useSelector((state) => state.map.mapObj);
+  const mapStyle = useSelector((state) => state.map.mapStyle);
+
   // Initialize Map
-  useCreateMap(mapContainerRef, coords, dispatch);
+  useCreateMap(mapContainerRef, mapStyle, coords, dispatch);
 
   // Keep track of total number of renders
   const renderCount = useRenderCount();
   //! DEV ONLY
   console.log("RENDER COUNT:", renderCount);
 
+  const layer = useSelector((state) => state.map.layer);
+  const prevLayer = useSelector((state) => state.map.prevLayer);
   // Selected layer in dropdown, to display label
   const [selectedLayer, setSelectedLayer] = useState({
-    label: "Precipitation",
-    value: "precipitationIntensity",
+    label: layerOptions.find((option) => option.value === layer).label,
+    value: layer,
   });
-  // console.log("NEW RENDER - Selected layer:", selectedLayer);
-  // Current layer
-  //! PRODUCTION ONLY
-  const [layer, setLayer] = useState("precipitationIntensity");
-  //! DEV ONLY
-  // const [layer, setLayer] = useState("blue");
-  // console.log("NEW RENDER - Current layer:", layer);
-  // Previous layer
-  const [prevLayer, setPrevLayer] = useState(null);
-  // console.log("NEW RENDER - Previous layer:", prevLayer);
 
   // Map style
   const [selectedStyle, setSelectedStyle] = useState({
-    label: "Dark",
-    value: "dark-v11",
+    label: styleOptions.find((option) => option.value === mapStyle).label,
+    value: mapStyle,
   });
 
-  // **********************************************************************  LAYER FUNCTIONS
+  // ********************************************************************** ADD/REMOVE LAYER FUNCTIONS ->
 
-  // ! ******************************************************** ADD LAYER TOMORROW: PRODUCTION ONLY
-
-  // Remove custom layers
-  const removeCustomLayers = () => {
-    const allLayers = mapObj.getStyle().layers;
-    allLayers.forEach((layer) => {
-      if (layer.id.startsWith("custom-layer")) {
-        // console.log(`REMOVING ${layer.id} LAYER`);
-        mapObj.removeLayer(layer.id);
-      }
-    });
-    // Remove sources
-    const allSources = Object.keys(mapObj.getStyle().sources);
-    allSources.forEach((sourceId) => {
-      if (sourceId.startsWith("custom-source")) {
-        // console.log(`REMOVING ${sourceId} SOURCE`);
-        mapObj.removeSource(sourceId);
-      }
-      return;
-    });
-  };
-
-  // Add current layer
-  const addCurrentLayer = () => {
-    // Check whether source & layer already exist
-    const allSources = Object.keys(mapObj.getStyle().sources);
-    if (!allSources.some((source) => source === `custom-source-${layer}`)) {
-      // Add source
-      // console.log(`ADDING NEW custom-source-${layer} SOURCE`);
-      mapObj.addSource(`custom-source-${layer}`, {
-        type: "raster",
-        tiles: [
-          `https://api.tomorrow.io/v4/map/tile/{z}/{x}/{y}/${layer}/${TIMESTAMP}.png?apikey=${TMW_KEY}`,
-        ],
-        tileSize: 256,
-        attribution:
-          '&copy; <a href="https://www.tomorrow.io/weather-api">Powered by Tomorrow.io</a>',
-      });
-      // Add layer
-      // console.log(`ADDING NEW custom-layer-${layer} LAYER`);
-      mapObj.addLayer({
-        id: `custom-layer-${layer}`,
-        type: "raster",
-        source: `custom-source-${layer}`,
-        minzoom: 1,
-        maxzoom: 12,
-        paint: {
-          "raster-opacity": 0.65,
-        },
-      });
-    }
-  };
-
-  // ! ******************************************************** ADD LAYER BASIC: DEV ONLY
-
-  // // Remove custom layers
-  // const removeCustomLayers = () => {
-  //   const allLayers = mapObj.getStyle().layers;
-  //   allLayers.forEach((layer) => {
-  //     if (layer.id.startsWith("custom-layer")) {
-  //       console.log(`REMOVING ${layer.id} LAYER`);
-  //       mapObj.removeLayer(layer.id);
-  //     }
-  //   });
-  //   // Remove sources
-  //   const allSources = Object.keys(mapObj.getStyle().sources);
-  //   allSources.forEach((sourceId) => {
-  //     if (sourceId.startsWith("custom-source")) {
-  //       console.log(`REMOVING ${sourceId} SOURCE`);
-  //       mapObj.removeSource(sourceId);
-  //     }
-  //     return;
-  //   });
-  // };
-
-  // // Add current layer
-  // const addCurrentLayer = () => {
-  //   // Check whether source & layer already exist
-  //   const allSources = Object.keys(mapObj.getStyle().sources);
-  //   if (!allSources.some((source) => source === `custom-source-${layer}`)) {
-  //     // Add source
-  //     console.log(`ADDING NEW custom-source-${layer} SOURCE`);
-  //     mapObj.addSource(`custom-source-${layer}`, {
-  //       type: "geojson",
-  //       data: {
-  //         type: "Feature",
-  //         geometry: {
-  //           type: "Polygon",
-  //           coordinates: [
-  //             [
-  //               [-180, 90],
-  //               [-180, -90],
-  //               [180, -90],
-  //               [180, 90],
-  //               [-180, 90],
-  //             ],
-  //           ],
-  //         },
-  //       },
-  //     });
-  //     // Add layer
-  //     console.log(`ADDING NEW custom-layer-${layer} LAYER`);
-  //     mapObj.addLayer({
-  //       id: `custom-layer-${layer}`, // Layer ID
-  //       type: "fill",
-  //       source: `custom-source-${layer}`,
-  //       layout: {},
-  //       paint: {
-  //         "fill-color": `${layer}`, // Layer color
-  //         "fill-opacity": 0.5,
-  //       },
-  //     });
-  //   }
-  // };
-
-  // **********************************************************************  LAYER FUNCTIONS END
+  // **********************************************************************  LAYER FUNCTIONS <-
 
   // **********************************************************  STYLE DROPDOWN CONFIG
 
@@ -193,68 +92,29 @@ function Map() {
 
     // Re-add current layer (if there was one) once new style has loaded
     if (mapObj && layer !== "none") {
-      // console.log(
-      //   "NEW STYLE - Setting style.load event listener to re-add current layer"
-      // );
-      mapObj.once("style.load", addCurrentLayer);
+      mapObj.once("style.load", () => addCurrentLayer(layer, mapObj));
     }
   };
-
-  // List of styleOptions
-  const styleOptions = [
-    { label: "Dark", value: "dark-v11" },
-    { label: "Light", value: "light-v11" },
-    { label: "Outdoors", value: "outdoors-v12" },
-    { label: "Satellite", value: "satellite-streets-v12" },
-    { label: "Streets", value: "streets-v12" },
-  ];
 
   // **********************************************************  LAYER DROPDOWN CONFIG
 
   // Change map layer selection in dropdown, update map layer
   const handleLayerSelect = (option) => {
     setSelectedLayer(option);
-    // console.log("HANDLE LAYER SELECT - Selected layer:", selectedLayer);
-    // console.log("HANDLE LAYER SELECT - Current layer:", layer);
-    // console.log("HANDLE LAYER SELECT - Previous layer:", prevLayer);
-    setPrevLayer(layer);
-    setLayer(option.value);
+    dispatch(updatePrevLayer(layer));
+    dispatch(updateLayer(option.value));
   };
-
-  //! List of layer options for Tomorrow API's core layers: PRODUCTION ONLY
-  const layerOptions = [
-    { label: "Air Quality", value: "mepIndex" },
-    { label: "Humidity", value: "humidity" },
-    { label: "Precipitation", value: "precipitationIntensity" },
-    { label: "Pressure (sea)", value: "pressureSeaLevel" },
-    { label: "Pressure (surface)", value: "pressureSurfaceLevel" },
-    { label: "Temperature", value: "temperature" },
-    { label: "Wind Speed", value: "windSpeed" },
-    { label: "No Layer", value: "none" },
-  ];
-
-  //! List of layer options: DEV ONLY
-  // const layerOptions = [
-  //   { label: "Red", value: "red" },
-  //   { label: "Green", value: "green" },
-  //   { label: "Blue", value: "blue" },
-  //   { label: "No Layer", value: "none" },
-  // ];
 
   // Render initial layer & update layer
   useEffect(() => {
-    // console.log("USE EFFECT - Selected layer:", selectedLayer);
-    // console.log("USE EFFECT - Current layer:", layer);
-    // console.log("USE EFFECT - Previous layer:", prevLayer);
-
     if (mapObj) {
       // Update layer
       if (prevLayer) {
         if (layer !== "none") {
-          removeCustomLayers();
-          addCurrentLayer();
+          removeCustomLayers(mapObj);
+          addCurrentLayer(layer, mapObj);
         } else {
-          removeCustomLayers();
+          removeCustomLayers(mapObj);
         }
       }
     }
@@ -263,7 +123,7 @@ function Map() {
   // Render initial layer
   if (layer !== "none" && renderCount === 2) {
     // console.log("SETTING FIRST STYLE LOAD LISTENER!");
-    mapObj.once("style.load", addCurrentLayer);
+    mapObj.once("style.load", () => addCurrentLayer(layer, mapObj));
   }
 
   return (
@@ -298,7 +158,9 @@ function Map() {
 
 export default Map;
 
-// ****************************************************************  Log all custom SOURCES & LAYERS START
+//! PREVIOUS DEV TROUBLESHOOTING STUFF
+
+// ****************************************************************  Log all custom SOURCES & LAYERS ->
 // try {
 //   // Get all sources
 //   const sources = Object.values(mapObj.getStyle().sources);
@@ -314,4 +176,4 @@ export default Map;
 // } catch (err) {
 //   console.log(err);
 // }
-// **************************************************************** Log all custom SOURCES & LAYERS END
+// **************************************************************** Log all custom SOURCES & LAYERS <-

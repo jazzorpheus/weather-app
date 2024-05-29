@@ -1,32 +1,18 @@
-Sort out Map/Dropdowns to use selectedLayer.value in instead of layer
-
 Figure out a way to keep map settings / map object between switching pages
+
+Have a panel display barebones weather data for current location next to map marker on map view?
+Barebones = temp, description, an icon
+
+Decide whether to use a separate CurrentPage component or just use WeatherDataDisplay
+
+Decide on height of CurrentPage / WeatherDataDisplay (use similar technique as for map?)
+
+Sort out Map/Dropdowns to use selectedLayer.value in instead of layer?
 
 Go over everything and tidy up!
 
 Make use of React Router loader function? E.g. go to current location when rendering
 MapPage
-
-Add location search inputs to Root Element
-
-Create a landing page
-
-Figure out how to get map to take up remaining space above navbar!
-
-BIG REFACTOR: Create bottom navigation that contains link to "Current", "Map", and "Forecast"; 
-check out MUI's bottom nav component. (To be displayed on all pages.)
-
-Consider using MUI's select component for style and layer dropdowns
-
-Move search form into its own component and render at top of screen so it is showing
-on all pages, a bit like a navbar
-
-Learn how to use React Router or set up a routing system in order to create a CurrentPage, 
-a MapPage and a ForecastPage, or use SPA techniques and render content conditionally according
-to user selection [see next]
-
-Have a panel display barebones weather data for current location next to map marker on map view?
-Barebones = temp, description, an icon
 
 Make UI more attractive on CurrentWeather view/page, add more stats/icons?
 

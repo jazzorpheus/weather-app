@@ -71,8 +71,6 @@ export default function Dropdown({
     handleToggle();
   };
 
-  console.log(value);
-
   // Generate HTML for displaying options and pass each element handleSelect
   const dropMenu = options.map((option, idx) => {
     return (
