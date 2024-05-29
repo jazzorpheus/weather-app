@@ -1,3 +1,6 @@
+// React DOM
+import ReactDOM from "react-dom/client";
+
 // React
 import { useState, useEffect } from "react";
 
@@ -24,7 +27,15 @@ import useClientLocation from "./hooks/use-client-location.js";
 // Mapbox GL
 import mapboxgl from "mapbox-gl";
 
+import CustomMarker from "./components/CustomMarker.jsx";
+
 export default function Root() {
+  // ************************************************************************** CUSTOM MARKER
+
+  // From weatherDataSlice
+  const weatherData = useSelector((state) => state.weatherData.data);
+  console.log("Root - weatherData:", weatherData);
+
   // Get client geolocation and dispatch to store
   useClientLocation();
 
@@ -45,6 +56,7 @@ export default function Root() {
   // From mapSlice
   const mapObj = useSelector((state) => state.map.mapObj);
   const marker = useSelector((state) => state.map.marker);
+  console.log("Root - marker:", marker);
 
   const toggleShowForm = () => {
     setShowForm(!showForm);
@@ -74,9 +86,14 @@ export default function Root() {
       }
       if (marker) {
         marker.remove();
+        const markerContainer = document.createElement("div");
+        ReactDOM.createRoot(markerContainer).render(
+          <CustomMarker data={weatherData} />
+        );
         dispatch(
           updateMarker(
-            new mapboxgl.Marker({ draggable: false, scale: 1 })
+            // new mapboxgl.Marker({ draggable: false, scale: 1 })
+            new mapboxgl.Marker(markerContainer)
               .setLngLat(coords.coords)
               .addTo(mapObj)
           )

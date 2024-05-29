@@ -8,7 +8,7 @@ const mapSlice = createSlice({
     mapObj: null,
     mapStyle: "dark-v11",
     marker: null,
-    layer: "none",
+    layer: "precipitationIntensity",
     prevLayer: null,
   },
   reducers: {

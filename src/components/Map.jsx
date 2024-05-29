@@ -41,7 +41,7 @@ const layerOptions = [
 ];
 
 // *************************************************************************************  COMPONENT
-function Map() {
+export default function Map() {
   // ******************************************************** DECLARE STATE, INIT MAP
 
   // Action dispatch function for updating map style, layer, etc.
@@ -155,8 +155,6 @@ function Map() {
     </div>
   );
 }
-
-export default Map;
 
 //! PREVIOUS DEV TROUBLESHOOTING STUFF
 
