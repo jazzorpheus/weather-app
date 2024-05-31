@@ -34,7 +34,6 @@ export default function Root() {
 
   // From weatherDataSlice
   const weatherData = useSelector((state) => state.weatherData.data);
-  console.log("Root - weatherData:", weatherData);
 
   // Get client geolocation and dispatch to store
   useClientLocation();
@@ -56,7 +55,6 @@ export default function Root() {
   // From mapSlice
   const mapObj = useSelector((state) => state.map.mapObj);
   const marker = useSelector((state) => state.map.marker);
-  console.log("Root - marker:", marker);
 
   const toggleShowForm = () => {
     setShowForm(!showForm);

@@ -1,9 +1,15 @@
 export default function CustomMarker({ data }) {
   console.log("Custom marker data:", data);
   return (
-    <>
-      <h1>Custom Marker!!</h1>
-      {data?.weather[0].description && <h2>{data.weather[0].description}</h2>}
-    </>
+    <div className="custom-marker-container">
+      <div className="custom-marker"></div>
+      {data ? (
+        <div className="custom-marker-text">
+          {(data.main.temp - 273.15).toFixed(1)}°C {data.weather[0].description}
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
   );
 }
