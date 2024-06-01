@@ -54,8 +54,6 @@ function useGetBackground() {
   } else {
     return " bg-gray-700";
   }
-
-  return styles;
 }
 
 export default useGetBackground;

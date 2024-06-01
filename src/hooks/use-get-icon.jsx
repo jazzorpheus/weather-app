@@ -26,49 +26,49 @@ function useGetIcon() {
     main = weatherData.data.weather[0].main;
     switch (main) {
       case "Ash":
-        icon = <AshIcon styles="fill-white" />;
+        icon = <AshIcon className="fill-white" />;
         break;
       case "Clear":
         icon = <SunIcon />;
         break;
       case "Clouds":
-        icon = <CloudsIcon styles="fill-white" />;
+        icon = <CloudsIcon className="fill-white" />;
         break;
       case "Drizzle":
-        icon = <DrizzleIcon styles="fill-white" />;
+        icon = <DrizzleIcon className="fill-white" />;
         break;
       case "Dust":
-        icon = <DustIcon styles="fill-white" />;
+        icon = <DustIcon className="fill-white" />;
         break;
       case "Fog":
-        icon = <FogIcon styles="fill-white" />;
+        icon = <FogIcon className="fill-white" />;
         break;
       case "Haze":
         icon = <HazeIcon />;
         break;
       case "Mist":
-        icon = <MistIcon styles="fill-white" />;
+        icon = <MistIcon className="fill-white" />;
         break;
       case "Rain":
-        icon = <RainIcon styles="fill-white" />;
+        icon = <RainIcon className="fill-white" />;
         break;
       case "Sand":
-        icon = <SandIcon styles="fill-white" />;
+        icon = <SandIcon className="fill-white" />;
         break;
       case "Smoke":
-        icon = <SmokeIcon styles="fill-white" />;
+        icon = <SmokeIcon className="fill-white" />;
         break;
       case "Snow":
-        icon = <SnowIcon styles="fill-white" />;
+        icon = <SnowIcon className="fill-white" />;
         break;
       case "Squall":
-        icon = <SquallIcon styles="fill-white" />;
+        icon = <SquallIcon className="fill-white" />;
         break;
       case "Thunderstorm":
-        icon = <ThunderstormIcon styles="fill-white" />;
+        icon = <ThunderstormIcon className="fill-white" />;
         break;
       case "Tornado":
-        icon = <TornadoIcon styles="fill-white" />;
+        icon = <TornadoIcon className="fill-white" />;
         break;
       default:
         icon = "";

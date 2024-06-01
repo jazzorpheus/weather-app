@@ -1,5 +1,7 @@
 
-Figure out a way to get CustomMarker to show up on first map load with current weather info
+Style custom marker
+    Use dynamic icon
+    Change "styles" prop to "className" across all icons
 
 Decide whether to use a separate CurrentPage component or just use WeatherDataDisplay
 

@@ -1,7 +1,7 @@
-export default function CloudsIcon({ styles }) {
+export default function CloudsIcon({ className }) {
   return (
     <svg
-      className={styles}
+      className={className}
       width="64"
       height="64"
       id="Capa_1"
