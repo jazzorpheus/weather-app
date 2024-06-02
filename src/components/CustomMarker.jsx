@@ -1,6 +1,3 @@
-// React-Redux
-import { useSelector } from "react-redux";
-
 import CloudsIcon from "../icons/CloudsIcon";
 
 export default function CustomMarker({ data }) {

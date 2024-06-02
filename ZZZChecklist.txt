@@ -1,4 +1,6 @@
 
+Quickly go through ESLint problems
+
 Figure out the custom marker rendering is working correctly without unnecessary re-renders
 
 Go through all app and figure out the cause of each and every re-render to make sure there are 
