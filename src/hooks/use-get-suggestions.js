@@ -19,7 +19,6 @@ const useGetSuggestions = async (searchTerm) => {
     response.body.features &&
     response.body.features.length > 0
   ) {
-    // return response.body.features[0].geometry.coordinates;
     return response.body.features;
   } else {
     console.error("Could not get search suggestions");

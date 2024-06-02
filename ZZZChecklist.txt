@@ -1,3 +1,5 @@
+Fix location search not working for very long queries, E.g. suggestions for Tokyo
+    Check this is working as expected.
 
 Quickly go through ESLint problems
 
