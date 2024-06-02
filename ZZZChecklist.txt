@@ -1,4 +1,9 @@
 
+Use React Router to figure out if we just came from /, /current, or /forecast to decide whether to 
+add the custom marker when loading /map route.
+
+Get a clouds + sunshine icon (e.g. for few clouds description)
+
 Style custom marker
     Use dynamic icon
     Change "styles" prop to "className" across all icons

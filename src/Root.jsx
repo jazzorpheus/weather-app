@@ -20,6 +20,7 @@ import { fetchWeatherData } from "./store/thunks/fetchWeatherData";
 // My Components
 import Navbar from "./components/Navbar.jsx";
 import SearchModal from "./components/SearchModal";
+import CustomMarker from "./components/CustomMarker.jsx";
 
 // Custom Hooks
 import useClientLocation from "./hooks/use-client-location.js";
@@ -27,13 +28,8 @@ import useClientLocation from "./hooks/use-client-location.js";
 // Mapbox GL
 import mapboxgl from "mapbox-gl";
 
-import CustomMarker from "./components/CustomMarker.jsx";
-
 export default function Root() {
   // ************************************************************************** CUSTOM MARKER
-
-  // From weatherDataSlice
-  const weatherData = useSelector((state) => state.weatherData.data);
 
   // Get client geolocation and dispatch to store
   useClientLocation();
@@ -43,6 +39,9 @@ export default function Root() {
 
   // Dispatch function
   const dispatch = useDispatch();
+
+  // From weatherData slice
+  const weatherData = useSelector((state) => state.weatherData.data);
 
   // From coordsSlice
   const coords = useSelector((state) => state.coords);
@@ -82,21 +81,6 @@ export default function Root() {
         toggleFormSubmitted();
         setShowForm(false);
       }
-      if (marker) {
-        marker.remove();
-        const markerContainer = document.createElement("div");
-        ReactDOM.createRoot(markerContainer).render(
-          <CustomMarker data={weatherData} />
-        );
-        dispatch(
-          updateMarker(
-            // new mapboxgl.Marker({ draggable: false, scale: 1 })
-            new mapboxgl.Marker(markerContainer)
-              .setLngLat(coords.coords)
-              .addTo(mapObj)
-          )
-        );
-      }
     }
   };
 
@@ -104,6 +88,25 @@ export default function Root() {
   useEffect(() => {
     getNewLocationData();
   }, [coords.coords]);
+
+  useEffect(() => {
+    if (marker) {
+      console.log("ROOT - RENDERING CUSTOM MARKER");
+      marker.remove();
+      const markerContainer = document.createElement("div");
+      ReactDOM.createRoot(markerContainer).render(
+        <CustomMarker data={weatherData} />
+      );
+      dispatch(
+        updateMarker(
+          // new mapboxgl.Marker({ draggable: false, scale: 1 })
+          new mapboxgl.Marker(markerContainer)
+            .setLngLat(coords.coords)
+            .addTo(mapObj)
+        )
+      );
+    }
+  }, [weatherData]);
 
   let onLandingPage;
   if (currentPath.pathname !== "/") {

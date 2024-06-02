@@ -7,6 +7,7 @@ import { updateMapObj, updateCoords, updateMarker } from "../store";
 
 // Mapbox GL
 import mapboxgl from "mapbox-gl";
+
 const mbxToken =
   "pk.eyJ1IjoiamF6em9ycGhldXMiLCJhIjoiY2xyejhvZDgxMWo2ZTJscHF0Y2kxZnlpaiJ9.CnwtM75CEUYnlYQf6CxQcg";
 // Mapbox access token

@@ -1,7 +1,9 @@
+// React-Redux
+import { useSelector } from "react-redux";
+
 import CloudsIcon from "../icons/CloudsIcon";
 
 export default function CustomMarker({ data }) {
-  console.log("Custom marker data:", data);
   return (
     <div className="custom-marker-container">
       <div className="custom-marker"></div>

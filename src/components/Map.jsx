@@ -1,8 +1,17 @@
+//! ************************************************* CUSTOM MARKER
+// React DOM
+import ReactDOM from "react-dom/client";
+import CustomMarker from "./CustomMarker";
+import { updateMarker } from "../store";
+// Mapbox GL
+import mapboxgl from "mapbox-gl";
+
 // React
 import { useState, useEffect, useRef } from "react";
 
 // React-Redux
 import { useDispatch, useSelector } from "react-redux";
+
 // Action Creator Functions
 import { updateMapStyle, updateLayer, updatePrevLayer } from "../store";
 
@@ -43,6 +52,10 @@ const layerOptions = [
 // *************************************************************************************  COMPONENT
 export default function Map() {
   // ******************************************************** DECLARE STATE, INIT MAP
+
+  //! **********************************************  CUSTOM MARKER
+  const marker = useSelector((state) => state.map.marker);
+  const weatherData = useSelector((state) => state.weatherData.data);
 
   // Action dispatch function for updating map style, layer, etc.
   const dispatch = useDispatch();
@@ -121,9 +134,26 @@ export default function Map() {
   }, [layer]);
 
   // Render initial layer
-  if (layer !== "none" && renderCount === 2) {
-    // console.log("SETTING FIRST STYLE LOAD LISTENER!");
+  if (renderCount === 2 && layer !== "none") {
     mapObj.once("style.load", () => addCurrentLayer(layer, mapObj));
+
+    //! *****************************************   CUSTOM MARKER
+    mapObj.once("style.load", () => {
+      console.log("MAP - RENDERING CUSTOM MARKER");
+      if (marker) {
+        marker.remove();
+        const markerContainer = document.createElement("div");
+        ReactDOM.createRoot(markerContainer).render(
+          <CustomMarker data={weatherData} />
+        );
+        dispatch(
+          updateMarker(
+            // new mapboxgl.Marker({ draggable: false, scale: 1 })
+            new mapboxgl.Marker(markerContainer).setLngLat(coords).addTo(mapObj)
+          )
+        );
+      }
+    });
   }
 
   return (
