@@ -89,25 +89,6 @@ export default function Root() {
     getNewLocationData();
   }, [coords.coords]);
 
-  useEffect(() => {
-    if (marker) {
-      console.log("ROOT - RENDERING CUSTOM MARKER");
-      marker.remove();
-      const markerContainer = document.createElement("div");
-      ReactDOM.createRoot(markerContainer).render(
-        <CustomMarker data={weatherData} />
-      );
-      dispatch(
-        updateMarker(
-          // new mapboxgl.Marker({ draggable: false, scale: 1 })
-          new mapboxgl.Marker(markerContainer)
-            .setLngLat(coords.coords)
-            .addTo(mapObj)
-        )
-      );
-    }
-  }, [weatherData]);
-
   let onLandingPage;
   if (currentPath.pathname !== "/") {
     onLandingPage = false;

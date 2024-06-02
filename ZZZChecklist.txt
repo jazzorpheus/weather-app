@@ -1,6 +1,8 @@
 
-Use React Router to figure out if we just came from /, /current, or /forecast to decide whether to 
-add the custom marker when loading /map route.
+Figure out the custom marker rendering is working correctly without unnecessary re-renders
+
+Go through all app and figure out the cause of each and every re-render to make sure there are 
+no unnecesasry re-renders
 
 Get a clouds + sunshine icon (e.g. for few clouds description)
 

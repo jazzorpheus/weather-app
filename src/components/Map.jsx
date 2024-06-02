@@ -133,26 +133,41 @@ export default function Map() {
     }
   }, [layer]);
 
+  useEffect(() => {
+    if (marker) {
+      marker.remove();
+      const markerContainer = document.createElement("div");
+      ReactDOM.createRoot(markerContainer).render(
+        <CustomMarker data={weatherData} />
+      );
+      dispatch(
+        updateMarker(
+          // new mapboxgl.Marker({ draggable: false, scale: 1 })
+          new mapboxgl.Marker(markerContainer).setLngLat(coords).addTo(mapObj)
+        )
+      );
+    }
+  }, [weatherData]);
+
   // Render initial layer
   if (renderCount === 2 && layer !== "none") {
     mapObj.once("style.load", () => addCurrentLayer(layer, mapObj));
 
     //! *****************************************   CUSTOM MARKER
     mapObj.once("style.load", () => {
-      console.log("MAP - RENDERING CUSTOM MARKER");
       if (marker) {
         marker.remove();
-        const markerContainer = document.createElement("div");
-        ReactDOM.createRoot(markerContainer).render(
-          <CustomMarker data={weatherData} />
-        );
-        dispatch(
-          updateMarker(
-            // new mapboxgl.Marker({ draggable: false, scale: 1 })
-            new mapboxgl.Marker(markerContainer).setLngLat(coords).addTo(mapObj)
-          )
-        );
       }
+      const markerContainer = document.createElement("div");
+      ReactDOM.createRoot(markerContainer).render(
+        <CustomMarker data={weatherData} />
+      );
+      dispatch(
+        updateMarker(
+          // new mapboxgl.Marker({ draggable: false, scale: 1 })
+          new mapboxgl.Marker(markerContainer).setLngLat(coords).addTo(mapObj)
+        )
+      );
     });
   }
 
