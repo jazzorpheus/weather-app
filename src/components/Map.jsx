@@ -150,8 +150,10 @@ export default function Map() {
   }, [weatherData]);
 
   // Render initial layer
-  if (renderCount === 2 && layer !== "none") {
-    mapObj.once("style.load", () => addCurrentLayer(layer, mapObj));
+  if (renderCount === 2) {
+    if (layer !== "none") {
+      mapObj.once("style.load", () => addCurrentLayer(layer, mapObj));
+    }
 
     //! *****************************************   CUSTOM MARKER
     mapObj.once("style.load", () => {
