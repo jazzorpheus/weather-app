@@ -1,7 +1,7 @@
-export default function SandIcon({ styles }) {
+export default function SandIcon({ className }) {
   return (
     <svg
-      className={styles}
+      className={className}
       width="64"
       height="64"
       viewBox="0 0 24 24"

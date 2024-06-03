@@ -17,6 +17,7 @@ import { updateMapStyle, updateLayer, updatePrevLayer } from "../store";
 
 // Custom Hooks
 import useCreateMap from "../hooks/use-create-map";
+import useGetIcon from "../hooks/use-get-icon";
 
 // My Components
 import Dropdown from "./Dropdown";
@@ -70,6 +71,9 @@ export default function Map() {
 
   // Initialize Map
   useCreateMap(mapContainerRef, mapStyle, coords, dispatch);
+
+  // Get relevant weather icon to use with custom marker
+  const weatherIcon = useGetIcon();
 
   // Keep track of total number of renders
   const renderCount = useRenderCount();
@@ -138,7 +142,7 @@ export default function Map() {
       marker.remove();
       const markerContainer = document.createElement("div");
       ReactDOM.createRoot(markerContainer).render(
-        <CustomMarker data={weatherData} />
+        <CustomMarker data={weatherData} icon={weatherIcon} />
       );
       dispatch(
         updateMarker(

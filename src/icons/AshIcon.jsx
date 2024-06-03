@@ -1,7 +1,7 @@
-export default function AshIcon({ styles }) {
+export default function AshIcon({ className }) {
   return (
     <svg
-      className={styles}
+      className={className}
       width="64"
       height="64"
       id="Layer_1"

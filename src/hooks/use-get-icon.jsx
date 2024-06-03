@@ -14,25 +14,43 @@ import SandIcon from "../icons/SandIcon";
 import SmokeIcon from "../icons/SmokeIcon";
 import SnowIcon from "../icons/SnowIcon";
 import SquallIcon from "../icons/SquallIcon";
+import SunClouds from "../icons/SunClouds";
 import SunIcon from "../icons/SunIcon";
 import ThunderstormIcon from "../icons/ThunderstormIcon";
 import TornadoIcon from "../icons/TornadoIcon";
 
 function useGetIcon() {
   const weatherData = useSelector((state) => state.weatherData);
-  let main;
   let icon;
   if (weatherData.data) {
-    main = weatherData.data.weather[0].main;
+    const { main } = weatherData.data.weather[0];
+    const { description } = weatherData.data.weather[0];
+    console.log(description);
     switch (main) {
       case "Ash":
         icon = <AshIcon className="fill-white" />;
         break;
       case "Clear":
-        icon = <SunIcon />;
+        icon = <SunIcon className="fill-amber-400" />;
         break;
       case "Clouds":
-        icon = <CloudsIcon className="fill-white" />;
+        switch (description) {
+          case "few clouds":
+            icon = <SunClouds className="fill-white" />;
+            break;
+          case "scattered clouds":
+            icon = <SunClouds className="fill-white" />;
+            break;
+          case "broken clouds":
+            icon = <CloudsIcon className="fill-white" />;
+            break;
+          case "overcast clouds":
+            icon = <CloudsIcon className="fill-white" />;
+            break;
+          default:
+            icon = <CloudsIcon className="fill-white" />;
+            break;
+        }
         break;
       case "Drizzle":
         icon = <DrizzleIcon className="fill-white" />;

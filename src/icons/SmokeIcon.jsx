@@ -1,7 +1,7 @@
-export default function SmokeIcon({ styles }) {
+export default function SmokeIcon({ className }) {
   return (
     <svg
-      className={styles}
+      className={className}
       width="64"
       height="64"
       viewBox="0 0 32 32"

@@ -1,7 +1,7 @@
-export default function TornadoIcon({ styles }) {
+export default function TornadoIcon({ className }) {
   return (
     <svg
-      className={styles}
+      className={className}
       width="64"
       height="64"
       viewBox="0 0 32 32"

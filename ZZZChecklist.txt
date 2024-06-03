@@ -1,6 +1,3 @@
-Fix location search not working for very long queries, E.g. suggestions for Tokyo
-    Check this is working as expected.
-
 Quickly go through ESLint problems
 
 Figure out the custom marker rendering is working correctly without unnecessary re-renders
@@ -26,6 +23,9 @@ Make UI more attractive on CurrentWeather view/page, add more stats/icons/graphi
 Get Vercel environment variables working
 
 Display arrow icons corresponding to wind direction
+
+Figure out a way to get around the token length exceeded error when using non-latin characters, e.g. Chinese,
+Japanese, in fetchCoords
 
 Go over everything and tidy up!
 

@@ -1,7 +1,7 @@
-export default function DustIcon({ styles }) {
+export default function DustIcon({ className }) {
   return (
     <svg
-      className={styles}
+      className={className}
       width="64"
       height="64"
       id="Layer_1"

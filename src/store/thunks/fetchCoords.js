@@ -3,8 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { useGetSuggestions } from "../../hooks/use-get-suggestions";
 
 const fetchCoords = createAsyncThunk("/fetchCoords", async (searchTerm) => {
-  console.log(searchTerm.length, searchTerm);
-
   // Get suggestions based on filtered search term
   const response = await useGetSuggestions(searchTerm);
 

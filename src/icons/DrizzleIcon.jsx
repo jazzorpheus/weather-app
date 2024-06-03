@@ -1,10 +1,9 @@
-export default function DrizzleIcon({ styles }) {
+export default function DrizzleIcon({ className }) {
   return (
     <svg
-      className={styles}
+      className={className}
       width="64"
       height="64"
-      fill="#000000"
       viewBox="0 0 56 56"
       xmlns="http://www.w3.org/2000/svg"
     >

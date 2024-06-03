@@ -1,7 +1,7 @@
-export default function SnowIcon({ styles }) {
+export default function SnowIcon({ className }) {
   return (
     <svg
-      className={styles}
+      className={className}
       width="64"
       height="64"
       id="Uploaded to svgrepo.com"

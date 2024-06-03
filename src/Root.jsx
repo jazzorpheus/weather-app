@@ -1,6 +1,3 @@
-// React DOM
-import ReactDOM from "react-dom/client";
-
 // React
 import { useState, useEffect } from "react";
 
@@ -11,22 +8,15 @@ import { useLocation } from "react-router-dom";
 // React-Redux
 import { useDispatch, useSelector } from "react-redux";
 
-// Action creator functions
-import { updateMarker } from "./store/index.js";
-
 // Async Thunks
 import { fetchWeatherData } from "./store/thunks/fetchWeatherData";
 
 // My Components
 import Navbar from "./components/Navbar.jsx";
 import SearchModal from "./components/SearchModal";
-import CustomMarker from "./components/CustomMarker.jsx";
 
 // Custom Hooks
 import useClientLocation from "./hooks/use-client-location.js";
-
-// Mapbox GL
-import mapboxgl from "mapbox-gl";
 
 export default function Root() {
   // ************************************************************************** CUSTOM MARKER
