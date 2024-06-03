@@ -166,7 +166,7 @@ export default function Map() {
       }
       const markerContainer = document.createElement("div");
       ReactDOM.createRoot(markerContainer).render(
-        <CustomMarker data={weatherData} />
+        <CustomMarker data={weatherData} icon={weatherIcon} />
       );
       dispatch(
         updateMarker(
