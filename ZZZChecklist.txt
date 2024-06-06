@@ -1,31 +1,20 @@
-Quickly go through ESLint problems
+Remove fetchCoords async thunk!
 
-Figure out the custom marker rendering is working correctly without unnecessary re-renders
-
-Go through all app and figure out the cause of each and every re-render to make sure there are 
-no unnecesasry re-renders
-
-Get a clouds + sunshine icon (e.g. for few clouds description)
-
-Style custom marker
-    Use dynamic icon
-    Change "styles" prop to "className" across all icons
+Implement forecast page using OpenWeatherMap 5-day forecast
 
 Decide whether to use a separate CurrentPage component or just use WeatherDataDisplay
 
+Fix map page sometimes being able to scroll up (using touchscreen and swiping up from navbar)
+
 Decide on height of CurrentPage / WeatherDataDisplay (use similar technique as for map?)
 
-Make use of React Router loader function? E.g. go to current location when rendering
-MapPage
+Make use of React Router loader function?
 
 Make UI more attractive on CurrentWeather view/page, add more stats/icons/graphics/visuals
 
 Get Vercel environment variables working
 
 Display arrow icons corresponding to wind direction
-
-Figure out a way to get around the token length exceeded error when using non-latin characters, e.g. Chinese,
-Japanese, in fetchCoords
 
 Go over everything and tidy up!
 

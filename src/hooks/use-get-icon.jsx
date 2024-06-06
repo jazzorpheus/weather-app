@@ -25,7 +25,6 @@ function useGetIcon() {
   if (weatherData.data) {
     const { main } = weatherData.data.weather[0];
     const { description } = weatherData.data.weather[0];
-    console.log(description);
     switch (main) {
       case "Ash":
         icon = <AshIcon className="fill-white" />;

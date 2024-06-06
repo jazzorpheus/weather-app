@@ -5,7 +5,7 @@ const geocoder = mbxGeocoding({
     "pk.eyJ1IjoiamF6em9ycGhldXMiLCJhIjoiY2xid25sbDhnMHlzZTN1bXNiejBvOXl0eiJ9.yv9LtnmzsC6A7a74Fwod7Q",
 });
 
-const useGetSuggestions = async (searchTerm) => {
+const getSuggestions = async (searchTerm) => {
   const response = await geocoder
     .forwardGeocode({
       query: searchTerm,
@@ -26,4 +26,4 @@ const useGetSuggestions = async (searchTerm) => {
   }
 };
 
-export { useGetSuggestions };
+export { getSuggestions };

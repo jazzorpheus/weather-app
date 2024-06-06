@@ -30,9 +30,6 @@ export default function Root() {
   // Dispatch function
   const dispatch = useDispatch();
 
-  // From weatherData slice
-  const weatherData = useSelector((state) => state.weatherData.data);
-
   // From coordsSlice
   const coords = useSelector((state) => state.coords);
 
@@ -43,7 +40,6 @@ export default function Root() {
   //
   // From mapSlice
   const mapObj = useSelector((state) => state.map.mapObj);
-  const marker = useSelector((state) => state.map.marker);
 
   const toggleShowForm = () => {
     setShowForm(!showForm);

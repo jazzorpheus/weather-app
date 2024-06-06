@@ -43,5 +43,4 @@ export {
 };
 
 // Re-Export async thunks
-export * from "./thunks/fetchCoords";
 export * from "./thunks/fetchWeatherData";

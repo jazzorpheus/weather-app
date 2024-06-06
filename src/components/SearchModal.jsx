@@ -7,11 +7,11 @@ import { createPortal } from "react-dom";
 // React-Redux
 import { useDispatch } from "react-redux";
 
-// Async Thunks
-import { fetchCoords } from "../store/thunks/fetchCoords";
+// Action Creator Function
+import { updateCoords } from "../store";
 
-// Custom Hooks
-import { useGetSuggestions } from "../hooks/use-get-suggestions";
+// Utility Functions
+import { getSuggestions } from "../utils/getSuggestions";
 
 // My Components
 import SuggestionItem from "./SuggestionItem";
@@ -49,7 +49,7 @@ function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
   // Get suggestions once search term required length
   useEffect(() => {
     const runGetSuggestions = async () => {
-      const response = await useGetSuggestions(searchTerm);
+      const response = await getSuggestions(searchTerm);
       setSuggestions(response);
     };
     if (searchTerm.length > 1) {
@@ -59,16 +59,23 @@ function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
     }
   }, [searchTerm]);
 
-  // If there are suggestions generate content
+  // If there are suggestions, generate list
   let suggestionsContent;
-  if (suggestions && suggestions[0]) {
+  if (suggestions[0]) {
     suggestionsContent = (
       <div className="bg-gray-900 rounded-md p-3">
         {suggestions.map((sugg) => {
+          // console.log(sugg.place_name, sugg.center);
           return (
             <SuggestionItem
               key={sugg.id}
-              onClick={() => setSearchTerm(sugg.place_name)}
+              // onClick={() => setSearchTerm(sugg.place_name)}
+              onClick={(event) => {
+                console.log("SUGGESTION CLICKED!!");
+                // Update coords which triggers getNewLocationData in Root.jsx
+                dispatch(updateCoords(sugg.center));
+                handleSubmit(event);
+              }}
             >
               {sugg.place_name}
             </SuggestionItem>
@@ -80,15 +87,14 @@ function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
     suggestionsContent = null;
   }
 
-  // Handle form submission: Fetch coords using search term
-  // (Then a coords change triggers fetchWeatherData in LocationSearch.jsx)
+  // Handle form submission: clear input, toggle formSubmitted state etc.
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (searchTerm.length < 1) {
       return;
     }
-    dispatch(fetchCoords(searchTerm));
     setSearchTerm("");
+    console.log("FORM SUBMITTING!");
     toggleSubmitted();
     // Remove focus from input element
     document.querySelector('input[name="searchTerm"]').blur();

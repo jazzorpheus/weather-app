@@ -22,7 +22,7 @@ import useGetIcon from "../hooks/use-get-icon";
 // My Components
 import Dropdown from "./Dropdown";
 
-// Utilities
+// Utility Functions
 import addCurrentLayer from "../utils/addCurrentLayer";
 import removeCustomLayers from "../utils/removeCustomLayers";
 
