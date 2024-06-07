@@ -2,8 +2,7 @@
 import { useState, useEffect } from "react";
 
 // React Router
-import { Link, Outlet } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link, Outlet } from "react-router-dom";
 
 // React-Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -16,13 +15,13 @@ import Navbar from "./components/Navbar.jsx";
 import SearchModal from "./components/SearchModal";
 
 // Custom Hooks
-import useClientLocation from "./hooks/use-client-location.js";
+import useGeoLocation from "./hooks/use-geo-location.js";
 
 export default function Root() {
   // ************************************************************************** CUSTOM MARKER
 
   // Get client geolocation and dispatch to store
-  useClientLocation();
+  useGeoLocation();
 
   // Get current URL path to check for /map [see below]
   const currentPath = useLocation();

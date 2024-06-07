@@ -1,12 +1,14 @@
-// React-Redux Hooks
+// React-Redux
 import { useSelector } from "react-redux";
+
 // Custom Hooks
 import useGetBackground from "../hooks/use-get-background";
+
 // My Components
 import WeatherDataDisplay from "../components/WeatherDataDisplay";
 import convertWeatherData from "../utils/convertWeatherData";
 
-function CurrentPage() {
+export default function CurrentPage() {
   // Dynamic background
   let styles =
     "current-weather flex flex-col justify-center items-center w-dvw";
@@ -27,5 +29,3 @@ function CurrentPage() {
 
   return <div className={styles}>{weatherDataDisplay}</div>;
 }
-
-export default CurrentPage;

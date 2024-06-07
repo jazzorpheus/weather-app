@@ -4,7 +4,7 @@ import WeatherStat from "./WeatherStat";
 // Custom Hooks
 import useGetIcon from "../hooks/use-get-icon";
 
-function WeatherDataDisplay({ data }) {
+export default function WeatherDataDisplay({ data }) {
   const weatherIcon = useGetIcon();
   const headers = data.slice(0, 2);
   const header = (
@@ -27,5 +27,3 @@ function WeatherDataDisplay({ data }) {
     </div>
   );
 }
-
-export default WeatherDataDisplay;

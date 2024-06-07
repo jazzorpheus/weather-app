@@ -1,8 +1,6 @@
-//! ************************************************* CUSTOM MARKER
 // React DOM
 import ReactDOM from "react-dom/client";
-import CustomMarker from "./CustomMarker";
-import { updateMarker } from "../store";
+
 // Mapbox GL
 import mapboxgl from "mapbox-gl";
 
@@ -13,7 +11,12 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Action Creator Functions
-import { updateMapStyle, updateLayer, updatePrevLayer } from "../store";
+import {
+  updateMapStyle,
+  updateLayer,
+  updatePrevLayer,
+  updateMarker,
+} from "../store";
 
 // Custom Hooks
 import useCreateMap from "../hooks/use-create-map";
@@ -21,6 +24,7 @@ import useGetIcon from "../hooks/use-get-icon";
 
 // My Components
 import Dropdown from "./Dropdown";
+import CustomMarker from "./CustomMarker";
 
 // Utility Functions
 import addCurrentLayer from "../utils/addCurrentLayer";
@@ -41,6 +45,7 @@ const styleOptions = [
 
 const layerOptions = [
   { label: "Air Quality", value: "mepIndex" },
+  { label: "Cloud Cover", value: "cloudCover" },
   { label: "Humidity", value: "humidity" },
   { label: "Precipitation", value: "precipitationIntensity" },
   { label: "Pressure (sea)", value: "pressureSeaLevel" },

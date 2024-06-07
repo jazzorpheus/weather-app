@@ -65,13 +65,10 @@ function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
     suggestionsContent = (
       <div className="bg-gray-900 rounded-md p-3">
         {suggestions.map((sugg) => {
-          // console.log(sugg.place_name, sugg.center);
           return (
             <SuggestionItem
               key={sugg.id}
-              // onClick={() => setSearchTerm(sugg.place_name)}
               onClick={(event) => {
-                console.log("SUGGESTION CLICKED!!");
                 // Update coords which triggers getNewLocationData in Root.jsx
                 dispatch(updateCoords(sugg.center));
                 handleSubmit(event);
@@ -94,7 +91,6 @@ function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
       return;
     }
     setSearchTerm("");
-    console.log("FORM SUBMITTING!");
     toggleSubmitted();
     // Remove focus from input element
     document.querySelector('input[name="searchTerm"]').blur();

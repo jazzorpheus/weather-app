@@ -1,51 +1,42 @@
-Remove fetchCoords async thunk!
-
-Implement forecast page using OpenWeatherMap 5-day forecast
-
-Decide whether to use a separate CurrentPage component or just use WeatherDataDisplay
-
-Fix map page sometimes being able to scroll up (using touchscreen and swiping up from navbar)
-
-Decide on height of CurrentPage / WeatherDataDisplay (use similar technique as for map?)
-
-Make use of React Router loader function?
-
-Make UI more attractive on CurrentWeather view/page, add more stats/icons/graphics/visuals
-
-Get Vercel environment variables working
-
-Display arrow icons corresponding to wind direction
-
-Go over everything and tidy up!
-
 ********************************************************************** BETA VERSION
 
-Set up API with RTK Query for coords and weatherData?
+Implement forecast using OpenWeatherMap 5-day forecast!
+    - Rename WeatherDataDisplay to CurrentWeatherDisplay
+    - Rename fetchWeatherData thunk to fetchCurrentWeather
+    - Rename weatherDataSlice to currentWeatherSlice
+    - Build a fetchForecastWeather async thunk
+    - Create a ForecastPage page
+    - Create a ForecastWeatherDisplay component
 
-Set up state management and APIs with Zustand?
+Make UI more attractive on CurrentPage, add more stats/icons/graphics/visuals
+    - Display arrow icons corresponding to wind direction
 
-Decide whether to use Async Thunks, RTK Query, or Zustand
-
-Add a 5-day forecast feature that opens up into a modal display
-
-Store Mapbox access token in some kind of environment variable?
-
-Customize map marker?
+Make UI more attractive on ForecastPage
 
 Add a units selection option: imperial or metric
 
+Get Vercel environment variables working
+
+Turn layers dropdown into a modal similar to Tomorrow's app and add a tonne more layers
+
+Make use of React Router loader function?
+
+Go over everything and tidy up!
+
+********************************************************************** LATER VERSIONS
+
+Set up API's with RTK Query?
+
+Try setting up state management and API's with Zustand?
+
+Decide whether to use Async Thunks, RTK Query, or Zustand
+
+Store Mapbox access token in some kind of environment variable?
+
 Implement skeleton to show while data loading?
 
-Style app to be more responsive to screen size
-
-Optional: Add map layers with cloud cover, temperature, wind, etc.
+Style app to be more responsive to screen size? Only if needed.
 
 Remove overly-long explanatory comments + write succinct comments/labels
 
 Remove console.log's unnecesasry in production
-
-Deploy and add to portfolio page
-
-********************************************************************** FUTURE IMPROVEMENTS
-
-Make sure style.load event listener cleanup is working
