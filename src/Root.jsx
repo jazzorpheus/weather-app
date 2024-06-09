@@ -8,7 +8,7 @@ import { useLocation, Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // Async Thunks
-import { fetchCurrentWeather } from "./store/thunks/fetchCurrentWeather";
+import { fetchCurrentWeather } from "./store";
 
 // My Components
 import Navbar from "./components/Navbar.jsx";

@@ -1,9 +1,8 @@
 ********************************************************************** BETA VERSION
 
 Implement forecast using OpenWeatherMap 5-day forecast!
-    - Create a ForecastPage page
     - Create a ForecastWeatherDisplay component
-    - Build a fetchForecastWeather async thunk
+        - Decide how to display forecast!
 
 
 Add space between search bar and location name on current page

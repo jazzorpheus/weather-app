@@ -21,7 +21,7 @@ export default function CurrentWeatherDisplay({ data }) {
   ));
 
   return (
-    <div className="current-display flex flex-col items-center mb-5">
+    <div className="flex flex-col items-center mb-5">
       {header}
       {weatherStats}
     </div>
