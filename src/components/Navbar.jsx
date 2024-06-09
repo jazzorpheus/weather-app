@@ -22,7 +22,10 @@ export default function Navbar() {
           <CiMap className="text-2xl" />
           Map
         </Link>
-        <Link className="flex flex-col justify-between items-center text-xs m-2">
+        <Link
+          className="flex flex-col justify-between items-center text-xs m-2"
+          to="/forecast"
+        >
           <MdOutlineSatelliteAlt className="text-2xl" /> Forecast
         </Link>
       </nav>

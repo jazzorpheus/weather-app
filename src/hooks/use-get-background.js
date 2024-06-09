@@ -2,10 +2,10 @@
 import { useSelector } from "react-redux";
 
 function useGetBackground() {
-  const weatherData = useSelector((state) => state.weatherData);
-  if (weatherData.data) {
-    const { main } = weatherData.data.weather[0];
-    const { description } = weatherData.data.weather[0];
+  const currentWeather = useSelector((state) => state.currentWeather);
+  if (currentWeather.data) {
+    const { main } = currentWeather.data.weather[0];
+    const { description } = currentWeather.data.weather[0];
     switch (main) {
       case "Ash":
         return " bg-mist";

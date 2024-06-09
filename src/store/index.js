@@ -14,15 +14,15 @@ import {
 // Import combined reducer and action creator functions from coordsSlice
 import { coordsReducer, updateCoords } from "./slices/coordsSlice";
 
-// Import combined reducer and action creator functions from weatherDataSlice
-import { weatherDataReducer } from "./slices/weatherDataSlice";
+// Import combined reducer and action creator functions from currentWeatherSlice
+import { currentWeatherReducer } from "./slices/currentWeatherSlice";
 
 // Configure store
 const store = configureStore({
   reducer: {
     map: mapReducer,
     coords: coordsReducer,
-    weatherData: weatherDataReducer,
+    currentWeather: currentWeatherReducer,
   },
   // Allow non-serializable values in the store (for the map object)
   middleware: (getDefaultMiddleware) =>
@@ -43,4 +43,4 @@ export {
 };
 
 // Re-Export async thunks
-export * from "./thunks/fetchWeatherData";
+export * from "./thunks/fetchCurrentWeather";

@@ -59,20 +59,20 @@ const layerOptions = [
 export default function Map() {
   // ******************************************************** DECLARE STATE, INIT MAP
 
-  //! **********************************************  CUSTOM MARKER
-  const marker = useSelector((state) => state.map.marker);
-  const weatherData = useSelector((state) => state.weatherData.data);
-
   // Action dispatch function for updating map style, layer, etc.
   const dispatch = useDispatch();
 
-  // Current coordinates from store
+  // Current coordinates current weather from store
   const { coords } = useSelector((state) => state.coords);
+  const currentWeather = useSelector((state) => state.currentWeather.data);
+
   // Reference to map HTML element
   const mapContainerRef = useRef();
-  // Map object & style from store
+
+  // Map object, marker & style from store
   const mapObj = useSelector((state) => state.map.mapObj);
   const mapStyle = useSelector((state) => state.map.mapStyle);
+  const marker = useSelector((state) => state.map.marker);
 
   // Initialize Map
   useCreateMap(mapContainerRef, mapStyle, coords, dispatch);
@@ -99,11 +99,7 @@ export default function Map() {
     value: mapStyle,
   });
 
-  // ********************************************************************** ADD/REMOVE LAYER FUNCTIONS ->
-
-  // **********************************************************************  LAYER FUNCTIONS <-
-
-  // **********************************************************  STYLE DROPDOWN CONFIG
+  // **********************************************************  STYLE DROPDOWN
 
   // Handle style selection
   const handleStyleSelect = (option) => {
@@ -118,7 +114,7 @@ export default function Map() {
     }
   };
 
-  // **********************************************************  LAYER DROPDOWN CONFIG
+  // **********************************************************  LAYER DROPDOWN
 
   // Change map layer selection in dropdown, update map layer
   const handleLayerSelect = (option) => {
@@ -126,6 +122,8 @@ export default function Map() {
     dispatch(updatePrevLayer(layer));
     dispatch(updateLayer(option.value));
   };
+
+  // **********************************************************  USE EFFECTS
 
   // Render initial layer & update layer
   useEffect(() => {
@@ -143,11 +141,12 @@ export default function Map() {
   }, [layer]);
 
   useEffect(() => {
+    // Update custom marker
     if (marker) {
       marker.remove();
       const markerContainer = document.createElement("div");
       ReactDOM.createRoot(markerContainer).render(
-        <CustomMarker data={weatherData} icon={weatherIcon} />
+        <CustomMarker data={currentWeather} icon={weatherIcon} />
       );
       dispatch(
         updateMarker(
@@ -156,7 +155,9 @@ export default function Map() {
         )
       );
     }
-  }, [weatherData]);
+  }, [currentWeather]);
+
+  // **********************************************************  INITIALIZE LAYER & MARKER
 
   // Render initial layer
   if (renderCount === 2) {
@@ -164,14 +165,14 @@ export default function Map() {
       mapObj.once("style.load", () => addCurrentLayer(layer, mapObj));
     }
 
-    //! *****************************************   CUSTOM MARKER
+    // Initialize custom marker
     mapObj.once("style.load", () => {
       if (marker) {
         marker.remove();
       }
       const markerContainer = document.createElement("div");
       ReactDOM.createRoot(markerContainer).render(
-        <CustomMarker data={weatherData} icon={weatherIcon} />
+        <CustomMarker data={currentWeather} icon={weatherIcon} />
       );
       dispatch(
         updateMarker(
@@ -213,7 +214,6 @@ export default function Map() {
 }
 
 //! PREVIOUS DEV TROUBLESHOOTING STUFF
-
 // ****************************************************************  Log all custom SOURCES & LAYERS ->
 // try {
 //   // Get all sources

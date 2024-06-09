@@ -8,7 +8,7 @@ import { useLocation, Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // Async Thunks
-import { fetchWeatherData } from "./store/thunks/fetchWeatherData";
+import { fetchCurrentWeather } from "./store/thunks/fetchCurrentWeather";
 
 // My Components
 import Navbar from "./components/Navbar.jsx";
@@ -32,13 +32,11 @@ export default function Root() {
   // From coordsSlice
   const coords = useSelector((state) => state.coords);
 
-  const [showForm, setShowForm] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  // State from store
-  //
   // From mapSlice
   const mapObj = useSelector((state) => state.map.mapObj);
+
+  const [showForm, setShowForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const toggleShowForm = () => {
     setShowForm(!showForm);
@@ -48,12 +46,12 @@ export default function Root() {
     setFormSubmitted(!formSubmitted);
   };
 
-  //  - Get new weather data
+  //  - Get new current weather data
   //  - Re-center map if change comes from form search
   //  - Move map marker to new coords
   const getNewLocationData = () => {
     if (coords.coords[0]) {
-      dispatch(fetchWeatherData(coords.coords));
+      dispatch(fetchCurrentWeather(coords.coords));
       if (formSubmitted) {
         // If map displaying, fly to location when form submitted
         if (currentPath.pathname === "/map") {
@@ -97,8 +95,8 @@ export default function Root() {
                 className="text-black border-2 border-gray-700 rounded opacity-100 p-1"
                 type="text"
                 placeholder="Search For Location"
-                value={""}
-                onChange={(e) => e.target.value}
+                // value={""}
+                // onChange={(e) => e.target.value}
                 onClick={() => setShowForm(true)}
               />
             </form>
@@ -114,8 +112,8 @@ export default function Root() {
           <Link className="block hover:bg-sky-700 rounded-md" to="/map">
             <h2 className="text-xl py-2">Weather Map</h2>
           </Link>
-          <Link className="block hover:bg-sky-700 rounded-md" to="/">
-            <h2 className="text-xl py-2">Forecast (Coming Soon)</h2>
+          <Link className="block hover:bg-sky-700 rounded-md" to="/forecast">
+            <h2 className="text-xl py-2">Weather Forecast</h2>
           </Link>
         </div>
       )}

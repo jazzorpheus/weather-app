@@ -6,9 +6,11 @@ const mapSlice = createSlice({
   name: "map",
   initialState: {
     mapObj: null,
-    mapStyle: "dark-v11",
+    // mapStyle: "dark-v11",
+    mapStyle: "outdoors-v12",
     marker: null,
-    layer: "precipitationIntensity",
+    // layer: "precipitationIntensity",
+    layer: "none",
     prevLayer: null,
   },
   reducers: {

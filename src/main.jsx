@@ -10,13 +10,13 @@ import { Provider } from "react-redux";
 // Redux Store
 import { store } from "./store/index.js";
 
-// My Components
-// import App from "./App.jsx";
+// Root Element / Page
 import Root from "./Root.jsx";
-import Map from "./components/Map.jsx";
 
 // My Pages
 import CurrentPage from "./pages/CurrentPage.jsx";
+import MapPage from "./pages/MapPage.jsx";
+import ForecastPage from "./pages/ForecastPage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 
 // Styles
@@ -35,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/map",
-        element: <Map />,
+        element: <MapPage />,
+      },
+      {
+        path: "/forecast",
+        element: <ForecastPage />,
       },
     ],
   },

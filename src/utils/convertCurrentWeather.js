@@ -1,5 +1,5 @@
-function convertWeatherData(weatherData) {
-  const windDeg = weatherData.data.wind.deg;
+export default function convertCurrentWeather(currentWeather) {
+  const windDeg = currentWeather.data.wind.deg;
   let windCompass;
 
   if (windDeg >= 348.75 || windDeg < 11.25) {
@@ -37,27 +37,27 @@ function convertWeatherData(weatherData) {
   }
 
   return [
-    { name: "Location", value: weatherData.data.name, units: "" },
-    { name: "Main", value: weatherData.data.weather[0].main, units: "" },
+    { name: "Location", value: currentWeather.data.name, units: "" },
+    { name: "Main", value: currentWeather.data.weather[0].main, units: "" },
     {
       name: "Description",
-      value: weatherData.data.weather[0].description,
+      value: currentWeather.data.weather[0].description,
       units: "",
     },
     {
       name: "Temperature",
-      value: (weatherData.data.main.temp - 273.15).toFixed(1),
+      value: (currentWeather.data.main.temp - 273.15).toFixed(1),
       units: "°C",
     },
     {
       name: "Feels like",
-      value: (weatherData.data.main.feels_like - 273.15).toFixed(1),
+      value: (currentWeather.data.main.feels_like - 273.15).toFixed(1),
       units: "°C",
     },
-    { name: "Humidity", value: weatherData.data.main.humidity, units: "%" },
+    { name: "Humidity", value: currentWeather.data.main.humidity, units: "%" },
     {
       name: "Wind speed",
-      value: (60 ** 2 * (weatherData.data.wind.speed / 1609.34)).toFixed(1),
+      value: (60 ** 2 * (currentWeather.data.wind.speed / 1609.34)).toFixed(1),
       units: "mph",
     },
     {
@@ -67,5 +67,3 @@ function convertWeatherData(weatherData) {
     },
   ];
 }
-
-export default convertWeatherData;

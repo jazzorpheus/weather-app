@@ -1,12 +1,14 @@
 ********************************************************************** BETA VERSION
 
 Implement forecast using OpenWeatherMap 5-day forecast!
-    - Rename WeatherDataDisplay to CurrentWeatherDisplay
-    - Rename fetchWeatherData thunk to fetchCurrentWeather
-    - Rename weatherDataSlice to currentWeatherSlice
-    - Build a fetchForecastWeather async thunk
     - Create a ForecastPage page
     - Create a ForecastWeatherDisplay component
+    - Build a fetchForecastWeather async thunk
+
+
+Add space between search bar and location name on current page
+
+Fix i and mapbox icons on map being blocked out
 
 Make UI more attractive on CurrentPage, add more stats/icons/graphics/visuals
     - Display arrow icons corresponding to wind direction

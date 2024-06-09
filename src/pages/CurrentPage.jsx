@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 import useGetBackground from "../hooks/use-get-background";
 
 // My Components
-import WeatherDataDisplay from "../components/WeatherDataDisplay";
-import convertWeatherData from "../utils/convertWeatherData";
+import CurrentWeatherDisplay from "../components/CurrentWeatherDisplay";
+
+// Utilities
+import convertCurrentWeather from "../utils/convertCurrentWeather";
 
 export default function CurrentPage() {
   // Dynamic background
@@ -14,18 +16,18 @@ export default function CurrentPage() {
     "current-weather flex flex-col justify-center items-center w-dvw";
   styles += useGetBackground();
 
-  // From weatherDataSlice
-  const weatherData = useSelector((state) => state.weatherData);
+  // From currentWeatherSlice
+  const currentWeather = useSelector((state) => state.currentWeather);
 
-  let weatherDataDisplay;
-  if (weatherData.isLoading) {
-    weatherDataDisplay = <p>Loading....</p>;
-  } else if (weatherData.error) {
-    weatherDataDisplay = <p>ERROR: {weatherData.error.message}</p>;
+  let currentDisplay;
+  if (currentWeather.isLoading) {
+    currentDisplay = <p>Loading....</p>;
+  } else if (currentWeather.error) {
+    currentDisplay = <p>ERROR: {currentWeather.error.message}</p>;
   } else {
-    const data = convertWeatherData(weatherData);
-    weatherDataDisplay = <WeatherDataDisplay data={data} />;
+    const data = convertCurrentWeather(currentWeather);
+    currentDisplay = <CurrentWeatherDisplay data={data} />;
   }
 
-  return <div className={styles}>{weatherDataDisplay}</div>;
+  return <div className={styles}>{currentDisplay}</div>;
 }

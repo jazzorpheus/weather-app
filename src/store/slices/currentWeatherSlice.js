@@ -2,10 +2,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Async Thunks
-import { fetchWeatherData } from "../thunks/fetchWeatherData";
+import { fetchCurrentWeather } from "../thunks/fetchCurrentWeather";
 
-const weatherDataSlice = createSlice({
-  name: "weatherData",
+const currentWeatherSlice = createSlice({
+  name: "currentWeather",
   initialState: {
     data: null,
     isLoading: true,
@@ -17,15 +17,15 @@ const weatherDataSlice = createSlice({
 
   extraReducers(builder) {
     // ***************************************************************  fetchWeather
-    builder.addCase(fetchWeatherData.pending, (state, action) => {
+    builder.addCase(fetchCurrentWeather.pending, (state, action) => {
       state.isLoading = true;
     });
-    builder.addCase(fetchWeatherData.fulfilled, (state, action) => {
+    builder.addCase(fetchCurrentWeather.fulfilled, (state, action) => {
       state.data = action.payload;
       state.isLoading = false;
       state.error = null;
     });
-    builder.addCase(fetchWeatherData.rejected, (state, action) => {
+    builder.addCase(fetchCurrentWeather.rejected, (state, action) => {
       state.error = action.error;
       state.isLoading = false;
     });
@@ -33,4 +33,4 @@ const weatherDataSlice = createSlice({
 });
 
 // Export single combined reducer
-export const weatherDataReducer = weatherDataSlice.reducer;
+export const currentWeatherReducer = currentWeatherSlice.reducer;
