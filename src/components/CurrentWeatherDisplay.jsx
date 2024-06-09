@@ -9,7 +9,7 @@ export default function CurrentWeatherDisplay({ data }) {
   const headers = data.slice(0, 2);
   const header = (
     <>
-      <h2 className="text-3xl font-bold mt-[1vw] mb-3">{headers[0].value}</h2>{" "}
+      <h2 className="text-3xl font-bold mb-3">{headers[0].value}</h2>{" "}
       {weatherIcon}
       <h3 className="text-2xl mt-2">{headers[1].value}</h3>
     </>
@@ -21,7 +21,7 @@ export default function CurrentWeatherDisplay({ data }) {
   ));
 
   return (
-    <div className="flex flex-col items-center mb-5">
+    <div className="current-display flex flex-col items-center mb-5">
       {header}
       {weatherStats}
     </div>
