@@ -9,7 +9,7 @@ export default function CurrentWeatherDisplay({ data }) {
   const headers = data.slice(0, 2);
   const header = (
     <>
-      <h2 className="text-3xl font-bold mt-20 mb-3">{headers[0].value}</h2>{" "}
+      <h2 className="text-3xl font-bold mt-[1vw] mb-3">{headers[0].value}</h2>{" "}
       {weatherIcon}
       <h3 className="text-2xl mt-2">{headers[1].value}</h3>
     </>
