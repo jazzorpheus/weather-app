@@ -1,9 +1,13 @@
 ********************************************************************** BETA VERSION
 
+Check to see if data displayed in forecast table matches what is coming back from the API
+i.e. what is printed to console
+
+Break down ForecastPage into smaller components
+
 Implement forecast using OpenWeatherMap 5-day forecast!
     - Create a ForecastWeatherDisplay component
         - Decide how to display forecast!
-
 
 Add space between search bar and location name on current page
 

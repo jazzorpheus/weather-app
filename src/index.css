@@ -211,3 +211,21 @@ body {
   font-size: 0.85rem;
   letter-spacing: 0.02rem;
 }
+
+/* ********************************************************* FORECAST TABLE */
+
+th,
+td {
+  min-width: 100px;
+}
+
+forecast-container {
+  /* height: calc(100dvh - 56px); */
+  /* position: relative !important; */
+  /* top: 1000px !important; */
+}
+
+table {
+  /* margin-bottom: 100px; */
+  /* margin-top: 400px; */
+}

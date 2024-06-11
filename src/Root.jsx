@@ -30,7 +30,7 @@ export default function Root() {
   const dispatch = useDispatch();
 
   // From coordsSlice
-  const coords = useSelector((state) => state.coords);
+  const coords = useSelector((state) => state.coords.coords);
 
   // From mapSlice
   const mapObj = useSelector((state) => state.map.mapObj);
@@ -50,13 +50,13 @@ export default function Root() {
   //  - Re-center map if change comes from form search
   //  - Move map marker to new coords
   const getNewLocationData = () => {
-    if (coords.coords[0]) {
-      dispatch(fetchCurrentWeather(coords.coords));
+    if (coords[0]) {
+      dispatch(fetchCurrentWeather(coords));
       if (formSubmitted) {
         // If map displaying, fly to location when form submitted
         if (currentPath.pathname === "/map") {
           mapObj.flyTo({
-            center: coords.coords,
+            center: coords,
             zoom: 9,
             essential: true,
           });
@@ -70,7 +70,7 @@ export default function Root() {
   // When coords change
   useEffect(() => {
     getNewLocationData();
-  }, [coords.coords]);
+  }, [coords]);
 
   let onLandingPage;
   if (currentPath.pathname !== "/") {
