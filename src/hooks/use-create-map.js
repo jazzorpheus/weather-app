@@ -22,6 +22,7 @@ function useCreateMap(mapContainerRef, mapStyle, center, dispatch) {
       center: center,
       // Zoom goes from 0 -> 22
       zoom: 4,
+      pitch: 40,
     });
     // Add navigation control (the +/- zoom buttons)
     map.addControl(
