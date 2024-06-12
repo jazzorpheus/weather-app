@@ -1,7 +1,19 @@
 ********************************************************************** BETA VERSION
 
+Convert wind direction to compass and use arrow icons
+
 Check to see if data displayed in forecast table matches what is coming back from the API
 i.e. what is printed to console
+
+Convert temperature to celsius
+
+Convert wind direction to compass direction plus icons
+
+Figure out other units and do any necessary conversions
+
+Represent temp as a bar graphic similar to met office website
+
+Figure out other ways to improve visuals
 
 Break down ForecastPage into smaller components
 

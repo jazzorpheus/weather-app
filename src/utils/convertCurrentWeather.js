@@ -46,12 +46,12 @@ export default function convertCurrentWeather(currentWeather) {
     },
     {
       name: "Temperature",
-      value: (currentWeather.data.main.temp - 273.15).toFixed(1),
+      value: currentWeather.data.main.temp.toFixed(1),
       units: "°C",
     },
     {
       name: "Feels like",
-      value: (currentWeather.data.main.feels_like - 273.15).toFixed(1),
+      value: currentWeather.data.main.feels_like.toFixed(1),
       units: "°C",
     },
     { name: "Humidity", value: currentWeather.data.main.humidity, units: "%" },
