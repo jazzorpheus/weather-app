@@ -7,7 +7,7 @@ export default function CustomMarker({ data, icon }) {
           <div className="scale-75">{icon}</div>
           <span className="relative bottom-1">{data.name}</span>
           <span className="relative bottom-1">
-            {(data.main.temp - 273.15).toFixed(1)}°C
+            {data.main.temp.toFixed(1)}°C
           </span>
           <span className="relative bottom-1">
             {data.weather[0].description}
