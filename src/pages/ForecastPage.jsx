@@ -166,7 +166,7 @@ export default function ForecastPage() {
                   </span>
                 </th>
               </tr>
-              <tr className="text-center">{timestamps}</tr>
+              <tr className="text-center sticky top-0 z-10">{timestamps}</tr>
               <tr>
                 <th
                   className="arrow-right sticky left-0 bg-blue-500 rounded"
