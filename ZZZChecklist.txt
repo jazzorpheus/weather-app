@@ -1,10 +1,6 @@
 ********************************************************************** BETA VERSION
 
-Fix issue of forecast table going off top and bottom on smaller screen height phones
-
-Fix issue where forecast gives different location to current page
-
-Fix repeating background on wider screens
+Do description + icons for forecast
 
 Add days to forecast time
 

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 // React-Redux
 // Action Creator Functions
-import { updateMapObj, updateCoords, updateMarker } from "../store";
+import { updateMapObj, updateCoords } from "../store";
 
 // Mapbox GL
 import mapboxgl from "mapbox-gl";
