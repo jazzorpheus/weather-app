@@ -151,8 +151,15 @@ export default function ForecastPage() {
           className="table-container relative overflow-x-scroll"
           ref={tableContainerRef}
         >
-          <h1 className="text-3xl font-bold text-center sticky left-0 mb-5">
+          <h1 className="text-3xl font-bold text-center sticky left-0 mb-4">
             {forecastWeather.data.city?.name || latLng}
+          </h1>
+          <h1 className="text-2xl font-bold text-center sticky left-0 mb-2">
+            {forecastWeather.data.list[0].weather[0].description
+              .charAt(0)
+              .toUpperCase() +
+              forecastWeather.data.list[0].weather[0].description.slice(1) ||
+              latLng}
           </h1>
           <table className=" rounded">
             <tbody>
