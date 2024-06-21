@@ -95,8 +95,6 @@ export default function Root() {
                 className="text-black border-2 border-gray-700 rounded opacity-100 p-1"
                 type="text"
                 placeholder="Search For Location"
-                // value={""}
-                // onChange={(e) => e.target.value}
                 onClick={() => setShowForm(true)}
               />
             </form>

@@ -1,50 +1,36 @@
 ********************************************************************** BETA VERSION
 
-Do description + icons for forecast
+Add all stats to current page
 
-Add days to forecast time
-
-Look into using T.io's API instead of OpenWeatherMap
-
-Convert wind direction to compass and use arrow icons
-
-Check to see if data displayed in forecast table matches what is coming back from the API
-i.e. what is printed to console
-
-Convert temperature to celsius
-
-Convert wind direction to compass direction plus icons
-
-Figure out other units and do any necessary conversions
-
-Represent temp as a bar graphic similar to met office website
-
-Figure out other ways to improve visuals
+Run forecast stats through convertCurrentWeather (rename to convertWeatherData)
 
 Break down ForecastPage into smaller components
 
-Implement forecast using OpenWeatherMap 5-day forecast!
-    - Create a ForecastWeatherDisplay component
-        - Decide how to display forecast!
+Figure how to display error page if there is a fetchCurrentWeather error
 
-Add space between search bar and location name on current page
+Convert wind direction to compass and use arrow icons
 
-Fix i and mapbox icons on map being blocked out
+Look into using T.io's API instead of OpenWeatherMap
 
-Make UI more attractive on CurrentPage, add more stats/icons/graphics/visuals
-    - Display arrow icons corresponding to wind direction
+Add icons to wind direction
 
-Make UI more attractive on ForecastPage
+Represent temp as a bar graphic similar to met office website?
+
+Take inspiration from T.io's charts and graphs for display on current and forecast pages
+
+Fix (i) and mapbox icons on map being blocked out
 
 Add a units selection option: imperial or metric
 
-Get Vercel environment variables working
+Use Vercel environment variables
 
-Turn layers dropdown into a modal similar to Tomorrow's app and add a tonne more layers
+Turn layers dropdown into a modal similar to Tomorrow's app and add a tonne more layers?
 
 Make use of React Router loader function?
 
-Go over everything and tidy up!
+Go over everything, tidy up comments, make sure no unnecessary re-renders
+
+remove unnecessary console.log's
 
 ********************************************************************** LATER VERSIONS
 
@@ -58,8 +44,5 @@ Store Mapbox access token in some kind of environment variable?
 
 Implement skeleton to show while data loading?
 
-Style app to be more responsive to screen size? Only if needed.
-
-Remove overly-long explanatory comments + write succinct comments/labels
-
-Remove console.log's unnecesasry in production
+Add sign-up capability so that users can look up search history, set a "Home" location, and
+receive weather warning notifications

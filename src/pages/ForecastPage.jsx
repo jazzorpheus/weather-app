@@ -29,6 +29,7 @@ export default function ForecastPage() {
 
   // State from store
   const coords = useSelector((state) => state.coords.coords);
+  const currentWeather = useSelector((state) => state.currentWeather);
   const forecastWeather = useSelector((state) => state.forecastWeather);
 
   if (forecastWeather && forecastWeather.data) {
@@ -62,7 +63,7 @@ export default function ForecastPage() {
     }
   };
 
-  let loadingOrError;
+  let foreLoadOrErr;
   let timestamps = [];
   let temperature = [];
   let feelsLike = [];
@@ -75,17 +76,17 @@ export default function ForecastPage() {
   let latLng;
   if (forecastWeather.isLoading) {
     styles += " items-center";
-    loadingOrError = <p>Loading...</p>;
+    foreLoadOrErr = <p>Loading...</p>;
   } else if (forecastWeather.error) {
     styles += " items-center";
-    loadingOrError = <p>ERROR: {forecastWeather.error.message}</p>;
+    foreLoadOrErr = <p>ERROR: {forecastWeather.error.message}</p>;
   } else {
     // ***********************************************************************
     const forecast = forecastWeather.data.list;
     forecast.forEach((item) => {
       timestamps.push(
         <td className="weather-stat bg-amber-500" key={uuid()}>
-          {moment.unix(item.dt).tz(timezone).format("HH:mm")}
+          {moment.unix(item.dt).tz(timezone).format("ddd HH:mm")}
         </td>
       );
       temperature.push(
@@ -136,6 +137,16 @@ export default function ForecastPage() {
     );
   }
 
+  let currLoadOrErr;
+  if (currentWeather.isLoading) {
+    currLoadOrErr = <p>Loading...</p>;
+  } else if (currentWeather.error) {
+    currLoadOrErr = <p>ERROR: {currentWeather.error.message}</p>;
+  } else {
+    currLoadOrErr = false;
+  }
+
+  console.log("CURRENT WEATHER:", currentWeather);
   return (
     <div className={styles}>
       <button
@@ -144,8 +155,8 @@ export default function ForecastPage() {
       >
         <FaCircleArrowLeft className="scale-150" />
       </button>
-      {loadingOrError ? (
-        loadingOrError
+      {foreLoadOrErr ? (
+        foreLoadOrErr
       ) : (
         <div
           className="table-container relative overflow-x-scroll"
@@ -155,11 +166,12 @@ export default function ForecastPage() {
             {forecastWeather.data.city?.name || latLng}
           </h1>
           <h1 className="text-2xl font-bold text-center sticky left-0 mb-2">
-            {forecastWeather.data.list[0].weather[0].description
-              .charAt(0)
-              .toUpperCase() +
-              forecastWeather.data.list[0].weather[0].description.slice(1) ||
-              latLng}
+            {currLoadOrErr
+              ? currLoadOrErr
+              : currentWeather.data.weather[0].description
+                  .charAt(0)
+                  .toUpperCase() +
+                  currentWeather.data.weather[0].description.slice(1) || latLng}
           </h1>
           <table className=" rounded">
             <tbody>

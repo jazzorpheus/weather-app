@@ -3,37 +3,37 @@ export default function convertCurrentWeather(currentWeather) {
   let windCompass;
 
   if (windDeg >= 348.75 || windDeg < 11.25) {
-    windCompass = "North";
+    windCompass = "N";
   } else if (windDeg >= 11.25 && windDeg < 33.75) {
-    windCompass = "North-Northeast";
+    windCompass = "NNE";
   } else if (windDeg >= 33.75 && windDeg < 56.25) {
-    windCompass = "Northeast";
+    windCompass = "NE";
   } else if (windDeg >= 56.25 && windDeg < 78.75) {
-    windCompass = "East-Northeast";
+    windCompass = "ENE";
   } else if (windDeg >= 78.75 && windDeg < 101.25) {
-    windCompass = "East";
+    windCompass = "E";
   } else if (windDeg >= 101.25 && windDeg < 123.75) {
-    windCompass = "East-Southeast";
+    windCompass = "ESE";
   } else if (windDeg >= 123.75 && windDeg < 146.25) {
-    windCompass = "Southeast";
+    windCompass = "SE";
   } else if (windDeg >= 146.25 && windDeg < 168.75) {
-    windCompass = "South-Southeast";
+    windCompass = "SSE";
   } else if (windDeg >= 168.75 && windDeg < 191.25) {
-    windCompass = "South";
+    windCompass = "S";
   } else if (windDeg >= 191.25 && windDeg < 213.75) {
-    windCompass = "South-Southwest";
+    windCompass = "SSW";
   } else if (windDeg >= 213.75 && windDeg < 236.25) {
-    windCompass = "Southwest";
+    windCompass = "SW";
   } else if (windDeg >= 236.25 && windDeg < 258.75) {
-    windCompass = "West-Southwest";
+    windCompass = "WSW";
   } else if (windDeg >= 258.75 && windDeg < 281.25) {
-    windCompass = "West";
+    windCompass = "W";
   } else if (windDeg >= 281.25 && windDeg < 303.75) {
-    windCompass = "West-Northwest";
+    windCompass = "WNW";
   } else if (windDeg >= 303.75 && windDeg < 326.25) {
-    windCompass = "Northwest";
+    windCompass = "NW";
   } else if (windDeg >= 326.25 && windDeg < 348.75) {
-    windCompass = "North-Northwest";
+    windCompass = "NNW";
   }
 
   return [
