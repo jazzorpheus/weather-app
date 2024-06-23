@@ -16,7 +16,7 @@ export default function CurrentWeatherStat({ stat }) {
   } else {
     content = (
       <>
-        <p className="mx-5">
+        <p className="px-5">
           {stat.name}: {stat.value}
           {stat.units}
         </p>
@@ -25,7 +25,7 @@ export default function CurrentWeatherStat({ stat }) {
   }
 
   return (
-    <figure className="weather-stat text-lg flex justify-between items-center border rounded-2xl">
+    <figure className="weather-stat text-sm flex justify-center items-center border rounded-2xl bg-[rgba(0,0,0,0.4)] m-1">
       {content}
     </figure>
   );

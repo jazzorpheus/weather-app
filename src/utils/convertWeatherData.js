@@ -85,7 +85,7 @@ export default function convertWeatherData(weather) {
       name: "Wind gust",
       value: weather.wind.gust
         ? (60 ** 2 * (weather.wind.gust / 1609.34)).toFixed(1)
-        : "Data not available",
+        : "N/A",
       units: weather.wind.gust ? "mph" : "",
     },
     {
