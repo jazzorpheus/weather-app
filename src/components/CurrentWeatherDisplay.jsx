@@ -23,7 +23,7 @@ export default function CurrentWeatherDisplay({ data }) {
   ));
 
   return (
-    <div className="flex flex-col items-center mb-5">
+    <div className="flex flex-col items-center mt-[56px] mb-[56px]">
       {header}
       {weatherStats}
     </div>
