@@ -1,14 +1,11 @@
 ********************************************************************** BETA VERSION
 
-Add all stats to current page
-
-Run forecast stats through convertCurrentWeather (rename to convertWeatherData)
+Convert wind direction to compass and use arrow icons
+    - Figure a way to rotate compass arrow according to direction
 
 Break down ForecastPage into smaller components
 
 Figure how to display error page if there is a fetchCurrentWeather error
-
-Convert wind direction to compass and use arrow icons
 
 Look into using T.io's API instead of OpenWeatherMap
 

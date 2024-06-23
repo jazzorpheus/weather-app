@@ -10,12 +10,16 @@ import { fetchForecastWeather } from "../store";
 // Custom hooks
 import useGetBackground from "../hooks/use-get-background";
 
+// Utilites
+import convertWeatherData from "../utils/convertWeatherData";
+
 // Moment.js
 import moment from "moment-timezone";
 
 // Icons
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import { FaCircleArrowRight } from "react-icons/fa6";
+import { TiLocationArrow } from "react-icons/ti";
 
 // Universally Unique Identifiers for <td> arrays
 import { v4 as uuid } from "uuid";
@@ -84,6 +88,8 @@ export default function ForecastPage() {
     // ***********************************************************************
     const forecast = forecastWeather.data.list;
     forecast.forEach((item) => {
+      const convertedItem = convertWeatherData(item);
+      console.log("ITEM:", convertedItem);
       timestamps.push(
         <td className="weather-stat bg-amber-500" key={uuid()}>
           {moment.unix(item.dt).tz(timezone).format("ddd HH:mm")}
@@ -91,42 +97,50 @@ export default function ForecastPage() {
       );
       temperature.push(
         <td className="weather-stat  py-2" key={uuid()}>
-          {item.main.temp.toFixed(1)}°C
+          {convertedItem[2].value}
+          {convertedItem[2].units}
         </td>
       );
       feelsLike.push(
         <td className="weather-stat py-2" key={uuid()}>
-          {item.main.feels_like.toFixed(1)}°C
+          {convertedItem[3].value}
+          {convertedItem[3].units}
         </td>
       );
       clouds.push(
         <td className="weather-stat py-2" key={uuid()}>
-          {item.clouds.all}%
-        </td>
-      );
-      windDirection.push(
-        <td className="weather-stat py-2" key={uuid()}>
-          {item.wind.deg}°
-        </td>
-      );
-      windSpeed.push(
-        <td className="weather-stat py-2" key={uuid()}>
-          {(60 ** 2 * (item.wind.speed / 1609.34)).toFixed(1)}mph
-        </td>
-      );
-      windGust.push(
-        <td className="weather-stat py-2" key={uuid()}>
-          {(60 ** 2 * (item.wind.gust / 1609.34)).toFixed(1)}mph
-        </td>
-      );
-      visibility.push(
-        <td className="weather-stat py-2" key={uuid()}>
-          {item.visibility / 1000}km
+          {convertedItem[4].value}
+          {convertedItem[4].units}
         </td>
       );
       humidity.push(
         <td className="weather-stat py-2" key={uuid()}>
-          {item.main.humidity}%
+          {convertedItem[5].value}
+          {convertedItem[5].units}
+        </td>
+      );
+      windSpeed.push(
+        <td className="weather-stat py-2" key={uuid()}>
+          {convertedItem[6].value}
+          {convertedItem[6].units}
+        </td>
+      );
+      windGust.push(
+        <td className="weather-stat py-2" key={uuid()}>
+          {convertedItem[7].value}
+          {convertedItem[7].units}
+        </td>
+      );
+      windDirection.push(
+        <td className="weather-stat py-2" key={uuid()}>
+          <TiLocationArrow className={convertedItem[8].styles} />
+          {convertedItem[8].value}
+        </td>
+      );
+      visibility.push(
+        <td className="weather-stat py-2" key={uuid()}>
+          {convertedItem[9].value}
+          {convertedItem[9].units}
         </td>
       );
     });
@@ -173,7 +187,7 @@ export default function ForecastPage() {
                   .toUpperCase() +
                   currentWeather.data.weather[0].description.slice(1) || latLng}
           </h1>
-          <table className=" rounded">
+          <table className="rounded">
             <tbody>
               <tr className="bg-blue-500 w-[4000px]">
                 <th
@@ -218,10 +232,11 @@ export default function ForecastPage() {
                   className="arrow-right sticky left-0 bg-blue-500 rounded"
                   colSpan={2}
                 >
-                  <h2>Wind direction</h2>
+                  <h2>Humidity</h2>
                 </th>
               </tr>
-              <tr className="text-center">{windDirection}</tr>
+              <tr className="text-center">{humidity}</tr>
+
               <tr>
                 <th
                   className="arrow-right sticky left-0 bg-blue-500 rounded"
@@ -245,19 +260,19 @@ export default function ForecastPage() {
                   className="arrow-right sticky left-0 bg-blue-500 rounded"
                   colSpan={2}
                 >
-                  <h2>Visibility</h2>
+                  <h2>Wind direction</h2>
                 </th>
               </tr>
-              <tr className="text-center">{visibility}</tr>
+              <tr className="text-center">{windDirection}</tr>
               <tr>
                 <th
                   className="arrow-right sticky left-0 bg-blue-500 rounded"
                   colSpan={2}
                 >
-                  <h2>Humidity</h2>
+                  <h2>Visibility</h2>
                 </th>
               </tr>
-              <tr className="text-center">{humidity}</tr>
+              <tr className="text-center">{visibility}</tr>
             </tbody>
           </table>
           <button

@@ -8,7 +8,7 @@ import useGetBackground from "../hooks/use-get-background";
 import CurrentWeatherDisplay from "../components/CurrentWeatherDisplay";
 
 // Utilities
-import convertCurrentWeather from "../utils/convertCurrentWeather";
+import convertWeatherData from "../utils/convertWeatherData";
 
 export default function CurrentPage() {
   // Dynamic background
@@ -25,7 +25,7 @@ export default function CurrentPage() {
   } else if (currentWeather.error) {
     currentDisplay = <p>ERROR: {currentWeather.error.message}</p>;
   } else {
-    const data = convertCurrentWeather(currentWeather);
+    const data = convertWeatherData(currentWeather.data);
     currentDisplay = <CurrentWeatherDisplay data={data} />;
   }
 

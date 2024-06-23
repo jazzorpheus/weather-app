@@ -11,7 +11,9 @@ export default function CurrentWeatherDisplay({ data }) {
     <>
       <h1 className="text-3xl font-bold mb-3">{headers[0].value}</h1>{" "}
       {weatherIcon}
-      <h2 className="text-2xl mt-2">{headers[1].value}</h2>
+      <h2 className="text-2xl mt-2">
+        {headers[1].value.charAt(0).toUpperCase() + headers[1].value.slice(1)}
+      </h2>
     </>
   );
 
