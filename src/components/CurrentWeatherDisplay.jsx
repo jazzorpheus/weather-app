@@ -11,7 +11,7 @@ export default function CurrentWeatherDisplay({ data }) {
     <>
       <h1 className="text-3xl font-bold mb-3">{headers[0].value}</h1>{" "}
       {weatherIcon}
-      <h2 className="text-2xl mt-2">
+      <h2 className="text-2xl mb-3">
         {headers[1].value.charAt(0).toUpperCase() + headers[1].value.slice(1)}
       </h2>
     </>
@@ -23,9 +23,11 @@ export default function CurrentWeatherDisplay({ data }) {
   ));
 
   return (
-    <div className="flex flex-col items-center mt-[56px] mb-[56px]">
+    <div className="flex flex-col items-center h-full w-full mt-[56px] mb-[10px]">
       {header}
-      {weatherStats}
+      <div className="flex-grow grid grid-rows-4 grid-cols-2">
+        {weatherStats}
+      </div>
     </div>
   );
 }
