@@ -50,7 +50,7 @@ export default function Root() {
   //  - Re-center map if change comes from form search
   //  - Move map marker to new coords
   const getNewLocationData = () => {
-    if (coords[0]) {
+    if (coords[0] || coords[1]) {
       dispatch(fetchCurrentWeather(coords));
       if (formSubmitted) {
         // If map displaying, fly to location when form submitted
