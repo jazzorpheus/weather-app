@@ -12,6 +12,7 @@ import useGetBackground from "../hooks/use-get-background";
 
 // Utilites
 import convertWeatherData from "../utils/convertWeatherData";
+import tempToColor from "../utils/tempToColor";
 
 // Moment.js
 import moment from "moment-timezone";
@@ -95,14 +96,22 @@ export default function ForecastPage() {
           {moment.unix(item.dt).tz(timezone).format("ddd HH:mm")}
         </td>
       );
+      const tempColor = tempToColor(convertedItem[2].value, 0.6);
+      let tempStyle = {
+        backgroundColor: tempColor,
+      };
       temperature.push(
-        <td className="weather-stat  py-2" key={uuid()}>
+        <td style={tempStyle} className="weather-stat py-2" key={uuid()}>
           {convertedItem[2].value}
           {convertedItem[2].units}
         </td>
       );
+      const feelsLikeColor = tempToColor(convertedItem[2].value, 0.6);
+      let feelsLikeStyle = {
+        backgroundColor: feelsLikeColor,
+      };
       feelsLike.push(
-        <td className="weather-stat py-2" key={uuid()}>
+        <td style={feelsLikeStyle} className="weather-stat py-2" key={uuid()}>
           {convertedItem[3].value}
           {convertedItem[3].units}
         </td>

@@ -24,6 +24,7 @@ body {
 
 .weather-stat {
   text-shadow: 0.05rem 0.05rem 0.05rem rgba(0, 0, 0, 1);
+  font-size: 0.875rem;
 }
 
 h1,

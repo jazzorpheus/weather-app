@@ -1,8 +1,5 @@
 ********************************************************************** BETA VERSION
 
-Convert wind direction to compass and use arrow icons
-    - Figure a way to rotate compass arrow according to direction
-
 Break down ForecastPage into smaller components
 
 Figure how to display error page if there is a fetchCurrentWeather error

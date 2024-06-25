@@ -4,7 +4,6 @@ import { TiLocationArrow } from "react-icons/ti";
 export default function CurrentWeatherStat({ stat }) {
   let content;
   if (stat.name === "Wind direction") {
-    console.log("IN WEATHER STAT:", stat);
     content = (
       <>
         <p>
@@ -25,7 +24,7 @@ export default function CurrentWeatherStat({ stat }) {
   }
 
   return (
-    <figure className="weather-stat text-sm flex justify-center items-center border rounded-2xl bg-[rgba(0,0,0,0.4)] m-1">
+    <figure className="weather-stat text-sm flex justify-center items-center border rounded-2xl m-1">
       {content}
     </figure>
   );
