@@ -76,7 +76,7 @@ export default function Dropdown({
     return (
       <li
         key={idx}
-        className="flex justify-start hover:bg-gray-700 rounded cursor-pointer list-none text-sm p-1"
+        className="flex justify-start hover:bg-sky-500 rounded-lg cursor-pointer list-none text-sm p-1"
         onClick={() => handleOnChange(option)}
       >
         {value?.value === option.value && <TiTick className="mr-1" />}
@@ -88,13 +88,15 @@ export default function Dropdown({
   return (
     <div ref={divEl} className={finalClassNames}>
       <Panel
-        className="flex justify-around items-center cursor-pointer text-sm"
+        className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-blue-800 to-sky-400"
         onClick={handleToggle}
       >
         {value?.label || label} <GoChevronUp className="text-lg" />
       </Panel>
       {isExpanded && (
-        <Panel className="absolute bottom-full w-[130px]">{dropMenu}</Panel>
+        <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-blue-800 to-sky-400">
+          {dropMenu}
+        </Panel>
       )}
     </div>
   );

@@ -1,0 +1,82 @@
+// Utilites
+import tempToColor from "../utils/tempToColor";
+
+export default function Thermometer({ temp }) {
+  const tempCol = tempToColor(temp);
+  let tempPercent = ((Number(temp) + 30) / 80) * 100;
+  if (tempPercent < 0) {
+    tempPercent = 0;
+  }
+
+  return (
+    <div className="w-[100px] h-[10px] block rounded-xl border mt-3 relative">
+      <div
+        style={{
+          width: "1px",
+          height: "5px",
+          left: "2%",
+          position: "absolute",
+          backgroundColor: "rgba(0,0,0,0.7)",
+          zIndex: "10",
+        }}
+      >
+        <span
+          style={{
+            position: "relative",
+            top: "6px",
+            left: "-3px",
+            fontSize: "0.7rem",
+          }}
+        >
+          -30
+        </span>
+      </div>
+      <div
+        style={{
+          width: "1px",
+          height: "5px",
+          left: "97%",
+          position: "absolute",
+          backgroundColor: "rgba(0,0,0,0.7)",
+          zIndex: "10",
+        }}
+      >
+        <span
+          style={{
+            position: "relative",
+            top: "6px",
+            left: "-3px",
+            fontSize: "0.7rem",
+          }}
+        >
+          50
+        </span>
+      </div>
+      <div
+        style={{
+          width: "1px",
+          height: "5px",
+          left: "37.5%",
+          position: "absolute",
+          backgroundColor: "rgba(0,0,0,0.7)",
+          zIndex: "10",
+        }}
+      >
+        <span
+          style={{
+            position: "relative",
+            top: "6px",
+            left: "-3px",
+            fontSize: "0.7rem",
+          }}
+        >
+          0
+        </span>
+      </div>
+      <div
+        style={{ backgroundColor: tempCol, width: `${tempPercent}%` }}
+        className="bg-red-500 h-full rounded-xl opacity-70"
+      ></div>
+    </div>
+  );
+}

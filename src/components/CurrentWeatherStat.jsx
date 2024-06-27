@@ -1,7 +1,15 @@
+// My Components
+import Thermometer from "./Thermometer.jsx";
+
 // Icons
 import { TiLocationArrow } from "react-icons/ti";
 
 export default function CurrentWeatherStat({ stat }) {
+  let graph;
+  if (stat.name === "Temperature" || stat.name === "Feels like") {
+    graph = <Thermometer temp={stat.value} />;
+  }
+
   let content;
   if (stat.name === "Wind direction") {
     content = (
@@ -15,7 +23,7 @@ export default function CurrentWeatherStat({ stat }) {
   } else {
     content = (
       <>
-        <p className="px-5">
+        <p className="px-4 text-center">
           {stat.name}: {stat.value}
           {stat.units}
         </p>
@@ -24,8 +32,9 @@ export default function CurrentWeatherStat({ stat }) {
   }
 
   return (
-    <figure className="weather-stat text-sm flex justify-center items-center border rounded-2xl m-1">
+    <figure className="weather-stat text-sm flex flex-col justify-center items-center border rounded-2xl m-1">
       {content}
+      {graph}
     </figure>
   );
 }

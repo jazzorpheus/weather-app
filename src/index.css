@@ -28,7 +28,10 @@ body {
 }
 
 h1,
-h2 {
+h2,
+li,
+nav > a,
+.panel {
   text-shadow: 0.05rem 0.05rem 0.05rem rgba(0, 0, 0, 1);
 }
 

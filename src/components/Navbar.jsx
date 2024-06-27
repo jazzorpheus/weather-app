@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <footer className="navbar fixed bottom-0 w-screen bg-gradient-to-t from-blue-950 to-blue-500">
+    <footer className="navbar fixed bottom-0 w-screen bg-gradient-to-t from-blue-800 to-sky-300">
       <nav className="grid grid-cols-3">
         <Link
           className="flex flex-col justify-between items-center text-xs m-2"

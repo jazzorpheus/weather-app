@@ -16,7 +16,7 @@ export default function CurrentPage() {
     "current-weather flex flex-col justify-center items-center w-dvw";
   styles += useGetBackground();
 
-  // From currentWeatherSlice
+  // Redux store
   const currentWeather = useSelector((state) => state.currentWeather);
 
   let currentDisplay;

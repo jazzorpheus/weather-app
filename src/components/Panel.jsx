@@ -6,7 +6,7 @@ import classNames from "classnames";
 // "children" is very important prop to include as it will include anything nested inside the panel.
 export default function Panel({ children, className, ...rest }) {
   const finalClassNames = classNames(
-    "border border-gray-500 rounded-2xl p-1.5 bg-gray-900 w-full",
+    "panel rounded-2xl p-1.5 w-full",
     className
   );
 
