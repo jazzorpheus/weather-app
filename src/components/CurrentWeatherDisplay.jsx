@@ -29,7 +29,7 @@ export default function CurrentWeatherDisplay({ data }) {
   return (
     <div className="flex flex-col items-center h-full w-full mt-[56px] mb-[10px]">
       {header}
-      <div className="flex-grow grid grid-rows-4 grid-cols-2">
+      <div className="flex-grow grid grid-rows-4 grid-cols-2 w-full max-w-[700px]">
         {weatherStats}
       </div>
     </div>

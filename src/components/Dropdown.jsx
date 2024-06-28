@@ -88,13 +88,15 @@ export default function Dropdown({
   return (
     <div ref={divEl} className={finalClassNames}>
       <Panel
-        className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-blue-800 to-sky-400"
+        // className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-400 to-blue-800"
+        className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-700 to-blue-900 border border-gray-300"
         onClick={handleToggle}
       >
         {value?.label || label} <GoChevronUp className="text-lg" />
       </Panel>
       {isExpanded && (
-        <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-blue-800 to-sky-400">
+        // <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-sky-400 to-blue-800">
+        <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-sky-700 to-blue-900">
           {dropMenu}
         </Panel>
       )}

@@ -13,12 +13,10 @@ export default function CurrentWeatherStat({ stat }) {
   let content;
   if (stat.name === "Wind direction") {
     content = (
-      <>
-        <p>
-          {stat.name}: <TiLocationArrow className={stat.styles} />
-          {stat.value}
-        </p>
-      </>
+      <p>
+        {stat.name}: <TiLocationArrow className={stat.styles} />
+        {stat.value}
+      </p>
     );
   } else {
     content = (
@@ -32,7 +30,7 @@ export default function CurrentWeatherStat({ stat }) {
   }
 
   return (
-    <figure className="weather-stat text-sm flex flex-col justify-center items-center border rounded-2xl m-1">
+    <figure className="weather-stat text-sm flex flex-col justify-center items-center bg-[rgba(23,37,84,0.4)] rounded-xl m-1">
       {content}
       {graph}
     </figure>

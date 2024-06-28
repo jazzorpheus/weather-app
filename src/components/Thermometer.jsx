@@ -24,7 +24,7 @@ export default function Thermometer({ temp }) {
           style={{
             position: "relative",
             top: "6px",
-            left: "-3px",
+            left: "-9px",
             fontSize: "0.7rem",
           }}
         >
@@ -45,7 +45,7 @@ export default function Thermometer({ temp }) {
           style={{
             position: "relative",
             top: "6px",
-            left: "-3px",
+            left: "-5px",
             fontSize: "0.7rem",
           }}
         >

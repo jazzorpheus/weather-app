@@ -92,7 +92,7 @@ export default function Root() {
           ) : (
             <form className="flex flex-col items-center my-3">
               <input
-                className="text-black border-2 border-gray-700 rounded opacity-100 p-1"
+                className="text-black border border-gray-700 rounded opacity-100 p-1"
                 type="text"
                 placeholder="Search For Location"
                 onClick={() => setShowForm(true)}

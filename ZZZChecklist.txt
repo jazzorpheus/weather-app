@@ -1,13 +1,5 @@
 ********************************************************************** BETA VERSION
 
-Change navbar color to grey
-
-Decide on secondary color (perhaps similar to the Strava dark theme orange)
-
-Give forecast timestamps secondary color background
-
-Fix current and map giving Manchester data instead of current location!
-
 Break down ForecastPage into smaller components
 
 Store user map zoom in state so that navigating back to map page takes user

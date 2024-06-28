@@ -114,7 +114,7 @@ function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
           onSubmit={handleSubmit}
         >
           <input
-            className="text-black border-2 border-gray-700 rounded opacity-100 p-1"
+            className="text-black border border-gray-700 rounded opacity-100 p-1"
             name="searchTerm"
             type="text"
             placeholder="Search For Location"
