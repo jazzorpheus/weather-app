@@ -89,7 +89,7 @@ export default function Dropdown({
     <div ref={divEl} className={finalClassNames}>
       <Panel
         // className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-400 to-blue-800"
-        className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-700 to-blue-900 border border-gray-300"
+        className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-700 to-blue-900 border border-[rgba(209,213,219,0.8)]"
         onClick={handleToggle}
       >
         {value?.label || label} <GoChevronUp className="text-lg" />
