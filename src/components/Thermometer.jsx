@@ -6,10 +6,12 @@ export default function Thermometer({ temp }) {
   let tempPercent = ((Number(temp) + 30) / 80) * 100;
   if (tempPercent < 0) {
     tempPercent = 0;
+  } else if (tempPercent > 100) {
+    tempPercent = 100;
   }
 
   return (
-    <div className="w-[100px] h-[10px] block rounded-xl border mt-3 relative">
+    <div className="w-[120px] h-[10px] block rounded-xl border relative">
       <div
         style={{
           width: "1px",

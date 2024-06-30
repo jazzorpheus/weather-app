@@ -1,7 +1,13 @@
 ********************************************************************** BETA VERSION
 
-Break down ForecastPage into smaller components
+Current page:
+        - Trial chart.js for the current stats
+                - Probably overkill to use chart.js...
 
+Forecast page:
+        - Add icon row to table
+        - Make ForecastTable component
+        
 Store user map zoom in state so that navigating back to map page takes user
 to exactly where they left off
 
