@@ -76,8 +76,13 @@ export default function Thermometer({ temp }) {
         </span>
       </div>
       <div
-        style={{ backgroundColor: tempCol, width: `${tempPercent}%` }}
-        className="bg-red-500 h-full rounded-xl opacity-70"
+        style={{
+          backgroundColor: tempCol,
+          width: `${tempPercent}%`,
+          borderTopRightRadius: tempPercent > 99 ? "12px" : "",
+          borderBottomRightRadius: tempPercent > 99 ? "12px" : "",
+        }}
+        className="bg-red-500 h-full rounded-l-xl opacity-70"
       ></div>
     </div>
   );

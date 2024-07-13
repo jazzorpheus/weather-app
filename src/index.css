@@ -272,3 +272,24 @@ td {
   margin-top: 56px;
   margin-bottom: 56px;
 }
+
+/* ********************************************************* CURRENT CUSTOM GRAPHS */
+
+.pie-chart-clouds {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: conic-gradient(DimGray calc(56 * 1%), PaleTurquoise 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pie-chart-humidity {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: conic-gradient(Gold calc(56 * 1%), DimGray 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

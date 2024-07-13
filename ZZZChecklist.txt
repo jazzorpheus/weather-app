@@ -1,8 +1,8 @@
 ********************************************************************** BETA VERSION
 
 Current page:
-        - Trial chart.js for the current stats
-                - Probably overkill to use chart.js...
+        - Decide whether to use Chart.js for current stats
+                - Probably overkill...
 
 Forecast page:
         - Add icon row to table

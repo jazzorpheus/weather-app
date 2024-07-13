@@ -1,6 +1,5 @@
 // My Components
 import Thermometer from "./Thermometer.jsx";
-import ThermometerChart from "./ThermometerChart.jsx";
 
 // Icons
 import { TiLocationArrow } from "react-icons/ti";
@@ -14,6 +13,41 @@ export default function CurrentWeatherStat({ stat }) {
     graph = <p>&lt;*Graph goes here!*&gt;</p>;
   }
 
+  // .pie-chart-clouds {
+  //   width: 40px;
+  //   height: 40px;
+  // border-radius: 50%;
+  // background: conic-gradient(DimGray calc(56 * 1%), PaleTurquoise 0);
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // }
+
+  if (stat.name === "Cloud cover") {
+    const styles = {
+      width: "40px",
+      height: "40px",
+      borderRadius: "50%",
+      background: `conic-gradient(DimGray calc(${stat.value} * 1%), PaleTurquoise 0)`,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    };
+    graph = <div style={styles}></div>;
+  }
+  if (stat.name === "Humidity") {
+    const styles = {
+      width: "40px",
+      height: "40px",
+      borderRadius: "50%",
+      background: `conic-gradient(PaleTurquoise calc(${stat.value} * 1%), DimGray 0)`,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    };
+    graph = <div style={styles}></div>;
+  }
+
   let content;
   if (stat.name === "Wind direction") {
     content = (
@@ -25,7 +59,7 @@ export default function CurrentWeatherStat({ stat }) {
   } else {
     content = (
       <>
-        <p className="relative top-[20%] text-center">
+        <p className="relative top-[15%] text-center">
           {stat.name}: {stat.value}
           {stat.units}
         </p>
