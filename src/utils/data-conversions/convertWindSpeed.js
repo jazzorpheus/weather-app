@@ -19,10 +19,10 @@ export default function convertWindSpeed(windSpeed) {
     intensityIdx = 8;
   } else if (mphVal >= 80 && mphVal < 90) {
     intensityIdx = 9;
-  } else if (mphVal >= 90 && mphVal < 100) {
+  } else if (mphVal > 90) {
     intensityIdx = 10;
   } else {
-    intensityIdx = 11;
+    intensityIdx = 0;
   }
 
   return {

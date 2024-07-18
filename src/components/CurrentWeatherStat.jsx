@@ -66,6 +66,7 @@ export default function CurrentWeatherStat({ stat }) {
     graph = <div style={arrowBaseStyles}>{arrowHeadsContainer}</div>;
   }
   if (stat.name === "Wind gust") {
+    console.log(stat.intensityIdxGust);
     let arrowHeads = [];
     for (let i = 0; i < stat.intensityIdxGust; i++) {
       arrowHeads.push(
