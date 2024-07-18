@@ -6,14 +6,11 @@ export default function convertWeatherData(weather) {
   // Wind direction
   const { windCompass, windCompassStyles } = convertWindDir(weather.wind.deg);
   // Wind speed
-  console.log("Weather:", weather.wind.speed);
   const { intensityIdx: intensityIdxSpeed, mphVal: mphValSpeed } =
     convertWindSpeed(weather.wind.speed);
-  console.log("Speed:", intensityIdxSpeed, mphValSpeed);
   // Wind gust
   const { intensityIdx: intensityIdxGust, mphVal: mphValGust } =
     convertWindSpeed(weather.wind.gust);
-  console.log("Gust:", intensityIdxGust, mphValGust);
 
   return [
     { name: "Location", value: weather.name, units: "" },

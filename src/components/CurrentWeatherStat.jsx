@@ -66,7 +66,6 @@ export default function CurrentWeatherStat({ stat }) {
     graph = <div style={arrowBaseStyles}>{arrowHeadsContainer}</div>;
   }
   if (stat.name === "Wind gust") {
-    console.log(stat.intensityIdxGust);
     let arrowHeads = [];
     for (let i = 0; i < stat.intensityIdxGust; i++) {
       arrowHeads.push(
@@ -89,12 +88,20 @@ export default function CurrentWeatherStat({ stat }) {
     let arrowHeadsContainer = <div>{arrowHeads}</div>;
     graph = <div style={arrowBaseStyles}>{arrowHeadsContainer}</div>;
   }
+  let windDirIcon;
+  if (stat.name === "Wind direction") {
+    // TODO
+    windDirIcon = <TiLocationArrow className={stat.styles} />;
+    graph = (
+      <TiLocationArrow className={stat.styles} style={{ scale: "3.5" }} />
+    );
+  }
 
   let statLabel;
   if (stat.name === "Wind direction") {
     statLabel = (
       <p className="relative top-[20%] text-center">
-        {stat.name}: <TiLocationArrow className={stat.styles} />
+        {stat.name}: {windDirIcon}
         {stat.value}
       </p>
     );
