@@ -11,7 +11,7 @@ import { fetchForecastWeather } from "../store";
 import useGetBackground from "../hooks/use-get-background";
 
 // Utilites
-import convertWeatherData from "../utils/convertWeatherData";
+import convertWeatherData from "../utils/data-conversions/convertWeatherData";
 import tempToColor from "../utils/tempToColor";
 
 // Moment.js

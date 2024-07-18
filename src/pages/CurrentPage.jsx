@@ -8,7 +8,7 @@ import useGetBackground from "../hooks/use-get-background";
 import CurrentWeatherDisplay from "../components/CurrentWeatherDisplay";
 
 // Utilities
-import convertWeatherData from "../utils/convertWeatherData";
+import convertWeatherData from "../utils/data-conversions/convertWeatherData";
 
 export default function CurrentPage() {
   // Dynamic background

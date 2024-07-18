@@ -1,6 +1,13 @@
 ********************************************************************** BETA VERSION
 
+Fix the refresh page lngLat error that seemed to start showing up just after moving
+convertWeatherData into data-conversions folder (try moving it out again to start)
+
 Current page:
+        - Finish arrowhead windspeed graphic
+                - Add arrow heads according to intensityIndex
+        - Figure out a way to have stats overflowing beneath the navbar and allow the user
+        to be able to scroll down.
         - Decide whether to use Chart.js for current stats
                 - Probably overkill...
 
@@ -45,7 +52,7 @@ Decide whether to use Async Thunks, RTK Query, or Zustand
 
 Store Mapbox access token in some kind of environment variable?
 
-Implement skeleton to show while data loading?
+Implement flashing skeleton to show while data loading?
 
 Add sign-up capability so that users can look up search history, set a "Home" location, and
 receive weather warning notifications
