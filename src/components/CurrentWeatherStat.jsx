@@ -92,9 +92,7 @@ export default function CurrentWeatherStat({ stat }) {
   if (stat.name === "Wind direction") {
     // TODO
     windDirIcon = <TiLocationArrow className={stat.styles} />;
-    graph = (
-      <TiLocationArrow className={stat.styles} style={{ scale: "3.5" }} />
-    );
+    graph = <TiLocationArrow className={stat.styles} style={{ scale: "3" }} />;
   }
 
   let statLabel;
@@ -107,12 +105,10 @@ export default function CurrentWeatherStat({ stat }) {
     );
   } else {
     statLabel = (
-      <>
-        <p className="relative top-[15%] text-center">
-          {stat.name}: {stat.value}
-          {stat.units}
-        </p>
-      </>
+      <p className="relative top-[15%] text-center">
+        {stat.name}: {stat.value}
+        {stat.units}
+      </p>
     );
   }
 
