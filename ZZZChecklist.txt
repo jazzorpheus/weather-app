@@ -1,15 +1,6 @@
 ********************************************************************** BETA VERSION
 
-Fix the refresh page lngLat error that seemed to start showing up just after moving
-convertWeatherData into data-conversions folder (try moving it out again to start)
-
-Current page:
-        - Finish arrowhead windspeed graphic
-                - Add arrow heads according to intensityIndex
-        - Figure out a way to have stats overflowing beneath the navbar and allow the user
-        to be able to scroll down.
-        - Decide whether to use Chart.js for current stats
-                - Probably overkill...
+Fix Visibility graph marker not matching up with full scale at 10km (current weather)
 
 Forecast page:
         - Add icon row to table
