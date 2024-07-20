@@ -67,7 +67,7 @@ export default function CurrentWeatherStat({ stat }) {
         <div
           style={{
             content: "",
-            position: "absolute",
+            position: "relative",
             top: "-4px",
             right: `${i * 10}px`,
             width: "0",
