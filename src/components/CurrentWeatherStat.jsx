@@ -103,7 +103,7 @@ export default function CurrentWeatherStat({ stat }) {
         <span
           style={{
             position: "absolute",
-            fontSize: "0.8rem",
+            fontSize: "0.7rem",
             left: "-4px",
             top: "5px",
           }}
@@ -123,7 +123,7 @@ export default function CurrentWeatherStat({ stat }) {
         <span
           style={{
             position: "absolute",
-            fontSize: "0.8rem",
+            fontSize: "0.7rem",
             left: "90px",
             top: "5px",
           }}
