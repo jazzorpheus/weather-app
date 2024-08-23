@@ -78,7 +78,7 @@ export default function Map() {
   useCreateMap(mapContainerRef, mapStyle, coords, dispatch);
 
   // Get relevant weather icon to use with custom marker
-  const weatherIcon = useGetIcon();
+  let weatherIcon = useGetIcon(currentWeather.weather[0]);
 
   // Keep track of total number of renders
   const renderCount = useRenderCount();

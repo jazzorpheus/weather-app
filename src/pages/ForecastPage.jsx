@@ -24,6 +24,7 @@ import { TiLocationArrow } from "react-icons/ti";
 
 // Universally Unique Identifiers for <td> arrays
 import { v4 as uuid } from "uuid";
+import IconCell from "../components/IconCell";
 
 export default function ForecastPage() {
   // Get client timezone
@@ -37,9 +38,9 @@ export default function ForecastPage() {
   const currentWeather = useSelector((state) => state.currentWeather);
   const forecastWeather = useSelector((state) => state.forecastWeather);
 
-  if (forecastWeather && forecastWeather.data) {
-    console.log(forecastWeather.data);
-  }
+  // if (forecastWeather && forecastWeather.data) {
+  //   console.log("FORECAST DATA:", forecastWeather.data);
+  // }
 
   const tableContainerRef = useRef(null);
 
@@ -70,6 +71,7 @@ export default function ForecastPage() {
 
   let foreLoadOrErr;
   let timestamps = [];
+  let icons = [];
   let temperature = [];
   let feelsLike = [];
   let clouds = [];
@@ -87,15 +89,16 @@ export default function ForecastPage() {
     foreLoadOrErr = <p>ERROR: {forecastWeather.error.message}</p>;
   } else {
     // ***********************************************************************
-    const forecast = forecastWeather.data.list;
+    const forecast = forecastWeather.data?.list || [];
     forecast.forEach((item) => {
       const convertedItem = convertWeatherData(item);
-      console.log("ITEM:", convertedItem);
+      // console.log("ITEM:", convertedItem);
       timestamps.push(
-        <td className="weather-stat bg-amber-500" key={uuid()}>
+        <td className="weather-stat bg-gray-900" key={uuid()}>
           {moment.unix(item.dt).tz(timezone).format("ddd HH:mm")}
         </td>
       );
+      icons.push(<IconCell key={uuid()} dataPoint={item} />);
       const tempColor = tempToColor(convertedItem[2].value, 0.6);
       let tempStyle = {
         backgroundColor: tempColor,
@@ -169,7 +172,6 @@ export default function ForecastPage() {
     currLoadOrErr = false;
   }
 
-  console.log("CURRENT WEATHER:", currentWeather);
   return (
     <div className={styles}>
       <button
@@ -186,7 +188,7 @@ export default function ForecastPage() {
           ref={tableContainerRef}
         >
           <h1 className="text-3xl font-bold text-center sticky left-0 mb-4">
-            {forecastWeather.data.city?.name || latLng}
+            {forecastWeather.data?.city?.name || latLng}
           </h1>
           <h1 className="text-2xl font-bold text-center sticky left-0 mb-2">
             {currLoadOrErr
@@ -198,9 +200,9 @@ export default function ForecastPage() {
           </h1>
           <table className="rounded">
             <tbody>
-              <tr className="bg-blue-500 w-[4000px]">
+              <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-blue-500 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
                   colSpan={2}
                 >
                   <span>
@@ -209,9 +211,10 @@ export default function ForecastPage() {
                 </th>
               </tr>
               <tr className="text-center sticky top-0 z-10">{timestamps}</tr>
+              <tr className="text-center">{icons}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-blue-500 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
                   colSpan={2}
                 >
                   <h2>Temperature</h2>
@@ -220,7 +223,7 @@ export default function ForecastPage() {
               <tr className="text-center">{temperature}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-blue-500 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
                   colSpan={2}
                 >
                   <h2>Feels like temperature</h2>
@@ -229,7 +232,7 @@ export default function ForecastPage() {
               <tr className="text-center">{feelsLike}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-blue-500 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
                   colSpan={2}
                 >
                   <h2>Cloud cover</h2>
@@ -238,17 +241,17 @@ export default function ForecastPage() {
               <tr className="text-center">{clouds}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-blue-500 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
                   colSpan={2}
                 >
-                  <h2>Humidity</h2>
+                  <h2 className="opacity-100">Humidity</h2>
                 </th>
               </tr>
               <tr className="text-center">{humidity}</tr>
 
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-blue-500 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
                   colSpan={2}
                 >
                   <h2>Wind speed</h2>
@@ -257,7 +260,7 @@ export default function ForecastPage() {
               <tr className="text-center">{windSpeed}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-blue-500 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
                   colSpan={2}
                 >
                   <h2>Wind gust</h2>
@@ -266,7 +269,7 @@ export default function ForecastPage() {
               <tr className="text-center">{windGust}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-blue-500 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
                   colSpan={2}
                 >
                   <h2>Wind direction</h2>
@@ -275,7 +278,7 @@ export default function ForecastPage() {
               <tr className="text-center">{windDirection}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-blue-500 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
                   colSpan={2}
                 >
                   <h2>Visibility</h2>

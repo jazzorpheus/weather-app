@@ -1,10 +1,14 @@
 ********************************************************************** BETA VERSION
 
-Fix Visibility graph marker not matching up with full scale at 10km (current weather)
+FIX FORECAST RELOAD PAGE CRASHES!!!
 
 Forecast page:
         - Add icon row to table
         - Make ForecastTable component
+        - Move forecast table into a modal and create link for "See full data" or similar
+        - On main forecast page build easier-to-read "outlook" / "summary" dashboards
+        - Next to each heading on forecast table have a "See graph" link that displays
+        line charts using Chart.js or similar. Enable side-scrolling similar to T.io app
         
 Store user map zoom in state so that navigating back to map page takes user
 to exactly where they left off
@@ -13,11 +17,7 @@ Figure how to display error page if there is a fetchCurrentWeather error
 
 Look into using T.io's API instead of OpenWeatherMap
 
-Add icons to wind direction
-
 Represent temp as a bar graphic similar to met office website?
-
-Take inspiration from T.io's charts and graphs for display on current and forecast pages
 
 Fix (i) and mapbox icons on map being blocked out
 
@@ -25,7 +25,7 @@ Add a units selection option: imperial or metric
 
 Use Vercel environment variables
 
-Turn layers dropdown into a modal similar to Tomorrow's app and add a tonne more layers?
+Turn layers dropdown into a modal similar to Tomorrow's app and add a tonne more layers
 
 Make use of React Router loader function?
 

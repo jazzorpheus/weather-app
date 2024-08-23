@@ -13,7 +13,7 @@ export default function convertWeatherData(weather) {
     convertWindSpeed(weather.wind.gust);
 
   return [
-    { name: "Location", value: weather.name, units: "" },
+    { name: "Location", value: weather.name || "N/A", units: "" },
     {
       name: "Description",
       value: weather.weather[0].description,

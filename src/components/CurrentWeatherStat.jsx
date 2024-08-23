@@ -46,7 +46,7 @@ export default function CurrentWeatherStat({ stat }) {
             content: "",
             position: "absolute",
             top: "-4px",
-            right: `${i * 10}px`,
+            right: `${i * 10 - 4}px`,
             width: "0",
             height: "0",
             borderLeft: "10px solid white",
@@ -69,7 +69,7 @@ export default function CurrentWeatherStat({ stat }) {
             content: "",
             position: "absolute",
             top: "-4px",
-            right: `${i * 10}px`,
+            right: `${i * 10 - 4}px`,
             width: "0",
             height: "0",
             borderLeft: "10px solid white",
@@ -116,7 +116,10 @@ export default function CurrentWeatherStat({ stat }) {
             content: "",
             width: "2px",
             borderBottom: "solid gold 9px",
-            left: `${stat.value * 10 - 2}%`,
+            left:
+              stat.value === 0
+                ? `${-2}%`
+                : `${stat.value * 10 - 1 / Math.ceil(stat.value)}%`,
             bottom: "0",
           }}
         ></div>

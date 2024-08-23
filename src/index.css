@@ -249,6 +249,7 @@ nav > a,
 
 td {
   min-width: 100px;
+  height: 40px;
   border-left: solid 1px;
 }
 
@@ -262,7 +263,7 @@ td {
   height: 0;
   border-top: 13px solid transparent;
   border-bottom: 13px solid transparent;
-  border-left: 15px solid #3b82f6;
+  border-left: 15px solid #7dd3fc;
 }
 
 .table-container {
