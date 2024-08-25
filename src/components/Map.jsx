@@ -84,7 +84,7 @@ export default function Map() {
   // Keep track of total number of renders
   const renderCount = useRenderCount();
   //! DEV ONLY
-  console.log("RENDER COUNT:", renderCount);
+  // console.log("RENDER COUNT:", renderCount);
 
   const layer = useSelector((state) => state.map.layer);
   const prevLayer = useSelector((state) => state.map.prevLayer);

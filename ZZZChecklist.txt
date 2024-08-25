@@ -1,13 +1,11 @@
 ********************************************************************** BETA VERSION
 
-Make all icons roughly the same size
-
 Forecast page:
-        - Make ForecastTable component
-        - Move forecast table into a modal and create link for "See full data" or similar
+        - Make ForecastTable component and refactor into smaller subcomponents
+        - Move forecast table into a modal and create link for "See full data"
         - On main forecast page build easier-to-read "outlook" / "summary" dashboards
         - Next to each heading on forecast table have a "See graph" link that displays
-        line charts using Chart.js or similar. Enable side-scrolling similar to T.io app
+          line charts using Chart.js. Enable side-scrolling similar to T.io app
         
 Store user map zoom in state so that navigating back to map page takes user
 to exactly where they left off
