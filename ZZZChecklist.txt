@@ -2,6 +2,8 @@
 
 Make all icons roughly the same size
 
+Fix forecast icons all same (coming from current)
+
 FIX FORECAST RELOAD PAGE CRASHES!!!
         - PC & MOBILE, reloading map OR going straight to /map incognito:
                         Oops!

@@ -1,6 +1,3 @@
-// React-Redux Hooks
-import { useSelector } from "react-redux";
-
 // My Components
 import CurrentWeatherStat from "./CurrentWeatherStat";
 
@@ -8,11 +5,8 @@ import CurrentWeatherStat from "./CurrentWeatherStat";
 import useGetIcon from "../hooks/use-get-icon";
 
 export default function CurrentWeatherDisplay({ data }) {
-  // State from store
-  const currentWeather = useSelector((state) => state.currentWeather);
-
   // Get icon matching description
-  const weatherIcon = useGetIcon(currentWeather.data.weather[0]);
+  const weatherIcon = useGetIcon();
 
   // Header contains: location, icon, description
   const headers = data.slice(0, 2);
