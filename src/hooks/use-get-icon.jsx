@@ -19,22 +19,25 @@ import SunIcon from "../icons/SunIcon";
 import ThunderstormIcon from "../icons/ThunderstormIcon";
 import TornadoIcon from "../icons/TornadoIcon";
 
-function useGetIcon(mainForecast = "", descrForecast = "") {
+function useGetIcon(data) {
   let icon;
-  const currentWeather = useSelector((state) => state.currentWeather);
+  // const currentWeather = useSelector((state) => state.currentWeather);
 
-  if (currentWeather.data) {
-    const { main, description } = currentWeather.data.weather[0];
-    switch (mainForecast || main) {
+  // if (currentWeather.data) {
+  if (data) {
+    // const { main, description } = currentWeather.data.weather[0];
+    const { main, description } = data.weather[0];
+    // switch (mainForecast || main) {
+    switch (main) {
       case "Ash":
         icon = <AshIcon className="fill-white" />;
         break;
       case "Clear":
         icon = <SunIcon className="fill-amber-400" />;
-        icon = <CloudsIcon className="fill-white" />;
         break;
       case "Clouds":
-        switch (descrForecast || description) {
+        // switch (descrForecast || description) {
+        switch (description) {
           case "few clouds":
             icon = <SunClouds className="fill-white" />;
             break;

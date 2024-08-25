@@ -75,8 +75,8 @@ export default function Map() {
   const mapStyle = useSelector((state) => state.map.mapStyle);
   const marker = useSelector((state) => state.map.marker);
 
-  // Get relevant weather icon to use with custom marker
-  let weatherIcon = useGetIcon();
+  // Get matching weather icon for custom marker
+  let weatherIcon = useGetIcon(currentWeather.data);
 
   // Initialize Map
   useCreateMap(mapContainerRef, mapStyle, coords, dispatch);
