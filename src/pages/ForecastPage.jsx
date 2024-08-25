@@ -89,7 +89,7 @@ export default function ForecastPage() {
     foreLoadOrErr = <p>ERROR: {forecastWeather.error.message}</p>;
   } else {
     // ***********************************************************************
-    const forecast = forecastWeather.data?.list || [];
+    const forecast = forecastWeather.data?.list; // || [];
     forecast.forEach((item) => {
       const convertedItem = convertWeatherData(item);
       // console.log("ITEM:", convertedItem);

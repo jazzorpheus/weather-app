@@ -4,8 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const coordsSlice = createSlice({
   name: "coords",
   initialState: {
-    // coords: [-2.245115, 53.479489],
-    coords: [],
+    coords: [-2.245115, 53.479489],
+    // coords: [],
     isLoading: true,
     error: null,
   },

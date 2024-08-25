@@ -34,7 +34,7 @@ import removeCustomLayers from "../utils/removeCustomLayers";
 // Gives access to variable that counts number of renders
 import { useRenderCount } from "@uidotdev/usehooks";
 
-// List of styleOptions
+// List of style options
 const styleOptions = [
   { label: "Dark", value: "dark-v11" },
   { label: "Light", value: "light-v11" },
@@ -43,6 +43,7 @@ const styleOptions = [
   { label: "Streets", value: "streets-v12" },
 ];
 
+// List of layer options
 const layerOptions = [
   { label: "Air Quality", value: "mepIndex" },
   { label: "Cloud Cover", value: "cloudCover" },
@@ -64,7 +65,7 @@ export default function Map() {
 
   // Current coordinates current weather from store
   const { coords } = useSelector((state) => state.coords);
-  const currentWeather = useSelector((state) => state.currentWeather.data);
+  const currentWeather = useSelector((state) => state.currentWeather);
 
   // Reference to map HTML element
   const mapContainerRef = useRef();
@@ -74,11 +75,11 @@ export default function Map() {
   const mapStyle = useSelector((state) => state.map.mapStyle);
   const marker = useSelector((state) => state.map.marker);
 
+  // Get relevant weather icon to use with custom marker
+  let weatherIcon = useGetIcon();
+
   // Initialize Map
   useCreateMap(mapContainerRef, mapStyle, coords, dispatch);
-
-  // Get relevant weather icon to use with custom marker
-  let weatherIcon = useGetIcon(currentWeather.weather[0]);
 
   // Keep track of total number of renders
   const renderCount = useRenderCount();
@@ -146,7 +147,7 @@ export default function Map() {
       marker.remove();
       const markerContainer = document.createElement("div");
       ReactDOM.createRoot(markerContainer).render(
-        <CustomMarker data={currentWeather} icon={weatherIcon} />
+        <CustomMarker data={currentWeather.data} icon={weatherIcon} />
       );
       dispatch(
         updateMarker(
@@ -155,7 +156,7 @@ export default function Map() {
         )
       );
     }
-  }, [currentWeather]);
+  }, [currentWeather.data]);
 
   // **********************************************************  INITIALIZE LAYER & MARKER
 
@@ -172,7 +173,7 @@ export default function Map() {
       }
       const markerContainer = document.createElement("div");
       ReactDOM.createRoot(markerContainer).render(
-        <CustomMarker data={currentWeather} icon={weatherIcon} />
+        <CustomMarker data={currentWeather.data} icon={weatherIcon} />
       );
       dispatch(
         updateMarker(

@@ -19,12 +19,13 @@ import SunIcon from "../icons/SunIcon";
 import ThunderstormIcon from "../icons/ThunderstormIcon";
 import TornadoIcon from "../icons/TornadoIcon";
 
-function useGetIcon(weather) {
+function useGetIcon() {
   const currentWeather = useSelector((state) => state.currentWeather);
+  // console.log("IN USEGETICON:", currentWeather);
   let icon;
   if (currentWeather.data) {
-    const { main } = weather;
-    const { description } = weather;
+    console.log(currentWeather);
+    const { main, description } = currentWeather.data.weather[0];
     switch (main) {
       case "Ash":
         icon = <AshIcon className="fill-white" />;
