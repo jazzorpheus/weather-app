@@ -2,8 +2,8 @@ export default function SquallIcon({ className }) {
   return (
     <svg
       className={className}
-      width="64"
-      height="64"
+      width="60"
+      height="60"
       viewBox="0 0 48 48"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"

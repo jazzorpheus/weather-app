@@ -2,8 +2,8 @@ export default function SandIcon({ className }) {
   return (
     <svg
       className={className}
-      width="64"
-      height="64"
+      width="60"
+      height="60"
       viewBox="0 0 24 24"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"

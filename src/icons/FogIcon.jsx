@@ -2,8 +2,8 @@ export default function FogIcon({ className }) {
   return (
     <svg
       className={className}
-      width="64"
-      height="64"
+      width="54"
+      height="54"
       viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
     >

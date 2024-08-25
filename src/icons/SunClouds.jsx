@@ -2,8 +2,8 @@ export default function SunClouds({ className }) {
   return (
     <svg
       className={className}
-      width="64"
-      height="64"
+      width="74"
+      height="74"
       viewBox="0 0 500 500"
       xmlns="http://www.w3.org/2000/svg"
     >

@@ -2,8 +2,8 @@ export default function CloudsIcon({ className }) {
   return (
     <svg
       className={className}
-      width="64"
-      height="64"
+      width="60"
+      height="60"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"

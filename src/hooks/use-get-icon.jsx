@@ -31,6 +31,7 @@ function useGetIcon(mainForecast = "", descrForecast = "") {
         break;
       case "Clear":
         icon = <SunIcon className="fill-amber-400" />;
+        icon = <CloudsIcon className="fill-white" />;
         break;
       case "Clouds":
         switch (descrForecast || description) {

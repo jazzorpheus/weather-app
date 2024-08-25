@@ -2,8 +2,8 @@ export default function MistIcon({ className }) {
   return (
     <svg
       className={className}
-      width="64"
-      height="64"
+      width="58"
+      height="58"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"

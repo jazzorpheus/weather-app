@@ -2,22 +2,6 @@
 
 Make all icons roughly the same size
 
-Fix forecast icons all same (coming from current)
-
-FIX FORECAST RELOAD PAGE CRASHES!!!
-        - PC & MOBILE, reloading map OR going straight to /map incognito:
-                        Oops!
-                        Sorry, an unexpected error has occurred.
-                        Cannot read properties of null (reading 'weather')
-
-        - MOBILE, reloading forecast (intermittent), (sometimes th's load but not td data)
-        - PC, going straight to /forecast incognito:     
-                        Oops!
-                        Sorry, an unexpected error has occurred.
-                        Cannot read properties of undefined (reading 'toFixed')
-
-        
-
 Forecast page:
         - Make ForecastTable component
         - Move forecast table into a modal and create link for "See full data" or similar
