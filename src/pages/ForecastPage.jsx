@@ -9,6 +9,7 @@ import { fetchForecastWeather } from "../store";
 
 // Custom hooks
 import useGetBackground from "../hooks/use-get-background";
+import useGetIcon from "../hooks/use-get-icon";
 
 // Utilites
 import convertWeatherData from "../utils/data-conversions/convertWeatherData";
@@ -163,6 +164,7 @@ export default function ForecastPage() {
     );
   }
 
+  const currentIcon = useGetIcon(currentWeather.data);
   let currLoadOrErr;
   if (currentWeather.isLoading) {
     currLoadOrErr = <p>Loading...</p>;
@@ -187,29 +189,30 @@ export default function ForecastPage() {
           className="table-container relative overflow-x-scroll"
           ref={tableContainerRef}
         >
-          <h1 className="text-3xl font-bold text-center sticky left-0 mb-4">
+          <h1 className="text-3xl font-bold text-center sticky left-0">
             {forecastWeather.data?.city?.name || latLng}
           </h1>
-          <h1 className="text-2xl font-bold text-center sticky left-0 mb-2">
+          <div className="flex justify-center sticky left-0">{currentIcon}</div>
+          <h2 className="text-2xl font-bold text-center sticky left-0 mb-2">
             {currLoadOrErr
               ? currLoadOrErr
               : currentWeather.data.weather[0].description
                   .charAt(0)
                   .toUpperCase() +
                   currentWeather.data.weather[0].description.slice(1) || latLng}
-          </h1>
+          </h2>
           <table className="rounded">
             <tbody>
-              <tr>
-                <th
-                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
-                  colSpan={2}
-                >
-                  <span>
-                    <h2>Time</h2>
-                  </span>
-                </th>
-              </tr>
+              {/* <tr> */}
+              {/* <th */}
+              {/* className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded" */}
+              {/* colSpan={2} */}
+              {/* > */}
+              {/* <span> */}
+              {/* <h2>Time</h2> */}
+              {/* </span> */}
+              {/* </th> */}
+              {/* </tr> */}
               <tr className="text-center sticky top-0 z-10">{timestamps}</tr>
               <tr className="text-center">{icons}</tr>
               <tr>
