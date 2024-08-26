@@ -1,5 +1,10 @@
 ********************************************************************** BETA VERSION
 
+Could do water droplets for humidity level? Like star rating, with 5 or 10 droplets
+filled up based on percentage.
+
+Figure way to limit API return fields to just what is needed?
+
 Forecast page:
         - Make ForecastTable component and refactor into smaller subcomponents
         - Move forecast table into a modal and create link for "See full data"
@@ -9,6 +14,8 @@ Forecast page:
         
 Store user map zoom in state so that navigating back to map page takes user
 to exactly where they left off
+
+Improve custom icon formatting on map so that data doesn't go too high or too low
 
 Figure how to display error page if there is a fetchCurrentWeather error
 
@@ -22,7 +29,9 @@ Add a units selection option: imperial or metric
 
 Use Vercel environment variables
 
-Turn layers dropdown into a modal similar to Tomorrow's app and add a tonne more layers
+Turn layers dropdown into a modal displaying key/scale image
+
+Add a tonne more layers
 
 Make use of React Router loader function?
 

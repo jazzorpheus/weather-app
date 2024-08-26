@@ -45,13 +45,20 @@ const styleOptions = [
 
 // List of layer options
 const layerOptions = [
-  { label: "Air Quality", value: "mepIndex" },
+  { label: "AQI (China MEP)", value: "mepIndex" },
+  { label: "AQI (US EPA)", value: "epaIndex" },
   { label: "Cloud Cover", value: "cloudCover" },
+  { label: "Dew Point", value: "dewPoint" },
+  { label: "Feels Like Temp", value: "temperatureApparent" },
   { label: "Humidity", value: "humidity" },
   { label: "Precipitation", value: "precipitationIntensity" },
   { label: "Pressure (sea)", value: "pressureSeaLevel" },
   { label: "Pressure (surface)", value: "pressureSurfaceLevel" },
   { label: "Temperature", value: "temperature" },
+  { label: "T'storm Chance", value: "thunderstormProbability" },
+  { label: "Visibility", value: "visibility" },
+  { label: "Wind Gust", value: "windGust" },
+  { label: "Wind Direction", value: "windDirection" },
   { label: "Wind Speed", value: "windSpeed" },
   { label: "No Layer", value: "none" },
 ];
