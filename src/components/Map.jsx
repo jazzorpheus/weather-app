@@ -49,7 +49,6 @@ const layerOptions = [
   { label: "AQI (US EPA)", value: "epaIndex" },
   { label: "Cloud Cover", value: "cloudCover" },
   { label: "Dew Point", value: "dewPoint" },
-  { label: "Feels Like Temp", value: "temperatureApparent" },
   { label: "Humidity", value: "humidity" },
   { label: "Precipitation", value: "precipitationIntensity" },
   { label: "Pressure (sea)", value: "pressureSeaLevel" },
