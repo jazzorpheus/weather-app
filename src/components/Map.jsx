@@ -43,6 +43,7 @@ const styleOptions = [
   { label: "Streets", value: "streets-v12" },
 ];
 
+// ! DEPRECATED
 // // List of layer options TOMORROW
 // const layerOptions = [
 //   { label: "AQI (China MEP)", value: "mepIndex" },

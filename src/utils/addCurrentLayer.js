@@ -1,6 +1,7 @@
-// Tomorrow API
-const TMW_KEY = "uHRwNBfZ4wdj8PmZ8ueU25NHB1eggBo9";
-const TIMESTAMP = new Date().toISOString();
+// ! DEPRECATED
+// // Tomorrow API
+// const TMW_KEY = "uHRwNBfZ4wdj8PmZ8ueU25NHB1eggBo9";
+// const TIMESTAMP = new Date().toISOString();
 
 // Open Weather Map Key
 const OPEN_WEATHER_KEY = "ff325cbc53fd8a64b302d2866b804fc8";
@@ -16,11 +17,10 @@ const addCurrentLayer = (layer, mapObj) => {
       type: "raster",
       tiles: [
         `https://tile.openweathermap.org/map/${layer}/{z}/{x}/{y}.png?appid=${OPEN_WEATHER_KEY}`,
-        // `http://maps.openweathermap.org/maps/2.0/weather/${layer}/{z}/{x}/{y}?appid=${OPEN_WEATHER_KEY}`,
       ],
       tileSize: 256,
       attribution:
-        '&copy; <a href="https://www.tomorrow.io/weather-api">Powered by Tomorrow.io</a>',
+        '&copy; <a href="https://www.openweathermap.org">Powered by Open Weather Map</a>',
     });
     // Add layer
     // console.log(`ADDING NEW custom-layer-${layer} LAYER`);
@@ -30,10 +30,17 @@ const addCurrentLayer = (layer, mapObj) => {
       source: `custom-source-${layer}`,
       minzoom: 1,
       maxzoom: 12,
-      paint: {
-        "raster-opacity": 0.65,
-      },
+      // paint: {
+      //   "raster-opacity": 0.6,
+      // },
     });
+    mapObj.setPaintProperty(`custom-layer-${layer}`, "raster-opacity", 0.75);
+    mapObj.setPaintProperty(
+      `custom-layer-${layer}`,
+      "raster-brightness-max",
+      0.8
+    ); // Increase brightness
+    mapObj.setPaintProperty(`custom-layer-${layer}`, "raster-saturation", 1); // Increase saturation
   }
 };
 
