@@ -205,7 +205,7 @@ export default function ForecastPage() {
             <tbody>
               {/* <tr> */}
               {/* <th */}
-              {/* className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded" */}
+              {/* className="arrow-right sticky left-0 bg-gradient-to-t from-zinc-900 to-blue-900 rounded" */}
               {/* colSpan={2} */}
               {/* > */}
               {/* <span> */}
@@ -217,7 +217,7 @@ export default function ForecastPage() {
               <tr className="text-center">{icons}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-zinc-900 to-blue-800 rounded"
                   colSpan={2}
                 >
                   <h2>Temperature</h2>
@@ -226,7 +226,7 @@ export default function ForecastPage() {
               <tr className="text-center">{temperature}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-zinc-900 to-blue-800 rounded"
                   colSpan={2}
                 >
                   <h2>Feels like temperature</h2>
@@ -235,7 +235,7 @@ export default function ForecastPage() {
               <tr className="text-center">{feelsLike}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-zinc-900 to-blue-800 rounded"
                   colSpan={2}
                 >
                   <h2>Cloud cover</h2>
@@ -244,7 +244,7 @@ export default function ForecastPage() {
               <tr className="text-center">{clouds}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-zinc-900 to-blue-800 rounded"
                   colSpan={2}
                 >
                   <h2 className="opacity-100">Humidity</h2>
@@ -254,7 +254,7 @@ export default function ForecastPage() {
 
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-zinc-900 to-blue-800 rounded"
                   colSpan={2}
                 >
                   <h2>Wind speed</h2>
@@ -263,7 +263,7 @@ export default function ForecastPage() {
               <tr className="text-center">{windSpeed}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-zinc-900 to-blue-800 rounded"
                   colSpan={2}
                 >
                   <h2>Wind gust</h2>
@@ -272,7 +272,7 @@ export default function ForecastPage() {
               <tr className="text-center">{windGust}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-zinc-900 to-blue-800 rounded"
                   colSpan={2}
                 >
                   <h2>Wind direction</h2>
@@ -281,7 +281,7 @@ export default function ForecastPage() {
               <tr className="text-center">{windDirection}</tr>
               <tr>
                 <th
-                  className="arrow-right sticky left-0 bg-gradient-to-r from-blue-800 to-sky-300 rounded"
+                  className="arrow-right sticky left-0 bg-gradient-to-r from-zinc-900 to-blue-800 rounded"
                   colSpan={2}
                 >
                   <h2>Visibility</h2>

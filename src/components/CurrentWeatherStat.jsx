@@ -20,14 +20,14 @@ export default function CurrentWeatherStat({ stat }) {
   if (stat.name === "Cloud cover") {
     const pieStyles = {
       ...pieBaseStyles,
-      background: `conic-gradient(DimGray calc(${stat.value} * 1%), PaleTurquoise 0)`,
+      background: `conic-gradient(DimGray calc(${stat.value} * 1%), SkyBlue 0)`,
     };
     graph = <div style={pieStyles}></div>;
   }
   if (stat.name === "Humidity") {
     const pieStyles = {
       ...pieBaseStyles,
-      background: `conic-gradient(PaleTurquoise calc(${stat.value} * 1%), DimGray 0)`,
+      background: `conic-gradient(DarkBlue calc(${stat.value} * 1%), transparent 0)`,
     };
     graph = <div style={pieStyles}></div>;
   }

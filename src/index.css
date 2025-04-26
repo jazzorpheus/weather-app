@@ -263,7 +263,7 @@ td {
   height: 0;
   border-top: 13px solid transparent;
   border-bottom: 13px solid transparent;
-  border-left: 15px solid #7dd3fc;
+  border-left: 15px solid rgba(25, 60, 184, 255);
 }
 
 .table-container {

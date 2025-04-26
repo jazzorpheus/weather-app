@@ -76,7 +76,7 @@ export default function Dropdown({
     return (
       <li
         key={idx}
-        className="flex justify-start hover:bg-sky-500 rounded-lg cursor-pointer list-none text-sm p-1"
+        className="flex justify-start hover:bg-blue-600 rounded-lg cursor-pointer list-none text-sm p-1"
         onClick={() => handleOnChange(option)}
       >
         {value?.value === option.value && <TiTick className="mr-1" />}
@@ -89,14 +89,16 @@ export default function Dropdown({
     <div ref={divEl} className={finalClassNames}>
       <Panel
         // className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-400 to-blue-800"
-        className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-700 to-blue-900 border border-[rgba(209,213,219,0.8)]"
+        // className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-700 to-blue-900 border border-[rgba(209,213,219,0.8)]"
+        className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-blue-900 to-zinc-900 border border-[rgba(209,213,219,0.8)]"
         onClick={handleToggle}
       >
         {value?.label || label} <GoChevronUp className="text-lg" />
       </Panel>
       {isExpanded && (
         // <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-sky-400 to-blue-800">
-        <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-sky-700 to-blue-900">
+        // <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-sky-700 to-blue-900">
+        <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-zinc-900 to-blue-900">
           {dropMenu}
         </Panel>
       )}

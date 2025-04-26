@@ -10,9 +10,8 @@ const mapSlice = createSlice({
     mapStyle: "satellite-streets-v12",
     // mapStyle: "outdoors-v12",
     marker: null,
-    layer: "precipitationIntensity",
-    // layer: "cloudCover",
-    // layer: "none",
+    // layer: "precipitation_new",
+    layer: "clouds_new",
     prevLayer: null,
   },
   reducers: {

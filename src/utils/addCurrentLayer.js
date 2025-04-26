@@ -2,6 +2,9 @@
 const TMW_KEY = "uHRwNBfZ4wdj8PmZ8ueU25NHB1eggBo9";
 const TIMESTAMP = new Date().toISOString();
 
+// Open Weather Map Key
+const OPEN_WEATHER_KEY = "ff325cbc53fd8a64b302d2866b804fc8";
+
 // Add current layer
 const addCurrentLayer = (layer, mapObj) => {
   // Check whether source & layer already exist
@@ -12,7 +15,8 @@ const addCurrentLayer = (layer, mapObj) => {
     mapObj.addSource(`custom-source-${layer}`, {
       type: "raster",
       tiles: [
-        `https://api.tomorrow.io/v4/map/tile/{z}/{x}/{y}/${layer}/${TIMESTAMP}.png?apikey=${TMW_KEY}`,
+        `https://tile.openweathermap.org/map/${layer}/{z}/{x}/{y}.png?appid=${OPEN_WEATHER_KEY}`,
+        // `http://maps.openweathermap.org/maps/2.0/weather/${layer}/{z}/{x}/{y}?appid=${OPEN_WEATHER_KEY}`,
       ],
       tileSize: 256,
       attribution:
@@ -34,3 +38,5 @@ const addCurrentLayer = (layer, mapObj) => {
 };
 
 export default addCurrentLayer;
+
+// `https://api.tomorrow.io/v4/map/tile/{z}/{x}/{y}/${layer}/${TIMESTAMP}.png?apikey=${TMW_KEY}`,
