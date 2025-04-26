@@ -30,17 +30,31 @@ const addCurrentLayer = (layer, mapObj) => {
       source: `custom-source-${layer}`,
       minzoom: 1,
       maxzoom: 12,
-      // paint: {
-      //   "raster-opacity": 0.6,
-      // },
+      paint: {
+        "raster-opacity": 0.5,
+        "raster-saturation": 1,
+      },
     });
-    mapObj.setPaintProperty(`custom-layer-${layer}`, "raster-opacity", 0.75);
-    mapObj.setPaintProperty(
-      `custom-layer-${layer}`,
-      "raster-brightness-max",
-      0.8
-    ); // Increase brightness
-    mapObj.setPaintProperty(`custom-layer-${layer}`, "raster-saturation", 1); // Increase saturation
+    // mapObj.setPaintProperty(`custom-layer-${layer}`, "raster-opacity", 0.75);
+    // mapObj.setPaintProperty(
+    //   `custom-layer-${layer}`,
+    //   "raster-brightness-max",
+    //   0.8
+    // );
+    // mapObj.setPaintProperty(`custom-layer-${layer}`, "raster-saturation", 0.8);
+    if (layer === "pressure_new" || layer === "temp_new") {
+      mapObj.setPaintProperty(
+        `custom-layer-${layer}`,
+        "raster-saturation",
+        0.8
+      );
+    } else if (layer === "wind_new") {
+      mapObj.setPaintProperty(
+        `custom-layer-${layer}`,
+        "raster-saturation",
+        0.98
+      );
+    }
   }
 };
 
