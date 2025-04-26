@@ -197,52 +197,41 @@ nav > a,
 
 .custom-marker-container {
   position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
   width: 120px;
-  height: 150px;
-  bottom: 92px;
-}
-
-.custom-marker {
-  position: relative;
-  width: 120px;
-  height: 150px;
-  background: rgba(17, 24, 39, 0.8);
-  border-radius: 50% / 10%;
-}
-.custom-marker:before {
-  content: "";
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  right: -5%;
-  left: -5%;
-  background: inherit;
-  border-radius: 5% / 50%;
-  background: rgba(17, 24, 39, 0.8);
-}
-
-.custom-marker:after {
-  content: "";
-  position: absolute;
-  bottom: -20px;
-  left: 40px;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 25px solid rgba(17, 24, 39, 0.8);
+  pointer-events: none;
+  transform: translateY(-50%);
 }
 
 .custom-marker-text {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+  background: rgba(17, 24, 39, 0.8);
+  border-radius: 12px;
+  padding: 8px;
   width: 120px;
-  height: 160px;
+  max-width: 120px;
+  text-align: center;
   font-size: 0.85rem;
   letter-spacing: 0.02rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+.custom-marker-pointer {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 14px solid rgba(17, 24, 39, 0.8);
+  margin-top: -2px;
+}
+
+.custom-marker-text:hover {
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
 }
 
 /* ********************************************************* FORECAST TABLE */
