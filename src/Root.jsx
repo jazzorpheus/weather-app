@@ -17,6 +17,11 @@ import SearchModal from "./components/SearchModal";
 // Custom Hooks
 import useGeoLocation from "./hooks/use-geo-location.js";
 
+// Assets & Styles
+import landingCurrent from "./images/landing-current.png";
+import landingMap from "./images/landing-map.png";
+import landingForecast from "./images/landing-forecast.png";
+
 export default function Root() {
   // ************************************************************************** CUSTOM MARKER
 
@@ -103,15 +108,47 @@ export default function Root() {
       )}
 
       {onLandingPage && (
-        <div className="relative top-1/3 text-center">
-          <Link className="block hover:bg-sky-700 rounded-md" to="/current">
-            <h2 className="text-xl py-2">Current Weather</h2>
+        <div className="flex flex-col justify-center items-center text-center h-screen w-screen bg-gradient-to-t from-zinc-900 to-blue-900 gap-6">
+          <Link
+            to="/current"
+            className="relative flex flex-col items-center w-[80vw] max-w-[600px] rounded-md overflow-hidden group"
+          >
+            <img
+              src={landingCurrent}
+              alt="Current Weather"
+              className="w-full h-auto object-cover blur-[1px] brightness-75 transition-transform duration-1000 ease-in-out group-hover:scale-105 group-hover:brightness-100"
+            />
+            <h2 className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-white drop-shadow-lg">
+              Current Weather
+            </h2>
           </Link>
-          <Link className="block hover:bg-sky-700 rounded-md" to="/map">
-            <h2 className="text-xl py-2">Weather Map</h2>
+
+          <Link
+            to="/map"
+            className="relative flex flex-col items-center w-[80vw] max-w-[600px] rounded-md overflow-hidden group"
+          >
+            <img
+              src={landingMap}
+              alt="Weather Map"
+              className="w-full h-auto object-cover blur-[1px] brightness-75 transition-transform duration-1000 ease-in-out group-hover:scale-105 group-hover:brightness-100"
+            />
+            <h2 className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-white drop-shadow-lg">
+              Weather Map
+            </h2>
           </Link>
-          <Link className="block hover:bg-sky-700 rounded-md" to="/forecast">
-            <h2 className="text-xl py-2">Weather Forecast</h2>
+
+          <Link
+            to="/forecast"
+            className="relative flex flex-col items-center w-[80vw] max-w-[600px] rounded-md overflow-hidden group"
+          >
+            <img
+              src={landingForecast}
+              alt="Weather Forecast"
+              className="w-full h-auto object-cover blur-[1px] brightness-75 transition-transform duration-1000 ease-in-out group-hover:scale-105 group-hover:brightness-100"
+            />
+            <h2 className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-white drop-shadow-lg">
+              Weather Forecast
+            </h2>
           </Link>
         </div>
       )}
