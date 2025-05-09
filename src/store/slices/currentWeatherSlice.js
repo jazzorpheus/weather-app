@@ -19,6 +19,7 @@ const currentWeatherSlice = createSlice({
     // ***************************************************************  fetchWeather
     builder.addCase(fetchCurrentWeather.pending, (state, action) => {
       state.isLoading = true;
+      state.error = null;
     });
     builder.addCase(fetchCurrentWeather.fulfilled, (state, action) => {
       state.data = action.payload;

@@ -1,5 +1,3 @@
 # Live Weather Map
 
-A front-end weather app created in React that utilizes the OpenWeatherMap, Tomorrow.io, and Mapbox APIs to render live weather data together with an integrated map for displaying current weather patterns such as precipitation intensity and wind speed. The top searchbar generates location suggestions on the fly using Mapbox SDK's forward geocoder. Additionally, the user can tap anywhere on the map which will match the geocoordinates of the tap to the nearest location for which Open Weather Map has data.
-
-The plan is to continue improving the UI, especially the current weather dashboard, and eventually add full forecasting information in the form of dashboards plus a time slider on the map.
+A front-end weather app created in React + JS that utilizes the OpenWeatherMap and Mapbox APIs to display current and forecasted weather data together with an integrated map. The map supports multiple raster-based datasets for displaying realtime weather patterns, with forecast data yet to be implemented with an adjustable slider for projecting forwards or backwards in time. The plan is to continue adding useful statistics and improve the current weather UI to be slick and visually appealing, and completely overhaul the forecast page UI with a plethora of informative charts and visualizations.
