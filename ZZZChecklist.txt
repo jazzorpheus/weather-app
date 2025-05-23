@@ -1,5 +1,11 @@
 ********************************************************************** BETA VERSION
 
+Restructure result of convertWeatherData from an array to an object of key-value pairs
+
+Re-add weather description and icon to top of forecastWeather page
+
+Re-add dynamic backgrounds to forecastWeather page
+
 Implement debouncer for search suggestions
 
 Forecast page:
