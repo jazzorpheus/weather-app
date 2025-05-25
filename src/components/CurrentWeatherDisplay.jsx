@@ -16,7 +16,6 @@ export default function CurrentWeatherDisplay({ data }) {
 
   // Get icon matching description
   const weatherIcon = useGetIcon(currentWeather.data);
-  console.log(currentWeather.data);
 
   const header = (
     <>
