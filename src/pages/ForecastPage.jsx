@@ -13,12 +13,14 @@ import { FaCircleArrowRight } from "react-icons/fa6";
 
 // Local Hooks
 import useGetBackground from "../hooks/use-get-background";
+import useGetIcon from "../hooks/use-get-icon";
 
 // Local Utilites
 import createReducer from "../utils/helpers/forecastTableHelpers";
 
 // Local Components
 import ForecastTable from "../components/ForecastTable";
+import IconCell from "../components/IconCell";
 
 export default function ForecastPage() {
   // Get client timezone
@@ -30,8 +32,11 @@ export default function ForecastPage() {
   // State from store
   const coords = useSelector((state) => state.coords.coords);
   const forecastWeather = useSelector((state) => state.forecastWeather);
+  const currentWeather = useSelector((state) => state.currentWeather);
 
+  // Custom Hooks
   const bgImage = useGetBackground();
+  const Icon = useGetIcon(currentWeather.data);
 
   // Fetch forecast based on current coords
   useEffect(() => {
@@ -117,14 +122,18 @@ export default function ForecastPage() {
         className="table-container relative overflow-x-scroll"
         ref={tableContainerRef}
       >
-        <h1 className="text-3xl font-bold text-center sticky left-0 mb-5">
-          {forecastWeather.data?.city?.name ||
-            (coords && (
-              <span>
-                Lat: {coords[1].toFixed(2)} | Lon: {coords[0].toFixed(2)}
-              </span>
-            ))}
-        </h1>
+        <div className="flex flex-col items-center text-2xl text-center sticky left-0 mb-5">
+          <h1 className="text-3xl font-bold">
+            {forecastWeather.data?.city?.name ||
+              (coords && (
+                <span>
+                  Lat: {coords[1].toFixed(2)} | Lon: {coords[0].toFixed(2)}
+                </span>
+              ))}
+          </h1>
+          <span>{Icon}</span>
+          <h2>{currentWeather.data?.weather[0].description}</h2>
+        </div>
         <ForecastTable forecastRowsData={tableRowsByType} />
       </div>
       <button

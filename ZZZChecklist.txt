@@ -1,8 +1,6 @@
 ********************************************************************** BETA VERSION
 
-Re-add weather description and icon to top of forecastWeather page
-
-Re-add dynamic backgrounds to forecastWeather page
+Make location name, icon, and description go underneath search bar but above header but below form
 
 Implement debouncer for search suggestions
 
