@@ -1,6 +1,3 @@
-// React-Redux Hooks
-import { useSelector } from "react-redux";
-
 // Icons
 import AshIcon from "../icons/AshIcon";
 import CloudsIcon from "../icons/CloudsIcon";
@@ -21,13 +18,9 @@ import TornadoIcon from "../icons/TornadoIcon";
 
 function useGetIcon(data) {
   let icon;
-  // const currentWeather = useSelector((state) => state.currentWeather);
 
-  // if (currentWeather.data) {
   if (data) {
-    // const { main, description } = currentWeather.data.weather[0];
     const { main, description } = data.weather[0];
-    // switch (mainForecast || main) {
     switch (main) {
       case "Ash":
         icon = <AshIcon className="fill-white" />;

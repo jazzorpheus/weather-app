@@ -1,5 +1,5 @@
 // Utilites
-import tempToColor from "../utils/tempToColor";
+import tempToColor from "../utils/data-conversions/tempToColor";
 
 export default function Thermometer({ temp }) {
   const tempCol = tempToColor(temp);
