@@ -21,7 +21,6 @@ import createReducer from "../utils/helpers/forecastTableHelpers";
 import ForecastTable from "../components/ForecastTable";
 
 export default function ForecastPage() {
-  console.log("RENDER!");
   // Get client timezone
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
