@@ -7,20 +7,17 @@ import { useSelector, useDispatch } from "react-redux";
 // Async Thunks
 import { fetchForecastWeather } from "../store";
 
-// Icons
-import { FaCircleArrowLeft } from "react-icons/fa6";
-import { FaCircleArrowRight } from "react-icons/fa6";
-
 // Local Hooks
 import useGetBackground from "../hooks/use-get-background";
 import useGetIcon from "../hooks/use-get-icon";
 
 // Local Utilites
 import createReducer from "../utils/helpers/forecastTableHelpers";
+import horizontalScroll from "../utils/helpers/horizontalScroll";
 
 // Local Components
 import ForecastTable from "../components/ForecastTable";
-import IconCell from "../components/IconCell";
+import HorizontalScrollButton from "../components/HorizontalScrollButton";
 
 export default function ForecastPage() {
   // Get client timezone
@@ -112,12 +109,10 @@ export default function ForecastPage() {
 
   return (
     <div className={`flex justify-center h-dvh w-dvw ${bgImage}`}>
-      <button
-        onClick={scrollLeft}
-        className="fixed left-0 top-1/2 -translate-y-1/2 z-10 p-2"
-      >
-        <FaCircleArrowLeft className="scale-150" />
-      </button>
+      <HorizontalScrollButton
+        direction="left"
+        scrollX={() => horizontalScroll(tableContainerRef, "left")}
+      />
       <div
         className="table-container relative overflow-x-scroll"
         ref={tableContainerRef}
@@ -136,12 +131,10 @@ export default function ForecastPage() {
         </div>
         <ForecastTable forecastRowsData={tableRowsByType} />
       </div>
-      <button
-        onClick={scrollRight}
-        className="fixed right-0 top-1/2 -translate-y-1/2 z-10 p-2"
-      >
-        <FaCircleArrowRight className="scale-150" />
-      </button>
+      <HorizontalScrollButton
+        direction="right"
+        scrollX={() => horizontalScroll(tableContainerRef, "right")}
+      />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 ********************************************************************** BETA VERSION
 
+Get search bar back on Map page!!!
+
 Make location name, icon, and description go underneath search bar but above header but below form
 
 Implement debouncer for search suggestions
