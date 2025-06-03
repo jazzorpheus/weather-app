@@ -43,26 +43,6 @@ const styleOptions = [
   { label: "Streets", value: "streets-v12" },
 ];
 
-// ! DEPRECATED
-// // List of layer options TOMORROW
-// const layerOptions = [
-//   { label: "AQI (China MEP)", value: "mepIndex" },
-//   { label: "AQI (US EPA)", value: "epaIndex" },
-//   { label: "Cloud Cover", value: "cloudCover" },
-//   { label: "Dew Point", value: "dewPoint" },
-//   { label: "Humidity", value: "humidity" },
-//   { label: "Precipitation", value: "precipitationIntensity" },
-//   { label: "Pressure (sea)", value: "pressureSeaLevel" },
-//   { label: "Pressure (surface)", value: "pressureSurfaceLevel" },
-//   { label: "Temperature", value: "temperature" },
-//   { label: "T'storm Chance", value: "thunderstormProbability" },
-//   { label: "Visibility", value: "visibility" },
-//   { label: "Wind Gust", value: "windGust" },
-//   { label: "Wind Direction", value: "windDirection" },
-//   { label: "Wind Speed", value: "windSpeed" },
-//   { label: "No Layer", value: "none" },
-// ];
-
 // List of layer options OPENWEATHERMAP
 const layerOptions = [
   { label: "Cloud Cover", value: "clouds_new" },
@@ -75,6 +55,8 @@ const layerOptions = [
 
 // *************************************************************************************  COMPONENT
 export default function Map() {
+  console.log("Map render");
+
   // ******************************************************** DECLARE STATE, INIT MAP
 
   // Action dispatch function for updating map style, layer, etc.
@@ -100,8 +82,6 @@ export default function Map() {
 
   // Keep track of total number of renders
   const renderCount = useRenderCount();
-  //! DEV ONLY
-  // console.log("RENDER COUNT:", renderCount);
 
   const layer = useSelector((state) => state.map.layer);
   const prevLayer = useSelector((state) => state.map.prevLayer);
@@ -230,22 +210,3 @@ export default function Map() {
     </div>
   );
 }
-
-//! PREVIOUS DEV TROUBLESHOOTING STUFF
-// ****************************************************************  Log all custom SOURCES & LAYERS ->
-// try {
-//   // Get all sources
-//   const sources = Object.values(mapObj.getStyle().sources);
-//   console.log("ALL SOURCES:", sources);
-//   // Get all layers
-//   const layers = mapObj.getStyle().layers;
-//   // Filter out custom layers
-//   const customLayers = layers.filter(function (layer) {
-//     // Check if the layer's ID starts with a specific prefix
-//     return layer.id.startsWith("custom-layer");
-//   });
-//   console.log("CUSTOM LAYERS:", customLayers);
-// } catch (err) {
-//   console.log(err);
-// }
-// **************************************************************** Log all custom SOURCES & LAYERS <-

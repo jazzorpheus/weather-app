@@ -23,16 +23,6 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import "./index.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-// // Tomorrow.io / ClimaCell API test
-// const options = { method: "GET" };
-// fetch(
-//   "https://api.tomorrow.io/v4/weather/realtime?location=Pwllheli&units=metric&apikey=uHRwNBfZ4wdj8PmZ8ueU25NHB1eggBo9",
-//   options
-// )
-//   .then((response) => response.json())
-//   .then((response) => console.log(response))
-//   .catch((err) => console.error(err));
-
 const router = createBrowserRouter([
   {
     path: "/",

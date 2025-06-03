@@ -1,8 +1,3 @@
-// ! DEPRECATED
-// // Tomorrow API
-// const TMW_KEY = "uHRwNBfZ4wdj8PmZ8ueU25NHB1eggBo9";
-// const TIMESTAMP = new Date().toISOString();
-
 // Open Weather Map Key
 const OPEN_WEATHER_KEY = "ff325cbc53fd8a64b302d2866b804fc8";
 
@@ -12,7 +7,6 @@ const addCurrentLayer = (layer, mapObj) => {
   const allSources = Object.keys(mapObj.getStyle().sources);
   if (!allSources.some((source) => source === `custom-source-${layer}`)) {
     // Add source
-    // console.log(`ADDING NEW custom-source-${layer} SOURCE`);
     mapObj.addSource(`custom-source-${layer}`, {
       type: "raster",
       tiles: [
@@ -23,7 +17,6 @@ const addCurrentLayer = (layer, mapObj) => {
         '&copy; <a href="https://www.openweathermap.org">Powered by Open Weather Map</a>',
     });
     // Add layer
-    // console.log(`ADDING NEW custom-layer-${layer} LAYER`);
     mapObj.addLayer({
       id: `custom-layer-${layer}`,
       type: "raster",
@@ -59,5 +52,3 @@ const addCurrentLayer = (layer, mapObj) => {
 };
 
 export default addCurrentLayer;
-
-// `https://api.tomorrow.io/v4/map/tile/{z}/{x}/{y}/${layer}/${TIMESTAMP}.png?apikey=${TMW_KEY}`,

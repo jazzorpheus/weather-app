@@ -43,26 +43,6 @@ export default function ForecastPage() {
   // Table Ref
   const tableContainerRef = useRef(null);
 
-  // Scroll page to left
-  const scrollLeft = () => {
-    if (tableContainerRef.current) {
-      tableContainerRef.current.scrollBy({
-        left: -300,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  // Scroll page to right
-  const scrollRight = () => {
-    if (tableContainerRef.current) {
-      tableContainerRef.current.scrollBy({
-        left: 300,
-        behavior: "smooth",
-      });
-    }
-  };
-
   // Generate and memoize table data
   const tableRowsByType = useMemo(() => {
     if (!forecastWeather.data?.list) return null;
