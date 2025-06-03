@@ -23,41 +23,35 @@ export default function Dropdown({
   // Used to toggle dropdown menu on or off
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // useRef can be used to create a reference to an element/value created by this component in the DOM.
-  // Need to connect 'divEl' to the root "div element" by giving it an attr/prop called "ref={divEl}" [see below].
-  // divEl now gives us an object that has a 'current' property that contains a pointer referring to the root div
-  // element that we need.
+  // Connect 'divEl' to root "div element" to be used to listen for clicks
   const divEl = useRef();
 
-  // Need to listen for clicks and determine if it is 'inside' our Dropdown component or 'outside' of it.
+  // Listen for clicks and determine if they're 'inside' or 'outside' Dropdown
   useEffect(() => {
     const handler = (event) => {
-      // First check to see if divEl is null (might have removed element from screen).
+      // Check to see if divEl null
       if (!divEl.current) {
         return;
       }
-      // Check to see if click event was within the Dropdown;
-      // if not, need to simply close dropMenu.
-      // REMEMBER to access the ".current" property of divEl!
+      // Check to see if click event was within the Dropdown
       if (!divEl.current.contains(event.target)) {
         setIsExpanded(false);
       }
     };
     // NOTE: 3rd argument (true) ensures browser watches for clicks during
-    // the 'capture' phase [see vid. 211]
+    // the 'capture' phase
     document.addEventListener("click", handler, true);
 
-    // cleanUp function
-    // If component happens to be removed from screen, it is important to remove
-    // this event listener.
+    // Clean Up
+    // If component removed from screen, remove event listener
     return () => {
       document.removeEventListener("click", handler);
     };
   }, []);
 
-  // Control whether dropDown menu is showing or not
+  // Control whether dropDown menu showing or not
   const handleToggle = () => {
-    // New value of state dependent on old value so use full callback version
+    // New value of state dependent on old value so using full callback
     // inside of setState
     setIsExpanded((curr) => !curr);
   };
@@ -71,7 +65,7 @@ export default function Dropdown({
     handleToggle();
   };
 
-  // Generate HTML for displaying options and pass each element handleSelect
+  // Generate HTML for displaying options and pass each element handleOnChange
   const dropMenu = options.map((option, idx) => {
     return (
       <li
@@ -88,16 +82,12 @@ export default function Dropdown({
   return (
     <div ref={divEl} className={finalClassNames}>
       <Panel
-        // className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-400 to-blue-800"
-        // className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-sky-700 to-blue-900 border border-[rgba(209,213,219,0.8)]"
         className="flex justify-around items-center cursor-pointer text-sm bg-gradient-to-t from-blue-900 to-zinc-900 border border-[rgba(209,213,219,0.8)]"
         onClick={handleToggle}
       >
         {value?.label || label} <GoChevronUp className="text-lg" />
       </Panel>
       {isExpanded && (
-        // <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-sky-400 to-blue-800">
-        // <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-sky-700 to-blue-900">
         <Panel className="absolute bottom-full w-[130px] bg-gradient-to-t from-zinc-900 to-blue-900">
           {dropMenu}
         </Panel>

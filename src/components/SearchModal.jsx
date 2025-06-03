@@ -16,7 +16,7 @@ import { getSuggestions } from "../utils/getSuggestions";
 // My Components
 import SuggestionItem from "./SuggestionItem";
 
-function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
+function SearchModal({ showModal, toggleShow, toggleSubmitted }) {
   // Local state for form
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -27,10 +27,10 @@ function SearchModal({ showForm, toggleShow, toggleSubmitted }) {
   // Focus on the input field when the form is rendered
   const inputRef = useRef(null);
   useEffect(() => {
-    if (showForm && inputRef.current) {
+    if (showModal && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [showForm]);
+  }, [showModal]);
 
   // Make sure user can't scroll while modal is shown on-screen
   useEffect(() => {

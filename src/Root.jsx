@@ -40,11 +40,11 @@ export default function Root() {
   // From mapSlice
   const mapObj = useSelector((state) => state.map.mapObj);
 
-  const [showForm, setShowForm] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const toggleShowForm = () => {
-    setShowForm(!showForm);
+  const toggleShowSearchModal = () => {
+    setShowSearchModal(!showSearchModal);
   };
 
   const toggleFormSubmitted = () => {
@@ -67,7 +67,7 @@ export default function Root() {
           });
         }
         toggleFormSubmitted();
-        setShowForm(false);
+        setShowSearchModal(false);
       }
     }
   };
@@ -84,14 +84,16 @@ export default function Root() {
     onLandingPage = true;
   }
 
+  console.log("showSearchModal:", showSearchModal);
+
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col items-center h-screen w-screen">
       {!onLandingPage && (
-        <header className="absolute">
-          {showForm ? (
+        <header className="fixed w-full z-10">
+          {showSearchModal ? (
             <SearchModal
-              showForm={showForm}
-              toggleShow={toggleShowForm}
+              showModal={showSearchModal}
+              toggleShow={toggleShowSearchModal}
               toggleSubmitted={toggleFormSubmitted}
             />
           ) : (
@@ -100,7 +102,7 @@ export default function Root() {
                 className="text-black border border-gray-700 rounded opacity-100 p-1"
                 type="text"
                 placeholder="Search For Location"
-                onClick={() => setShowForm(true)}
+                onClick={() => setShowSearchModal(true)}
               />
             </form>
           )}

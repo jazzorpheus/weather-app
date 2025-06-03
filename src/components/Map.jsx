@@ -55,8 +55,6 @@ const layerOptions = [
 
 // *************************************************************************************  COMPONENT
 export default function Map() {
-  console.log("Map render");
-
   // ******************************************************** DECLARE STATE, INIT MAP
 
   // Action dispatch function for updating map style, layer, etc.
@@ -121,7 +119,7 @@ export default function Map() {
     dispatch(updateLayer(option.value));
   };
 
-  // **********************************************************  USE EFFECTS
+  // **********************************************************  EFFECTS
 
   // Render initial layer & update layer
   useEffect(() => {
@@ -180,33 +178,54 @@ export default function Map() {
       );
     });
   }
-
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="w-dvw">
-        {/* <div className="sidebar text-white bg-gray-700 ">
-          Longitude: {coords[0]} | Latitude: {coords[1]}
-        </div> */}
-        <div ref={mapContainerRef} className="map-container w-100" />
-        <div className="absolute -translate-y-12 translate-x-4">
-          <Dropdown
-            className="w-[130px]"
-            label="Map Style"
-            options={styleOptions}
-            value={selectedStyle}
-            onChange={handleStyleSelect}
-          />
-        </div>
-        <div className="absolute -translate-y-12 translate-x-40">
-          <Dropdown
-            className="w-[150px]"
-            label="Add Layer"
-            options={layerOptions}
-            value={selectedLayer}
-            onChange={handleLayerSelect}
-          />
-        </div>
+    <div className="fixed inset-0">
+      <div ref={mapContainerRef} className="map-container w-full h-full z-0" />
+      <div className="absolute bottom-20 left-0 w-full px-2 flex flex-wrap justify-start gap-2">
+        <Dropdown
+          className="w-[130px] min-w-0 flex-shrink"
+          label="Map Style"
+          options={styleOptions}
+          value={selectedStyle}
+          onChange={handleStyleSelect}
+        />
+        <Dropdown
+          className="w-[150px] min-w-0 flex-shrink"
+          label="Add Layer"
+          options={layerOptions}
+          value={selectedLayer}
+          onChange={handleLayerSelect}
+        />
       </div>
     </div>
   );
 }
+
+// return (
+//   <div className="flex flex-col justify-center items-center">
+//     <div className="w-dvw">
+//       {/* <div className="sidebar text-white bg-gray-700 ">
+//         Longitude: {coords[0]} | Latitude: {coords[1]}
+//       </div> */}
+//       <div ref={mapContainerRef} className="map-container w-full z-0" />
+//       <div className="absolute -translate-y-12 translate-x-4">
+//         <Dropdown
+//           className="w-[130px]"
+//           label="Map Style"
+//           options={styleOptions}
+//           value={selectedStyle}
+//           onChange={handleStyleSelect}
+//         />
+//       </div>
+//       <div className="absolute -translate-y-12 translate-x-40">
+//         <Dropdown
+//           className="w-[150px]"
+//           label="Add Layer"
+//           options={layerOptions}
+//           value={selectedLayer}
+//           onChange={handleLayerSelect}
+//         />
+//       </div>
+//     </div>
+//   </div>
+// );
