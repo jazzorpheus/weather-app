@@ -10,10 +10,10 @@ import { useDispatch } from "react-redux";
 // Action Creator Function
 import { updateCoords } from "../store";
 
-// Utility Functions
+// Local Utilities
 import { getSuggestions } from "../utils/getSuggestions";
 
-// My Components
+// Local Components
 import SuggestionItem from "./SuggestionItem";
 
 function SearchModal({ showModal, toggleShow, toggleSubmitted }) {

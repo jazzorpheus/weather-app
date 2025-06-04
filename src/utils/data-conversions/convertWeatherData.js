@@ -2,45 +2,49 @@
 import convertWindDir from "./convertWindDir";
 import convertWindSpeed from "./convertWindSpeed";
 
-export default function convertWeatherData(weather) {
-  // Wind direction
-  const { windCompass, windCompassStyles } = convertWindDir(weather.wind.deg);
-  // Wind speed
+export default function convertWeatherData(data) {
+  if (!data) return null;
+
+  const { windCompass, windCompassStyles } = convertWindDir(data.wind.deg);
   const { intensityIdx: intensityIdxSpeed, mphVal: mphValSpeed } =
-    convertWindSpeed(weather.wind.speed);
-  // Wind gust
-  const { intensityIdx: intensityIdxGust, mphVal: mphValGust } =
-    convertWindSpeed(weather.wind.gust);
+    convertWindSpeed(data.wind.speed);
+
+  // Check if gust data exists (not all data points contain gust data)
+  const gustConversion = data.wind.gust
+    ? convertWindSpeed(data.wind.gust)
+    : null;
+  const intensityIdxGust = gustConversion?.intensityIdx;
+  const mphValGust = gustConversion?.mphVal;
 
   return {
     location: {
       name: "Location",
-      value: weather.name || "N/A",
+      value: data.name || "N/A",
       units: "",
     },
     description: {
       name: "Description",
-      value: weather.weather[0].description,
+      value: data.weather[0].description,
       units: "",
     },
     temperature: {
       name: "Temperature",
-      value: weather.main.temp.toFixed(1),
+      value: data.main.temp.toFixed(1),
       units: "°C",
     },
     feelsLike: {
       name: "Feels like",
-      value: weather.main.feels_like.toFixed(1),
+      value: data.main.feels_like.toFixed(1),
       units: "°C",
     },
     cloudCover: {
       name: "Cloud cover",
-      value: weather.clouds.all,
+      value: data.clouds.all,
       units: "%",
     },
     humidity: {
       name: "Humidity",
-      value: weather.main.humidity,
+      value: data.main.humidity,
       units: "%",
     },
     windSpeed: {
@@ -51,9 +55,9 @@ export default function convertWeatherData(weather) {
     },
     windGust: {
       name: "Wind gust",
-      value: weather.wind.gust ? mphValGust : "N/A",
+      value: mphValGust ?? "N/A",
       intensityIdx: intensityIdxGust,
-      units: weather.wind.gust ? "mph" : "",
+      units: gustConversion ? "mph" : "",
     },
     windDirection: {
       name: "Wind direction",
@@ -63,7 +67,7 @@ export default function convertWeatherData(weather) {
     },
     visibility: {
       name: "Visibility",
-      value: weather.visibility / 1000,
+      value: data.visibility / 1000,
       units: "km",
     },
   };

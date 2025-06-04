@@ -22,11 +22,11 @@ import {
 import useCreateMap from "../hooks/use-create-map";
 import useGetIcon from "../hooks/use-get-icon";
 
-// My Components
+// Local Components
 import Dropdown from "./Dropdown";
 import CustomMarker from "./CustomMarker";
 
-// Utility Functions
+// Local Utilities
 import addCurrentLayer from "../utils/map-layers/addCurrentLayer";
 import removeCustomLayers from "../utils/map-layers/removeCustomLayers";
 

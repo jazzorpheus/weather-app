@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 // Async Thunks
 import { fetchForecastWeather } from "../store";
 
-// Local Hooks
+// Custom Hooks
 import useGetBackground from "../hooks/use-get-background";
 import useGetIcon from "../hooks/use-get-icon";
 

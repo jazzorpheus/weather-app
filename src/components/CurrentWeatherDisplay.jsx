@@ -1,31 +1,19 @@
 // Props Validation
 import PropTypes from "prop-types";
 
-// React-Redux
-import { useSelector } from "react-redux";
-
-// My Components
+// Local Components
 import CurrentWeatherStat from "./CurrentWeatherStat";
 
-// Custom Hooks
-import useGetIcon from "../hooks/use-get-icon";
-
-export default function CurrentWeatherDisplay({ data }) {
-  // State from store
-  const currentWeather = useSelector((state) => state.currentWeather);
-
-  // Get icon matching description
-  const weatherIcon = useGetIcon(currentWeather.data);
-
+export default function CurrentWeatherDisplay({ currentData, currentIcon }) {
   const header = (
     <>
-      <h1 className="text-3xl font-bold mb-1">{data.location.value}</h1>
-      {weatherIcon}
-      <h2 className="text-2xl mb-2">{data.description.value}</h2>
+      <h1 className="text-3xl font-bold mb-1">{currentData.location.value}</h1>
+      {currentIcon}
+      <h2 className="text-2xl mb-2">{currentData.description.value}</h2>
     </>
   );
 
-  const currentStats = Object.values(data)
+  const currentStats = Object.values(currentData)
     .slice(2)
     .map((stat) => <CurrentWeatherStat key={stat.name} stat={stat} />);
 
@@ -41,7 +29,7 @@ export default function CurrentWeatherDisplay({ data }) {
 
 // Props Validation
 CurrentWeatherDisplay.propTypes = {
-  data: PropTypes.shape({
+  currentData: PropTypes.shape({
     location: PropTypes.shape({
       value: PropTypes.string.isRequired,
     }).isRequired,

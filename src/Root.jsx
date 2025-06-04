@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 // Async Thunks
 import { fetchCurrentWeather } from "./store";
 
-// My Components
+// Local Components
 import Navbar from "./components/Navbar.jsx";
 import SearchModal from "./components/SearchModal";
 

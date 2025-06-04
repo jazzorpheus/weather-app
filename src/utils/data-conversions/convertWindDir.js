@@ -1,4 +1,6 @@
 export default function convertWindDir(windDeg) {
+  if (!windDeg) return null;
+
   if (windDeg >= 348.75 || windDeg < 11.25) {
     return { windCompass: "N", windCompassStyles: "inline rotate-[135deg]" };
   } else if (windDeg >= 11.25 && windDeg < 33.75) {

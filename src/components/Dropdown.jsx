@@ -1,7 +1,7 @@
 // React Hooks
 import { useState, useEffect, useRef } from "react";
 
-// My components
+// Local Components
 import Panel from "./Panel";
 
 // Icons

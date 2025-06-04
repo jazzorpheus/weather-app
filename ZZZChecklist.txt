@@ -1,33 +1,41 @@
 ********************************************************************** BETA VERSION
 
-Get search bar back on Map page!!!
+Fixed CurrentPage running hooks conditionally:
+    - Rewrite convertWeatherData to be robust / defensive so that it can handle both data being
+    null and data points not containing certain values, e.g. gust.
+    - Rewrite useGetBackground to receive a data argument passed down from the page level and make
+    sure it is robust / defensive
 
-Make location name, icon, and description go underneath search bar but above header but below form
+Implement new charts/visuals for displaying current weather stats
+
+Make sure search suggestions don't fall underneath timestamps row of forecast table
 
 Implement debouncer for search suggestions
 
+Make location name, icon, and description go underneath search bar but above header on forecast page
+
+FIX map.jsx, it's a mess and shouldn't need to use userRenderCount!
+
 Forecast page:
         - Make ForecastTable component and refactor into smaller subcomponents
-        - Move forecast table into modal and add link for "See full data" to forecast page
+        - Move forecast table into modal and add link for "See full data table" to forecast page
         - On main forecast page build easier-to-read "outlook" / "summary" dashboards
         - Next to each heading on forecast table have a "See graph" link that displays
           line charts using Chart.js. Enable side-scrolling similar to T.io app
         
-Store user map zoom in state so that navigating back to map page takes user
+Store user map zoom and tilt in state so that navigating back to map page takes user
 to exactly where they left off
 
-Could do water droplets for humidity level? Like star rating, with 5 or 10 droplets
-filled up based on percentage.
-
-Improve custom icon formatting on map so that data doesn't go too high or too low
+Somehow cache map and map layer data so they don't need to be re-rendered every time User 
+goes to map page
 
 Figure how to display error page if there is a fetchCurrentWeather error
 
-Represent temp as a bar graphic similar to met office website?
+Represent temp as a bar graphic similar to met office website on forecast table?
 
-Fix (i) and mapbox icons on map being blocked out
+Fix (i) and mapbox icons on map being blocked out on smaller screens
 
-Add a units selection option: imperial or metric
+Add a units selection option?: imperial or metric
 
 Use Vercel environment variables
 

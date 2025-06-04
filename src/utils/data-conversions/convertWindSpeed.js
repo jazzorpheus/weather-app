@@ -1,4 +1,6 @@
 export default function convertWindSpeed(windSpeed) {
+  if (!windSpeed) return null;
+
   const mphVal = (60 ** 2 * (windSpeed / 1609.34)).toFixed(1);
   let intensityIdx;
   if (mphVal >= 0 && mphVal < 10) {
