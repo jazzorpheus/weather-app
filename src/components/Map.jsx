@@ -27,8 +27,8 @@ import Dropdown from "./Dropdown";
 import CustomMarker from "./CustomMarker";
 
 // Utility Functions
-import addCurrentLayer from "../utils/addCurrentLayer";
-import removeCustomLayers from "../utils/removeCustomLayers";
+import addCurrentLayer from "../utils/map-layers/addCurrentLayer";
+import removeCustomLayers from "../utils/map-layers/removeCustomLayers";
 
 // @uidotdev/usehooks
 // Gives access to variable that counts number of renders

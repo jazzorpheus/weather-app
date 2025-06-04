@@ -84,8 +84,6 @@ export default function Root() {
     onLandingPage = true;
   }
 
-  console.log("showSearchModal:", showSearchModal);
-
   return (
     <div className="flex flex-col items-center h-screen w-screen">
       {!onLandingPage && (

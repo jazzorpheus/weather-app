@@ -12,8 +12,8 @@ import useGetBackground from "../hooks/use-get-background";
 import useGetIcon from "../hooks/use-get-icon";
 
 // Local Utilites
-import createReducer from "../utils/helpers/forecastTableHelpers";
-import horizontalScroll from "../utils/helpers/horizontalScroll";
+import createReducer from "../utils/forecast-helpers/forecastTableHelpers";
+import horizontalScroll from "../utils/forecast-helpers/horizontalScroll";
 
 // Local Components
 import ForecastTable from "../components/ForecastTable";

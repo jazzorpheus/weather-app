@@ -42,7 +42,7 @@ export default function CurrentWeatherStat({ stat }) {
   };
   if (stat.name === "Wind speed") {
     let arrowHeads = [];
-    for (let i = 0; i < stat.intensityIdxSpeed; i++) {
+    for (let i = 0; i < stat.intensityIdx; i++) {
       arrowHeads.push(
         <div
           style={{
@@ -65,7 +65,7 @@ export default function CurrentWeatherStat({ stat }) {
   }
   if (stat.name === "Wind gust") {
     let arrowHeads = [];
-    for (let i = 0; i < stat.intensityIdxGust; i++) {
+    for (let i = 0; i < stat.intensityIdx; i++) {
       arrowHeads.push(
         <div
           style={{
