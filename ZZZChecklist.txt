@@ -1,6 +1,6 @@
 ********************************************************************** BETA VERSION
 
-Fixed CurrentPage running hooks conditionally:
+Fix CurrentPage running hooks conditionally:
     - Rewrite convertWeatherData to be robust / defensive so that it can handle both data being
     null and data points not containing certain values, e.g. gust.
     - Rewrite useGetBackground to receive a data argument passed down from the page level and make
