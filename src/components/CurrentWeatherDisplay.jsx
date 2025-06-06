@@ -1,6 +1,3 @@
-// Props Validation
-import PropTypes from "prop-types";
-
 // Local Components
 import CurrentWeatherStat from "./CurrentWeatherStat";
 
@@ -26,15 +23,3 @@ export default function CurrentWeatherDisplay({ currentData, currentIcon }) {
     </div>
   );
 }
-
-// Props Validation
-CurrentWeatherDisplay.propTypes = {
-  currentData: PropTypes.shape({
-    location: PropTypes.shape({
-      value: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.shape({
-      value: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-};

@@ -8,8 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchForecastWeather } from "../store";
 
 // Custom Hooks
-import useGetBackground from "../hooks/use-get-background";
-import useGetIcon from "../hooks/use-get-icon";
+import getBackgroundClass from "../utils/style-helpers/getBackgroundClass";
+import getWeatherIcon from "../utils/style-helpers/getWeatherIcon";
 
 // Local Utilites
 import createReducer from "../utils/forecast-helpers/forecastTableHelpers";
@@ -32,8 +32,9 @@ export default function ForecastPage() {
   const currentWeather = useSelector((state) => state.currentWeather);
 
   // Custom Hooks
-  const bgImage = useGetBackground();
-  const Icon = useGetIcon(currentWeather.data);
+  let styles = "flex justify-center h-dvh w-dvw";
+  styles += getBackgroundClass(currentWeather.data);
+  const Icon = getWeatherIcon(currentWeather.data);
 
   // Fetch forecast based on current coords
   useEffect(() => {
@@ -71,8 +72,9 @@ export default function ForecastPage() {
 
   // Show loading while fetching forecast data
   if (forecastWeather.isLoading) {
+    styles += " items-center";
     return (
-      <div className="flex justify-center items-center h-dvh w-dvw bg-gradient-to-t from-zinc-700 to-blue-400">
+      <div className={styles}>
         <p>Loading...</p>
       </div>
     );
@@ -80,15 +82,16 @@ export default function ForecastPage() {
 
   // Display error message if fetching forecast data fails
   if (forecastWeather.error) {
+    styles += " items-center";
     return (
-      <div className="flex justify-center items-center h-dvh w-dvw bg-gradient-to-t from-zinc-700 to-blue-400">
+      <div className={styles}>
         <p>ERROR: {forecastWeather.error.message}</p>
       </div>
     );
   }
 
   return (
-    <div className={`flex justify-center h-dvh w-dvw ${bgImage}`}>
+    <div className={styles}>
       <HorizontalScrollButton
         direction="left"
         scrollX={() => horizontalScroll(tableContainerRef, "left")}

@@ -1,6 +1,3 @@
-// Props Validation
-import PropTypes from "prop-types";
-
 export default function ForecastRow({ rowTitle, rowData }) {
   return (
     <>
@@ -16,8 +13,3 @@ export default function ForecastRow({ rowTitle, rowData }) {
     </>
   );
 }
-
-ForecastRow.propTypes = {
-  rowTitle: PropTypes.string.isRequired,
-  rowData: PropTypes.node.isRequired,
-};

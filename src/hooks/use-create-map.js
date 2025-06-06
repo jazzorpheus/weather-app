@@ -31,17 +31,6 @@ function useCreateMap(mapContainerRef, mapStyle, center, dispatch) {
       }),
       "top-right"
     );
-    // // Render map marker at center
-    // dispatch(
-    //   updateMarker(
-    //     new mapboxgl.Marker({
-    //       draggable: false,
-    //       scale: 1,
-    //     })
-    //       .setLngLat(center)
-    //       .addTo(map)
-    //   )
-    // );
     // Event Listener: Change coords in store/state on user click
     map.on("click", (event) => {
       dispatch(updateCoords([event.lngLat.lng, event.lngLat.lat]));

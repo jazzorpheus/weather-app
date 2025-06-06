@@ -2,8 +2,8 @@
 import { useSelector } from "react-redux";
 
 // Custom Hooks
-import useGetBackground from "../hooks/use-get-background";
-import useGetIcon from "../hooks/use-get-icon";
+import getBackgroundClass from "../utils/style-helpers/getBackgroundClass";
+import getWeatherIcon from "../utils/style-helpers/getWeatherIcon";
 
 // Local Components
 import CurrentWeatherDisplay from "../components/CurrentWeatherDisplay";
@@ -18,22 +18,22 @@ export default function CurrentPage() {
   // Dynamic background
   let styles =
     "current-weather flex flex-col justify-center items-center w-dvw";
-  styles += useGetBackground();
+  styles += getBackgroundClass(currentWeather.data);
 
   // Get icon matching weather description
-  const weatherIcon = useGetIcon(currentWeather.data);
+  const weatherIcon = getWeatherIcon(currentWeather.data);
 
   // Convert current weather data to usable format
   const convertedWeatherData = convertWeatherData(currentWeather.data);
 
   // Show loading while fetching current data
   if (currentWeather.isLoading) {
-    return <p>Loading....</p>;
+    return <p className={styles}>Loading....</p>;
   }
 
   // Display error message if fetching current data fails
   if (currentWeather.error) {
-    return <p>ERROR: {currentWeather.error.message}</p>;
+    return <p className={styles}>ERROR: {currentWeather.error.message}</p>;
   }
 
   return (

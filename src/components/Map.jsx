@@ -20,7 +20,7 @@ import {
 
 // Custom Hooks
 import useCreateMap from "../hooks/use-create-map";
-import useGetIcon from "../hooks/use-get-icon";
+import getWeatherIcon from "../utils/style-helpers/getWeatherIcon";
 
 // Local Components
 import Dropdown from "./Dropdown";
@@ -73,7 +73,7 @@ export default function Map() {
   const marker = useSelector((state) => state.map.marker);
 
   // Get matching weather icon for custom marker
-  let weatherIcon = useGetIcon(currentWeather.data);
+  let weatherIcon = getWeatherIcon(currentWeather.data);
 
   // Initialize Map
   useCreateMap(mapContainerRef, mapStyle, coords, dispatch);
@@ -200,32 +200,3 @@ export default function Map() {
     </div>
   );
 }
-
-// return (
-//   <div className="flex flex-col justify-center items-center">
-//     <div className="w-dvw">
-//       {/* <div className="sidebar text-white bg-gray-700 ">
-//         Longitude: {coords[0]} | Latitude: {coords[1]}
-//       </div> */}
-//       <div ref={mapContainerRef} className="map-container w-full z-0" />
-//       <div className="absolute -translate-y-12 translate-x-4">
-//         <Dropdown
-//           className="w-[130px]"
-//           label="Map Style"
-//           options={styleOptions}
-//           value={selectedStyle}
-//           onChange={handleStyleSelect}
-//         />
-//       </div>
-//       <div className="absolute -translate-y-12 translate-x-40">
-//         <Dropdown
-//           className="w-[150px]"
-//           label="Add Layer"
-//           options={layerOptions}
-//           value={selectedLayer}
-//           onChange={handleLayerSelect}
-//         />
-//       </div>
-//     </div>
-//   </div>
-// );

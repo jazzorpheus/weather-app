@@ -1,6 +1,3 @@
-// Props Validation
-import PropTypes from "prop-types";
-
 // Local Components
 import Thermometer from "./Thermometer.jsx";
 
@@ -164,15 +161,3 @@ export default function CurrentWeatherStat({ stat }) {
     </figure>
   );
 }
-
-// Props Validation
-CurrentWeatherStat.propTypes = {
-  stat: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    units: PropTypes.string,
-    intensityIdxSpeed: PropTypes.number,
-    intensityIdxGust: PropTypes.number,
-    styles: PropTypes.string,
-  }).isRequired,
-};

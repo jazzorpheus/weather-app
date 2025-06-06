@@ -1,6 +1,3 @@
-// Props Validation
-import PropTypes from "prop-types";
-
 // React Hooks
 import { useMemo } from "react";
 
@@ -44,18 +41,3 @@ export default function ForecastTable({ forecastRowsData }) {
     </div>
   );
 }
-
-ForecastTable.propTypes = {
-  forecastRowsData: PropTypes.shape({
-    timestamps: PropTypes.node.isRequired,
-    icons: PropTypes.node.isRequired,
-    temperature: PropTypes.node.isRequired,
-    feelsLike: PropTypes.node.isRequired,
-    cloudCover: PropTypes.node.isRequired,
-    humidity: PropTypes.node.isRequired,
-    windSpeed: PropTypes.node.isRequired,
-    windGust: PropTypes.node.isRequired,
-    windDirection: PropTypes.node.isRequired,
-    visibility: PropTypes.node.isRequired,
-  }).isRequired,
-};
