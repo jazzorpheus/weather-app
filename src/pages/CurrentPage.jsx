@@ -15,9 +15,11 @@ export default function CurrentPage() {
   // Redux store
   const currentWeather = useSelector((state) => state.currentWeather);
 
-  // Dynamic background
+  // Container base styles
   let styles =
     "current-weather flex flex-col justify-center items-center w-dvw";
+
+  // Get background matching weather description
   styles += getBackgroundClass(currentWeather.data);
 
   // Get icon matching weather description
