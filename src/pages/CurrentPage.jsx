@@ -6,7 +6,7 @@ import getBackgroundClass from "../utils/style-helpers/getBackgroundClass";
 import getWeatherIcon from "../utils/style-helpers/getWeatherIcon";
 
 // Local Components
-import CurrentWeatherDisplay from "../components/CurrentWeatherDisplay";
+import CurrentWeatherDisplay from "../components/current/CurrentWeatherDisplay";
 
 // Local Utilities
 import convertWeatherData from "../utils/data-conversions/convertWeatherData";
