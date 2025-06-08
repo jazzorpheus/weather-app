@@ -5,7 +5,7 @@ import { WindArrows } from "./visuals/WindArrows";
 import { WindDirection } from "./visuals/WindDirection";
 import { VisibilityScale } from "./visuals/VisibilityScale";
 
-const VISUALIZATION_MAP = {
+const VISUALS_MAP = {
   Temperature: (stat) => <Thermometer temp={stat.value} />,
   "Feels like": (stat) => <Thermometer temp={stat.value} />,
   "Cloud cover": (stat) => (
@@ -28,7 +28,7 @@ const VISUALIZATION_MAP = {
   Visibility: (stat) => <VisibilityScale value={stat.value} />,
 };
 
-export default function StatVisualization({ stat }) {
-  const VisualizationComponent = VISUALIZATION_MAP[stat.name];
-  return VisualizationComponent ? VisualizationComponent(stat) : null;
+export default function StatVisual({ stat }) {
+  const VisualComponent = VISUALS_MAP[stat.name];
+  return VisualComponent ? VisualComponent(stat) : null;
 }
