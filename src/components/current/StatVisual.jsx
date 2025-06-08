@@ -1,9 +1,9 @@
 // Local Components
-import Thermometer from "./visuals/Thermometer.jsx";
-import { PieChart } from "./visuals/PieChart";
-import { WindArrows } from "./visuals/WindArrows";
-import { WindDirection } from "./visuals/WindDirection";
-import { VisibilityScale } from "./visuals/VisibilityScale";
+import Thermometer from "./visuals/Thermometer";
+import PieChart from "./visuals/PieChart";
+import WindArrows from "./visuals/WindArrows";
+import WindDirection from "./visuals/WindDirection";
+import VisibilityScale from "./visuals/VisibilityScale";
 
 const VISUALS_MAP = {
   Temperature: (stat) => <Thermometer temp={stat.value} />,

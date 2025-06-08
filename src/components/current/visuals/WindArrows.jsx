@@ -1,4 +1,4 @@
-export function WindArrows({ intensityIdx }) {
+export default function WindArrows({ intensityIdx }) {
   const arrowBaseStyles = {
     position: "relative",
     width: "100px",

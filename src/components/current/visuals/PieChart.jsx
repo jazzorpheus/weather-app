@@ -1,4 +1,4 @@
-export function PieChart({
+export default function PieChart({
   value,
   foregroundColor,
   backgroundColor = "transparent",

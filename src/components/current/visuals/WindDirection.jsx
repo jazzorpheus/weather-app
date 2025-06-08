@@ -1,5 +1,5 @@
 import { TiLocationArrow } from "react-icons/ti";
 
-export function WindDirection({ styles }) {
+export default function WindDirection({ styles }) {
   return <TiLocationArrow className={styles} style={{ scale: "3" }} />;
 }

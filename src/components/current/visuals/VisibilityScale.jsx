@@ -1,4 +1,4 @@
-export function VisibilityScale({ value }) {
+export default function VisibilityScale({ value }) {
   const scaleBaseStyles = {
     position: "relative",
     width: "100px",
