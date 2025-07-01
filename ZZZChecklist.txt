@@ -1,13 +1,6 @@
 ********************************************************************** BETA VERSION
 
-FIX ERROR: Cannot destructure property 'windCompass' of '$N(...)' as it is null !!!
-(When refreshing current page)
-
-Fix CurrentPage running hooks conditionally:
-    - Rewrite convertWeatherData to be robust / defensive so that it can handle both data being
-    null and data points not containing certain values, e.g. gust.
-    - Rewrite useGetBackground to receive a data argument passed down from the page level and make
-    sure it is robust / defensive
+Tidy up Map.jsx
 
 Implement new charts/visuals for displaying current weather stats
 
