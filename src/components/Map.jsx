@@ -43,7 +43,7 @@ const styleOptions = [
   { label: "Streets", value: "streets-v12" },
 ];
 
-// List of layer options OPENWEATHERMAP
+// List of layer options (OpenWeatherMap)
 const layerOptions = [
   { label: "Cloud Cover", value: "clouds_new" },
   { label: "Precipitation", value: "precipitation_new" },
@@ -68,11 +68,9 @@ export default function Map() {
   const mapContainerRef = useRef();
 
   // Map object, marker & style from store
-  const mapObj = useSelector((state) => state.map.mapObj);
-  const mapStyle = useSelector((state) => state.map.mapStyle);
-  const marker = useSelector((state) => state.map.marker);
+  const { mapObj, mapStyle, marker } = useSelector((state) => state.map);
 
-  // Get matching weather icon for custom marker
+  // Get appropriate weather icon for custom marker
   let weatherIcon = getWeatherIcon(currentWeather.data);
 
   // Initialize Map
@@ -81,21 +79,33 @@ export default function Map() {
   // Keep track of total number of renders
   const renderCount = useRenderCount();
 
-  const layer = useSelector((state) => state.map.layer);
-  const prevLayer = useSelector((state) => state.map.prevLayer);
-  // Selected layer in dropdown, to display label
+  // **********************************************************  CONTROL LAYER
+
+  // Current and previous layers from store
+  const { layer, prevLayer } = useSelector((state) => state.map);
+
+  // Selected layer in dropdown
   const [selectedLayer, setSelectedLayer] = useState({
     label: layerOptions.find((option) => option.value === layer).label,
     value: layer,
   });
 
-  // Map style
+  // Change map layer selection in dropdown, update map layer
+  const handleLayerSelect = (option) => {
+    // Set layer option in dropdown
+    setSelectedLayer(option);
+    // Update layers in store
+    dispatch(updatePrevLayer(layer));
+    dispatch(updateLayer(option.value));
+  };
+
+  // **********************************************************  CONTROL STYLE
+
+  // Selected map style in dropdown
   const [selectedStyle, setSelectedStyle] = useState({
     label: styleOptions.find((option) => option.value === mapStyle).label,
     value: mapStyle,
   });
-
-  // **********************************************************  STYLE DROPDOWN
 
   // Handle style selection
   const handleStyleSelect = (option) => {
@@ -110,16 +120,7 @@ export default function Map() {
     }
   };
 
-  // **********************************************************  LAYER DROPDOWN
-
-  // Change map layer selection in dropdown, update map layer
-  const handleLayerSelect = (option) => {
-    setSelectedLayer(option);
-    dispatch(updatePrevLayer(layer));
-    dispatch(updateLayer(option.value));
-  };
-
-  // **********************************************************  EFFECTS
+  // *******************************************************  LAYER & MARKER EFFECTS AFTER INIT
 
   // Render initial layer & update layer
   useEffect(() => {
@@ -146,7 +147,6 @@ export default function Map() {
       );
       dispatch(
         updateMarker(
-          // new mapboxgl.Marker({ draggable: false, scale: 1 })
           new mapboxgl.Marker(markerContainer).setLngLat(coords).addTo(mapObj)
         )
       );
@@ -172,7 +172,6 @@ export default function Map() {
       );
       dispatch(
         updateMarker(
-          // new mapboxgl.Marker({ draggable: false, scale: 1 })
           new mapboxgl.Marker(markerContainer).setLngLat(coords).addTo(mapObj)
         )
       );

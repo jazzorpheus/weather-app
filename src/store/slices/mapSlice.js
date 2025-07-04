@@ -6,12 +6,10 @@ const mapSlice = createSlice({
   name: "map",
   initialState: {
     mapObj: null,
-    // mapStyle: "dark-v11",
     mapStyle: "satellite-streets-v12",
-    // mapStyle: "outdoors-v12",
     marker: null,
-    layer: "clouds_new",
     // layer: "none",
+    layer: "clouds_new",
     prevLayer: null,
   },
   reducers: {
