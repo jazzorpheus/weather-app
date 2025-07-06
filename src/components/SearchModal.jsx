@@ -45,15 +45,23 @@ export default function SearchModal({
 
   // Fetch suggestions on input
   useEffect(() => {
-    const runGetSuggestions = async () => {
-      const response = await getSuggestions(searchTerm);
-      setSuggestions(response);
-    };
-    if (searchTerm.length > 1) {
+    const delayDebounce = setTimeout(() => {
+      const runGetSuggestions = async () => {
+        if (searchTerm.length > 1) {
+          const response = await getSuggestions(searchTerm);
+          if (response && response !== 0) {
+            setSuggestions(response);
+          } else {
+            setSuggestions([]);
+          }
+        } else {
+          setSuggestions([]);
+        }
+      };
       runGetSuggestions();
-    } else {
-      setSuggestions([]);
-    }
+    }, 300); // 300ms debounce delay
+
+    return () => clearTimeout(delayDebounce);
   }, [searchTerm]);
 
   // Reset highlight when suggestions update
