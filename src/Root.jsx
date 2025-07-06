@@ -100,7 +100,7 @@ export default function Root() {
                 className="text-black border border-gray-700 rounded opacity-100 p-1"
                 type="text"
                 placeholder="Search For Location"
-                onClick={() => setShowSearchModal(true)}
+                onFocus={() => setShowSearchModal(true)}
               />
             </form>
           )}

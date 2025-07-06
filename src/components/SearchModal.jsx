@@ -16,37 +16,34 @@ import { getSuggestions } from "../utils/getSuggestions";
 // Local Components
 import SuggestionItem from "./SuggestionItem";
 
-function SearchModal({ showModal, toggleShow, toggleSubmitted }) {
-  // Local state for form
+export default function SearchModal({
+  showModal,
+  toggleShow,
+  toggleSubmitted,
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
-  // Dispatch function
   const dispatch = useDispatch();
-
-  // Focus on the input field when the form is rendered
   const inputRef = useRef(null);
+
+  // Autofocus input
   useEffect(() => {
     if (showModal && inputRef.current) {
       inputRef.current.focus();
     }
   }, [showModal]);
 
-  // Make sure user can't scroll while modal is shown on-screen
+  // Disable page scroll
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
-
-    // CleanUp function
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, []);
 
-  // Hijack control of form input value
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-  // Get suggestions once search term required length
+  // Fetch suggestions on input
   useEffect(() => {
     const runGetSuggestions = async () => {
       const response = await getSuggestions(searchTerm);
@@ -59,46 +56,79 @@ function SearchModal({ showModal, toggleShow, toggleSubmitted }) {
     }
   }, [searchTerm]);
 
-  // If there are suggestions, generate list
-  let suggestionsContent;
-  if (suggestions[0]) {
-    suggestionsContent = (
-      <div className="bg-gray-900 rounded-md p-3">
-        {suggestions.map((sugg) => {
-          return (
-            <SuggestionItem
-              key={sugg.id}
-              onClick={(event) => {
-                // Update coords which triggers getNewLocationData in Root.jsx
-                dispatch(updateCoords(sugg.center));
-                handleSubmit(event);
-              }}
-            >
-              {sugg.place_name}
-            </SuggestionItem>
-          );
-        })}
-      </div>
-    );
-  } else {
-    suggestionsContent = null;
-  }
+  // Reset highlight when suggestions update
+  useEffect(() => {
+    setHighlightedIndex(-1);
+  }, [suggestions]);
 
-  // Handle form submission: clear input, toggle formSubmitted state etc.
+  // Input change
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Key navigation
+  const handleKeyDown = (event) => {
+    if (suggestions.length === 0) return;
+
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        setHighlightedIndex((prev) =>
+          prev < suggestions.length - 1 ? prev + 1 : 0
+        );
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        setHighlightedIndex((prev) =>
+          prev > 0 ? prev - 1 : suggestions.length - 1
+        );
+        break;
+      case "Enter":
+        if (highlightedIndex >= 0) {
+          event.preventDefault();
+          const selected = suggestions[highlightedIndex];
+          dispatch(updateCoords(selected.center));
+          handleSubmit(event);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (searchTerm.length < 1) {
-      return;
-    }
+    if (searchTerm.length < 1) return;
     setSearchTerm("");
     toggleSubmitted();
-    // Remove focus from input element
     document.querySelector('input[name="searchTerm"]').blur();
   };
 
   const handleCancel = () => {
     toggleShow();
   };
+
+  // Suggestions list
+  let suggestionsContent = null;
+  if (suggestions[0]) {
+    suggestionsContent = (
+      <div className="bg-gray-900 rounded-md p-3">
+        {suggestions.map((sugg, index) => (
+          <SuggestionItem
+            key={sugg.id}
+            highlighted={index === highlightedIndex}
+            onClick={(event) => {
+              dispatch(updateCoords(sugg.center));
+              handleSubmit(event);
+            }}
+          >
+            {sugg.place_name}
+          </SuggestionItem>
+        ))}
+      </div>
+    );
+  }
 
   return createPortal(
     <div className="fixed inset-0 flex justify-center items-start bg-gray-300 opacity-80">
@@ -120,6 +150,7 @@ function SearchModal({ showModal, toggleShow, toggleSubmitted }) {
             placeholder="Search For Location"
             value={searchTerm}
             onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
             ref={inputRef}
           />
           {suggestionsContent}
@@ -129,5 +160,3 @@ function SearchModal({ showModal, toggleShow, toggleSubmitted }) {
     document.querySelector(".modal-container")
   );
 }
-
-export default SearchModal;
