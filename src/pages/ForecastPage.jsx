@@ -105,7 +105,7 @@ export default function ForecastPage() {
             {forecastWeather.data?.city?.name ||
               (coords && (
                 <span>
-                  Lat: {coords[1].toFixed(2)} | Lon: {coords[0].toFixed(2)}
+                  Lat {coords[1].toFixed(2)} | Lon {coords[0].toFixed(2)}
                 </span>
               ))}
           </h1>

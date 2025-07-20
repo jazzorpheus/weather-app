@@ -13,6 +13,7 @@ import convertWeatherData from "../utils/data-conversions/convertWeatherData";
 
 export default function CurrentPage() {
   // Redux store
+  const coords = useSelector((state) => state.coords.coords);
   const currentWeather = useSelector((state) => state.currentWeather);
 
   // Container base styles
@@ -41,6 +42,7 @@ export default function CurrentPage() {
   return (
     <div className={styles}>
       <CurrentWeatherDisplay
+        coords={coords}
         currentData={convertedWeatherData}
         currentIcon={weatherIcon}
       />

@@ -19,7 +19,7 @@ export default function convertWeatherData(data) {
   return {
     location: {
       name: "Location",
-      value: data.name || "N/A",
+      value: data.name,
       units: "",
     },
     description: {

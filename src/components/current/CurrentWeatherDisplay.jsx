@@ -1,10 +1,19 @@
 // Local Components
 import CurrentWeatherStat from "./CurrentWeatherStat";
 
-export default function CurrentWeatherDisplay({ currentData, currentIcon }) {
+export default function CurrentWeatherDisplay({
+  coords,
+  currentData,
+  currentIcon,
+}) {
+  const locationName = currentData.location.value;
   const header = (
     <>
-      <h1 className="text-3xl font-bold mb-1">{currentData.location.value}</h1>
+      <h1 className="text-3xl font-bold mb-1">
+        {locationName
+          ? locationName
+          : `Lat ${coords[1].toFixed(2)} | Lon ${coords[0].toFixed(2)}`}
+      </h1>
       {currentIcon}
       <h2 className="text-2xl mb-2">{currentData.description.value}</h2>
     </>
