@@ -130,6 +130,7 @@ export default function SearchModal({
               dispatch(updateCoords(sugg.center));
               handleSubmit(event);
             }}
+            onMouseEnter={() => setHighlightedIndex(index)} // 👈 new
           >
             {sugg.place_name}
           </SuggestionItem>
