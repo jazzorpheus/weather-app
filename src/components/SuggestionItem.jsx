@@ -1,7 +1,7 @@
 export default function SuggestionItem({ children, onClick, highlighted }) {
   return (
     <>
-      <li className="flex justify-between items-center list-none m-2">
+      <li className="flex justify-between items-center list-none m-2 z-25">
         <button
           onClick={onClick}
           className={`w-full text-left p-2 rounded transition-colors duration-100

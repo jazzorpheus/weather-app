@@ -139,7 +139,7 @@ export default function SearchModal({
   }
 
   return createPortal(
-    <div className="fixed inset-0 flex justify-center items-start bg-gray-300 opacity-80">
+    <div className="fixed inset-0 flex justify-center items-start bg-gray-300 opacity-80 z-40">
       <div className="flex justify-center w-5/6 mt-5">
         <button
           className="self-start text-white border-2 border-gray-700 bg-gray-900 rounded opacity-100 p-1 px-2 me-2"

@@ -87,7 +87,7 @@ export default function Root() {
   return (
     <div className="flex flex-col items-center h-screen w-screen">
       {!onLandingPage && (
-        <header className="fixed w-full z-10">
+        <header className="fixed w-full">
           {showSearchModal ? (
             <SearchModal
               showModal={showSearchModal}
